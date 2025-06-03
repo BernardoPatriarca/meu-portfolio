@@ -577,8 +577,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.imgur.com/aghYGnr.png') center/cover fixed;
-            opacity: 0.03;
+            background: url('https://images.unsplash.com/photo-1672581437674-3186b17b405a?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover fixed;
+            opacity: 0.18;
             z-index: 0;
         }
 
@@ -634,8 +634,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.imgur.com/aghYGnr.png') no-repeat center/contain;
-            opacity: 0.05;
+            background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/contain;
+            opacity: 0.15;
             z-index: 0;
         }
 
@@ -2069,6 +2069,28 @@
         [data-theme="dark"] .navbar-toggler {
             color: rgba(255, 255, 255, 0.85);
         }
+
+        /* Adicione no início do seu CSS */
+@media (max-width: 768px) {
+  /* Desativa animações complexas em dispositivos móveis */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Simplifica o efeito de partículas */
+  #particles-js {
+    display: none;
+  }
+  
+  /* Reduz efeitos de hover */
+  .nav-link:hover, 
+  .project-card:hover,
+  .btn-primary-custom:hover,
+  .btn-outline-custom:hover {
+    transform: none !important;
+  }
+}
     </style>
 </head>
 
