@@ -6,39 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bernardo Patriarca - Desenvolvedor FullStack</title>
     <link rel="icon" href="https://i.imgur.com/aghYGnr.png" type="image/png">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet">
-    <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- AOS (Animate On Scroll) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
             --primary: #6C63FF;
-            /* Roxo vibrante */
             --primary-dark: #564FD8;
             --primary-light: #8B85FF;
             --secondary: #FF6584;
-            /* Rosa coral */
             --secondary-dark: #E04D6D;
             --accent: #00BFA6;
-            /* Verde água */
             --dark: #31313b;
-            /* Azul marinho escuro */
             --light: #F8F9FF;
-            /* Branco azulado */
             --gray: #6B7C93;
-            /* Cinza azulado */
             --light-gray: #E6ECF8;
-            /* Cinza muito claro */
             --dark-gray: #16213E;
-            /* Azul marinho mais escuro */
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -49,7 +36,6 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        /* Dark Mode Variables */
         [data-theme="dark"] {
             --dark: #F8F9FF;
             --light: #0F0F23;
@@ -113,7 +99,6 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* Navbar - Glassmorphism Effect */
         .navbar {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
@@ -211,7 +196,6 @@
             width: 80%;
         }
 
-        /* Theme Toggle Button */
         .theme-toggle {
             width: 42px;
             height: 42px;
@@ -262,7 +246,6 @@
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
-        /* Hero Section - Modern Gradient with Particles */
         .hero-section {
             height: 100vh;
             min-height: 800px;
@@ -377,7 +360,6 @@
             transition: transform 0.2s ease;
         }
 
-        /* Floating Elements */
         .floating {
             animation: float 6s ease-in-out infinite;
         }
@@ -425,7 +407,6 @@
             }
         }
 
-        /* Buttons with Gradient and Hover Effects */
         .btn-primary-custom {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border: none;
@@ -516,7 +497,6 @@
             opacity: 1;
         }
 
-        /* Sections with Modern Styling */
         .section-title {
             color: var(--dark);
             margin-bottom: 3rem;
@@ -621,7 +601,6 @@
             background: linear-gradient(90deg, var(--accent), var(--secondary));
         }
 
-        /* About Section with Glassmorphism Card */
         .about-section {
             position: relative;
             overflow: hidden;
@@ -691,7 +670,6 @@
             transform: translateY(15px) translateZ(-20px);
         }
 
-        /* Skills Section with Animated Bars */
         .skills-section {
             position: relative;
             overflow: hidden;
@@ -748,7 +726,6 @@
             }
         }
 
-        /* Timeline with Modern Design */
         .timeline {
             position: relative;
             padding-left: 3rem;
@@ -835,7 +812,6 @@
             line-height: 1.8;
         }
 
-        /* Projects Section with Hover Effects */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -1086,7 +1062,6 @@
             background-color: var(--light);
         }
 
-        /* Code Snippet with Modern Look */
         .code-snippet {
             background-color: var(--code-bg);
             border-radius: 15px;
@@ -1191,7 +1166,6 @@
             color: #F8F8F2;
         }
 
-        /* Contact Section with Interactive Cards */
         .contact-info {
             text-align: center;
             padding: 3rem 2rem;
@@ -1319,7 +1293,6 @@
             width: 100%;
         }
 
-        /* Form with Floating Labels */
         .form-group {
             position: relative;
             margin-bottom: 2rem;
@@ -1429,7 +1402,6 @@
             opacity: 1;
         }
 
-        /* Footer with Gradient */
         footer {
             background: var(--light);
             color: var(--dark);
@@ -1610,7 +1582,6 @@
             font-size: 1rem;
         }
 
-        /* Back to Top Button with Floating Effect */
         .back-to-top {
             position: fixed;
             bottom: 40px;
@@ -1646,7 +1617,6 @@
             box-shadow: 0 15px 30px rgba(255, 101, 132, 0.4);
         }
 
-        /* Animations */
         @keyframes float {
             0% {
                 transform: translateY(0px);
@@ -1725,7 +1695,6 @@
             }
         }
 
-        /* Responsividade */
         @media (max-width: 1400px) {
             .hero-content h1 {
                 font-size: 3.5rem;
@@ -1908,7 +1877,6 @@
 
         @media (max-width: 768px) {
 
-            /* Ajustes na navbar */
             .navbar {
                 padding: 1rem 0;
             }
@@ -1939,7 +1907,6 @@
                 margin: 0.3rem 0;
             }
 
-            /* Ajuste nos ícones sociais e tema */
             .d-flex.align-items-center.ms-lg-3 {
                 margin-left: 0 !important;
                 margin-top: 1.5rem;
@@ -1989,7 +1956,6 @@
             }
         }
 
-        /* Adicione isso na seção de estilos */
         html,
         body {
             width: 100%;
@@ -2026,7 +1992,6 @@
             box-shadow: none;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -2060,55 +2025,37 @@
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
-        /* Estilo para o ícone do menu hamburguer no modo escuro */
         [data-theme="dark"] .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
-        /* Estilo para o botão do menu no modo escuro */
         [data-theme="dark"] .navbar-toggler {
             color: rgba(255, 255, 255, 0.85);
         }
 
-        /* Adicione no início do seu CSS */
-@media (max-width: 768px) {
-  /* Desativa animações complexas em dispositivos móveis */
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
-  
-  /* Simplifica o efeito de partículas */
-  #particles-js {
-    display: none;
-  }
-  
-  /* Reduz efeitos de hover */
-  .nav-link:hover, 
-  .project-card:hover,
-  .btn-primary-custom:hover,
-  .btn-outline-custom:hover {
-    transform: none !important;
-  }
-}
+        @media (max-width: 768px) {
 
-.hero-image {
-    position: absolute;
-    top: -40%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    z-index: -1;
-    width: 35em;
-    height: auto;
-    pointer-events: none;
-    opacity: 0.8; /* opcional: ajuste de transparência para não ofuscar o conteúdo */
-}
+            #particles-js {
+                display: none;
+            }
 
+        }
+
+        .hero-image {
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            z-index: -1;
+            width: 35em;
+            height: auto;
+            pointer-events: none;
+            opacity: 0.8;
+        }
     </style>
 </head>
 
 <body data-theme="light">
-    <!-- Top Bar/Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid px-3 px-md-4 px-lg-5">
             <a class="navbar-brand" href="#home">
@@ -2155,7 +2102,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Modern Gradient with Particles -->
     <section id="home" class="hero-section">
         <div id="particles-js"></div>
         <div class="hero-content container">
@@ -2181,7 +2127,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about-section section-padding">
         <div class="container">
             <div class="row align-items-center">
@@ -2214,20 +2159,15 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="section-padding section-dark">
         <div class="container">
-            <!-- Título da Seção -->
             <div class="text-center mb-5" data-aos="fade-up">
                 <h2 class="section-title">Minhas <span class="text-primary">Habilidades</span></h2>
                 <p class="section-subtitle">Tecnologias e ferramentas que domino e utilizo no meu dia a dia</p>
             </div>
 
-            <!-- Lista de Habilidades -->
             <div class="row">
-                <!-- Coluna 1 -->
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <!-- Front-end Skills -->
                     <div class="skill-item">
                         <div class="skill-name">
                             <span>HTML5 & CSS3</span>
@@ -2280,9 +2220,7 @@
                 </div>
 
 
-                <!-- Coluna 2 -->
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <!-- Back-end e Outras Skills -->
                     <div class="skill-item">
                         <div class="skill-name">
                             <span>Dart</span>
@@ -2338,7 +2276,6 @@
         </div>
     </section>
 
-    <!-- Education Section -->
     <section id="education" class="section-padding">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -2397,7 +2334,6 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="section-padding section-dark">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -2412,14 +2348,15 @@
                     </div>
                     <div class="project-body">
                         <h5 class="project-title">Cordeiro Santo</h5>
-                        <p class="project-text" style="color: #fff">Landing page completa sobre a igreja Cordeiro Santo com detalhes de
+                        <p class="project-text" style="color: #fff">Landing page completa sobre a igreja Cordeiro Santo
+                            com detalhes de
                             evento, galeria e contatos.</p>
 
                         <div class="project-tags">
                             <span class="project-tag tag-react">HTML</span>
                             <span class="project-tag tag-node">CSS</span>
                             <span class="project-tag tag-node">JavaScript</span>
-                            
+
                         </div>
 
                         <div class="project-links">
@@ -2438,14 +2375,15 @@
                     </div>
                     <div class="project-body">
                         <h5 class="project-title">Construtora Patriarca</h5>
-                        <p class="project-text"  style="color: #fff">Informações da construtora Patriarca Pato Branco, com exemplos de
+                        <p class="project-text" style="color: #fff">Informações da construtora Patriarca Pato Branco,
+                            com exemplos de
                             projetos e função de entrar em contato.</p>
 
                         <div class="project-tags">
                             <span class="project-tag tag-react">HTML</span>
                             <span class="project-tag tag-node">CSS</span>
                             <span class="project-tag tag-node">JavaScript</span>
-                            
+
                         </div>
 
                         <div class="project-links">
@@ -2463,14 +2401,15 @@
                     </div>
                     <div class="project-body">
                         <h5 class="project-title">Sabor Elegante</h5>
-                        <p class="project-text" style="color: #fff">Apresenta serviços disponibilizados pelo restaurante, os pratos,
+                        <p class="project-text" style="color: #fff">Apresenta serviços disponibilizados pelo
+                            restaurante, os pratos,
                             contatos etc.</p>
 
                         <div class="project-tags">
                             <span class="project-tag tag-react">HTML</span>
                             <span class="project-tag tag-node">CSS</span>
                             <span class="project-tag tag-node">JavaScript</span>
-                            
+
                         </div>
 
                         <div class="project-links">
@@ -2492,33 +2431,32 @@
         </div>
     </section>
 
-    <!-- Code Snippet Section -->
     <section class="section-padding">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
-                <h2 class="section-title">Meu <span class="text-primary">Código</span></h2>
-                <p class="lead">Aqui está um exemplo do meu código em Java, demonstrando minha abordagem para
-                    resolver problemas complexos de backend de forma limpa e eficiente.</p>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h2 class="section-title">Meu <span class="text-primary">Código</span></h2>
+                    <p class="lead">Aqui está um exemplo do meu código em Java, demonstrando minha abordagem para
+                        resolver problemas complexos de backend de forma limpa e eficiente.</p>
 
-                <p>Este snippet mostra uma implementação de filtro com paginação usando JPA e queries nativas,
-                    que desenvolvi para um sistema de CRM. Demonstra minha preocupação com segurança (prevenção
-                    contra SQL injection) e performance.</p>
+                    <p>Este snippet mostra uma implementação de filtro com paginação usando JPA e queries nativas,
+                        que desenvolvi para um sistema de CRM. Demonstra minha preocupação com segurança (prevenção
+                        contra SQL injection) e performance.</p>
 
-                <p>Além do Java, tenho experiência em diversos frameworks e tecnologias backend, sempre seguindo
-                    as melhores práticas de desenvolvimento e padrões de código.</p>
-            </div>
-            <div class="col-lg-6" data-aos="fade-left">
-                <div class="code-snippet">
-                    <div class="code-header">
-                        <div class="code-dots">
-                            <div class="code-dot dot-red"></div>
-                            <div class="code-dot dot-yellow"></div>
-                            <div class="code-dot dot-green"></div>
+                    <p>Além do Java, tenho experiência em diversos frameworks e tecnologias backend, sempre seguindo
+                        as melhores práticas de desenvolvimento e padrões de código.</p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="code-snippet">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <div class="code-dot dot-red"></div>
+                                <div class="code-dot dot-yellow"></div>
+                                <div class="code-dot dot-green"></div>
+                            </div>
+                            <div class="code-title">MotivoPerdaRepositoryImpl.java</div>
                         </div>
-                        <div class="code-title">MotivoPerdaRepositoryImpl.java</div>
-                    </div>
-                    <div class="code-content">
+                        <div class="code-content">
 <span class="code-annotation">@Override</span>
 <span class="code-keyword">public</span> Page&lt;MotivoPerda&gt; <span class="code-function">filtrar</span>(String pesquisa, Boolean inativo, Pageable pageable) {
     <span class="code-keyword">try</span> {
@@ -2567,14 +2505,13 @@
         <span class="code-keyword">return new</span> PageImpl&lt;&gt;(Collections.emptyList());
     }
 }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section-padding section-dark">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -2624,7 +2561,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -2638,8 +2574,7 @@
                         <a href="https://github.com/BernardoPatriarca" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/bernardo-patriarca-0080a8302/" target="_blank"><i
                                 class="fab fa-linkedin-in"></i></a>
-                        <a href="https://w.app/uvmnqm" target="_blank"><i
-                                class="fab fa-whatsapp"></i></a>
+                        <a href="https://w.app/uvmnqm" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         <a href="https://www.instagram.com/ber.patri/" target="_blank"><i
                                 class="fab fa-instagram"></i></a>
                     </div>
@@ -2661,12 +2596,12 @@
                     <div class="footer-links">
                         <h4>Tecnologias</h4>
                         <ul>
-                            <li><a >JavaScript</a></li>
-                            <li><a >Angular</a></li>
-                            <li><a >Flutter</a></li>
-                            <li><a >Python</a></li>
-                            <li><a >Java</a></li>
-                            <li><a >Bootstrap</a></li>
+                            <li><a>JavaScript</a></li>
+                            <li><a>Angular</a></li>
+                            <li><a>Flutter</a></li>
+                            <li><a>Python</a></li>
+                            <li><a>Java</a></li>
+                            <li><a>Bootstrap</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2708,12 +2643,10 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <a href="#home" class="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </a>
 
-    <!-- Modal para todos os projetos -->
     <div class="modal fade" id="allProjectsModal" tabindex="-1" aria-labelledby="allProjectsModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -2724,7 +2657,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="row" id="all-projects-container">
-                        <!-- Projetos adicionais serão carregados aqui via JavaScript -->
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -2734,21 +2666,16 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- AOS (Animate On Scroll) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Script principal -->
     <script>
-        // Inicializa AOS (Animate On Scroll)
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
             once: true
         });
 
-        // Configuração das partículas
         const particlesConfig = {
             "particles": {
                 "number": {
@@ -2839,16 +2766,13 @@
             "retina_detect": true
         };
 
-        // Função para inicializar as partículas com a cor correta
         function initParticles() {
             const currentTheme = document.body.getAttribute('data-theme');
             const particlesColor = currentTheme === 'dark' ? '#ffffff' : '#ffffff';
 
-            // Atualiza a cor na configuração
             particlesConfig.particles.color.value = particlesColor;
             particlesConfig.particles.line_linked.color = particlesColor;
 
-            // Remove as partículas existentes e recria com a nova configuração
             if (window.pJSDom && window.pJSDom.length > 0) {
                 window.pJSDom[0].pJS.fn.vendors.destroypJS();
                 window.pJSDom = [];
@@ -2857,13 +2781,11 @@
             particlesJS('particles-js', particlesConfig);
         }
 
-        // Theme Toggle Functionality
         const themeToggle = document.getElementById('themeToggle');
         const themeToggleMobile = document.getElementById('themeToggleMobile');
         const body = document.body;
         const currentTheme = localStorage.getItem('theme');
 
-        // Check for saved theme preference
         if (currentTheme) {
             body.setAttribute('data-theme', currentTheme);
             updateThemeIcon(currentTheme);
@@ -2876,7 +2798,7 @@
             body.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
-            initParticles(); // Atualiza as partículas quando o tema muda
+            initParticles();
         });
 
         if (themeToggleMobile) {
@@ -2896,7 +2818,6 @@
             }
         }
 
-        // Navbar scroll effect
         window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
@@ -2906,7 +2827,6 @@
             }
         });
 
-        // Back to top button
         window.addEventListener('scroll', function () {
             const backToTop = document.querySelector('.back-to-top');
             if (window.scrollY > 300) {
@@ -2916,7 +2836,6 @@
             }
         });
 
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2930,7 +2849,6 @@
                         behavior: 'smooth'
                     });
 
-                    // Fecha o menu mobile se estiver aberto
                     const navbarCollapse = document.querySelector('.navbar-collapse');
                     if (navbarCollapse.classList.contains('show')) {
                         const bsCollapse = new bootstrap.Collapse(navbarCollapse);
@@ -2940,7 +2858,6 @@
             });
         });
 
-        // Ativa o link ativo na navegação
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
 
@@ -2964,7 +2881,6 @@
             });
         });
 
-        // Função para animar as barras de habilidades
         function animateSkills() {
             const skillsSection = document.getElementById('skills');
             const skillBars = document.querySelectorAll('.skill-progress');
@@ -2983,7 +2899,6 @@
 
             observer.observe(skillsSection);
         }
-        // Efeito magnético nos botões
         const magneticButtons = document.querySelectorAll('.magnetic');
 
         magneticButtons.forEach(button => {
@@ -3002,7 +2917,6 @@
             });
         });
 
-        // Inicializa labels flutuantes
         document.querySelectorAll('.form-control').forEach(input => {
             if (input.value) {
                 input.nextElementSibling.classList.add('active');
@@ -3019,10 +2933,9 @@
             });
         });
 
-        // Inicializa quando o DOM estiver pronto
         document.addEventListener('DOMContentLoaded', function () {
             animateSkills();
-            initParticles(); // Inicializa as partículas com a cor correta
+            initParticles();
         });
     </script>
 </body>
