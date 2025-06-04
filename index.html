@@ -2052,6 +2052,39 @@
             pointer-events: none;
             opacity: 0.8;
         }
+
+        .btn-primary-custom {
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-primary-custom {
+            animation: floatPrimary 3s ease-in-out infinite;
+        }
+
+        .btn-outline-custom {
+            animation: floatOutline 3s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes floatPrimary {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes floatOutline {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
     </style>
 </head>
 
@@ -2105,14 +2138,14 @@
     <section id="home" class="hero-section">
         <div id="particles-js"></div>
         <div class="hero-content container">
-            <h1 data-aos="fade-down" data-aos-duration="1000">Bernardo Patriarca
+            <h1 data-aos-once="false" data-aos="fade-down" data-aos-duration="1000">Bernardo Patriarca
             </h1>
-            <h2 class="h4 mb-4" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="150">Desenvolvedor
+            <h2 class="h4 mb-4" data-aos-once="false" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="150">Desenvolvedor
                 FullStack</h2>
-            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">Criando
+            <p data-aos-once="false" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">Criando
                 soluções digitais performáticas
                 e escaláveis com as melhores tecnologias do mercado.</p>
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="450" class="hero-buttons">
+            <div data-aos-once="false" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="450" class="hero-buttons">
                 <a href="#projects" class="btn btn-primary-custom btn-lg magnetic" data-strength="20">
                     <i class="fas fa-code me-2"></i>Meus Projetos
                 </a>
@@ -2130,7 +2163,7 @@
     <section id="about" class="about-section section-padding">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos-once="false" data-aos="fade-up">
                     <h2 class="section-title">Sobre <span class="text-primary">Mim</span></h2>
                     <p class="lead">Sou um desenvolvedor FullStack de 20 anos, apaixonado por tecnologia e inovação.
                         Atualmente trabalho na Supera Sistemas em Pato Branco, onde moro, e estou cursando Sistemas de
@@ -2149,7 +2182,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left">
+                <div class="col-lg-6" data-aos-once="false" data-aos="fade-up">
                     <div class="profile-img-container">
                         <img src="https://i.pinimg.com/736x/43/b1/6a/43b16aa470ccdc201da7cac0866f4a18.jpg"
                             alt="Bernardo Patriarca" class="img-fluid profile-img floating floating-1">
@@ -2161,13 +2194,13 @@
 
     <section id="skills" class="section-padding section-dark">
         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
+            <div class="text-center mb-5" data-aos-once="false" data-aos="fade-down">
                 <h2 class="section-title">Minhas <span class="text-primary">Habilidades</span></h2>
                 <p class="section-subtitle">Tecnologias e ferramentas que domino e utilizo no meu dia a dia</p>
             </div>
 
             <div class="row">
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-6" data-aos-once="false" data-aos="fade-right" data-aos-delay="100">
                     <div class="skill-item">
                         <div class="skill-name">
                             <span>HTML5 & CSS3</span>
@@ -2220,7 +2253,7 @@
                 </div>
 
 
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-md-6" data-aos-once="false" data-aos="fade-left" data-aos-delay="200">
                     <div class="skill-item">
                         <div class="skill-name">
                             <span>Dart</span>
@@ -2278,13 +2311,13 @@
 
     <section id="education" class="section-padding">
         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
+            <div class="text-center mb-5" data-aos-once="false" data-aos="fade-down">
                 <h2 class="section-title">Formação & <span class="text-primary">Experiência</span></h2>
                 <p class="section-subtitle">Minha jornada acadêmica e profissional</p>
             </div>
 
             <div class="row">
-                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos-once="false" data-aos="fade-up">
                     <h3 class="mb-4"><i class="fas fa-graduation-cap me-2 text-primary"></i>Formação Acadêmica</h3>
 
                     <div class="timeline">
@@ -2312,7 +2345,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6" data-aos="fade-left">
+                <div class="col-lg-6" data-aos-once="false" data-aos="fade-up">
                     <h3 class="mb-4"><i class="fas fa-briefcase me-2 text-primary"></i>Experiência Profissional</h3>
 
                     <div class="timeline">
@@ -2336,13 +2369,13 @@
 
     <section id="projects" class="section-padding section-dark">
         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
+            <div class="text-center mb-5" data-aos-once="false" data-aos="fade-up">
                 <h2 class="section-title">Meus <span class="text-primary">Projetos</span></h2>
                 <p class="section-subtitle">Alguns dos trabalhos que desenvolvi recentemente</p>
             </div>
 
             <div class="projects-grid">
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card" data-aos-once="false" data-aos="fade-up" data-aos-delay="100">
                     <div class="project-img-container">
                         <img src="https://i.imgur.com/iPoISZ6.png" class="project-img" alt="Projeto Cordeiro Santo">
                     </div>
@@ -2368,7 +2401,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-card" data-aos-once="false" data-aos="fade-up" data-aos-delay="200">
                     <div class="project-img-container">
                         <img src="https://i.imgur.com/HVjQmdu.png" class="project-img"
                             alt="Projeto Construtora Patriarca">
@@ -2395,7 +2428,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card" data-aos-once="false" data-aos="fade-up" data-aos-delay="300">
                     <div class="project-img-container">
                         <img src="https://i.imgur.com/zUd9yFR.png" class="project-img" alt="Projeto Sabor Elegante">
                     </div>
@@ -2422,7 +2455,7 @@
                 </div>
             </div>
 
-            <div class="text-center mt-5" data-aos="fade-up">
+            <div class="text-center mt-5" data-aos-once="false" data-aos="fade-up">
                 <a href="https://github.com/BernardoPatriarca?tab=repositories" target="_blank"
                     class="btn btn-primary-custom magnetic" data-strength="15">
                     <i class="fas fa-eye me-2"></i>Ver Todos os Projetos
@@ -2433,8 +2466,8 @@
 
     <section class="section-padding">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+            <div class="row align-items-center"> 
+                <div class="col-lg-12 mb-5 mb-lg-0 pb-3" data-aos-once="false" data-aos="fade-up">
                     <h2 class="section-title">Meu <span class="text-primary">Código</span></h2>
                     <p class="lead">Aqui está um exemplo do meu código em Java, demonstrando minha abordagem para
                         resolver problemas complexos de backend de forma limpa e eficiente.</p>
@@ -2446,7 +2479,7 @@
                     <p>Além do Java, tenho experiência em diversos frameworks e tecnologias backend, sempre seguindo
                         as melhores práticas de desenvolvimento e padrões de código.</p>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left">
+                <div class="col-lg-12" data-aos-once="false" data-aos="fade-up">
                     <div class="code-snippet">
                         <div class="code-header">
                             <div class="code-dots">
@@ -2514,13 +2547,13 @@
 
     <section id="contact" class="section-padding section-dark">
         <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
+            <div class="text-center mb-5" data-aos-once="false" data-aos="fade-up">
                 <h2 class="section-title">Entre em <span class="text-white">Contato</span></h2>
                 <p class="section-subtitle">Estou disponível para oportunidades e colaborações</p>
             </div>
 
             <div class="row g-4">
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-lg-4" data-aos-once="false" data-aos="fade-up" data-aos-delay="100">
                     <div class="contact-info">
                         <div class="contact-icon-box">
                             <i class="fas fa-map-marker-alt"></i>
@@ -2533,7 +2566,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-4" data-aos-once="false" data-aos="fade-up" data-aos-delay="200">
                     <div class="contact-info">
                         <div class="contact-icon-box">
                             <i class="fas fa-envelope"></i>
@@ -2545,7 +2578,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-lg-4" data-aos-once="false" data-aos="fade-up" data-aos-delay="300">
                     <div class="contact-info">
                         <div class="contact-icon-box">
                             <i class="fas fa-phone-alt"></i>
@@ -2673,7 +2706,7 @@
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
-            once: true
+            once: false
         });
 
         const particlesConfig = {
@@ -2861,6 +2894,10 @@
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
 
+        window.addEventListener('scroll', function() {
+            AOS.refresh();
+        });
+
         window.addEventListener('scroll', function () {
             let current = '';
 
@@ -2882,23 +2919,29 @@
         });
 
         function animateSkills() {
-            const skillsSection = document.getElementById('skills');
-            const skillBars = document.querySelectorAll('.skill-progress');
+                const skillsSection = document.getElementById('skills');
+                const skillBars = document.querySelectorAll('.skill-progress');
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        skillBars.forEach(bar => {
-                            const width = bar.parentElement.previousElementSibling.lastElementChild.textContent;
-                            bar.style.width = width;
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            skillBars.forEach(bar => {
+                                bar.style.width = '0';
+                                setTimeout(() => {
+                                    const width = bar.parentElement.previousElementSibling.lastElementChild.textContent;
+                                    bar.style.width = width;
+                                }, 100);
+                            });
+                        } else {
+                            skillBars.forEach(bar => {
+                                bar.style.width = '0';
+                            });
+                        }
+                    });
+                }, { threshold: 0.5 });
 
-            observer.observe(skillsSection);
-        }
+                observer.observe(skillsSection);
+            }
         const magneticButtons = document.querySelectorAll('.magnetic');
 
         magneticButtons.forEach(button => {
@@ -2934,8 +2977,18 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: false
+            });
+
             animateSkills();
             initParticles();
+
+            window.addEventListener('resize', function () {
+                AOS.refresh();
+            });
         });
     </script>
 </body>
