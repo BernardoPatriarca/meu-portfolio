@@ -557,7 +557,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1672581437674-3186b17b405a?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover fixed;
+            background: url('https://i.imgur.com/ThSdBhh.jpeg') center/cover fixed;
             opacity: 0.18;
             z-index: 0;
         }
@@ -613,7 +613,58 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .second-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .second-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1744782211816-c5224434614f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .third-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .third-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .fourth-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fourth-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
             opacity: 0.15;
             z-index: 0;
         }
@@ -2309,7 +2360,7 @@
         </div>
     </section>
 
-    <section id="education" class="section-padding">
+    <section id="education" class="section-padding second-section">
         <div class="container">
             <div class="text-center mb-5" data-aos-once="false" data-aos="fade-down">
                 <h2 class="section-title">Formação & <span class="text-primary">Experiência</span></h2>
@@ -2464,7 +2515,7 @@
         </div>
     </section>
 
-    <section class="section-padding">
+    <section class="section-padding third-section">
         <div class="container">
             <div class="row align-items-center"> 
                 <div class="col-lg-12 mb-5 mb-lg-0 pb-3" data-aos-once="false" data-aos="fade-up">
@@ -2732,12 +2783,12 @@
                     }
                 },
                 "opacity": {
-                    "value": 0.5,
+                    "value": 0.6,
                     "random": true,
                     "anim": {
                         "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
+                        "speed": 3,
+                        "opacity_min": 0.2,
                         "sync": false
                     }
                 },
@@ -2746,8 +2797,8 @@
                     "random": true,
                     "anim": {
                         "enable": true,
-                        "speed": 2,
-                        "size_min": 0.1,
+                        "speed": 3,
+                        "size_min": 0.3,
                         "sync": false
                     }
                 },
@@ -2756,11 +2807,11 @@
                     "distance": 150,
                     "color": "#ffffff",
                     "opacity": 0.2,
-                    "width": 1
+                    "width": 2
                 },
                 "move": {
                     "enable": true,
-                    "speed": 1,
+                    "speed": 2,
                     "direction": "none",
                     "random": true,
                     "straight": false,
