@@ -15,18 +15,18 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #6C63FF;
+            --primary: #637aff;
             --primary-dark: #564FD8;
-            --primary-light: #8B85FF;
-            --secondary: #FF6584;
-            --secondary-dark: #E04D6D;
+            --primary-light: #8593ff;
+            --secondary: #4285F4;
+            --secondary-dark: #3367D6;
             --accent: #00BFA6;
             --dark: #31313b;
-            --light: #F8F9FF;
-            --gray: #6B7C93;
+            --light: #c5c6dd;
+            --gray: #3e4146;
             --light-gray: #E6ECF8;
             --dark-gray: #16213E;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
             --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -39,7 +39,7 @@
         [data-theme="dark"] {
             --dark: #F8F9FF;
             --light: #0F0F23;
-            --gray: #A3B1C6;
+            --gray: #b2bac7;
             --light-gray: #1A1A2E;
             --dark-gray: #0A0A1A;
             --code-bg: #1A1A2E;
@@ -62,7 +62,7 @@
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background-color 1s ease, color 1s ease;
         }
 
         h1,
@@ -300,7 +300,7 @@
             margin-bottom: 2rem;
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-out 0.3s both;
+            animation: fadeIn 1s ease-out 1s both;
         }
 
         .hero-content p {
@@ -311,7 +311,7 @@
             margin-right: auto;
             letter-spacing: 0.5px;
             color: rgba(255, 255, 255, 0.8);
-            animation: fadeIn 1.5s ease-out 0.5s both;
+            animation: fadeIn 1.5s ease-out 1s both;
             line-height: 1.6;
         }
 
@@ -336,7 +336,7 @@
             transform: translateX(-50%);
             z-index: 2;
             opacity: 0.8;
-            transition: opacity 0.3s ease;
+            transition: opacity 1s ease;
             animation: bounce 2s infinite;
             font-size: 20px;
             color: #fff;
@@ -357,7 +357,7 @@
 
         .magnetic {
             display: inline-block;
-            transition: transform 0.2s ease;
+            transition: transform 1s ease;
         }
 
         .floating {
@@ -606,17 +606,6 @@
             overflow: hidden;
         }
 
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
-            opacity: 0.15;
-            z-index: 0;
-        }
 
         .second-section {
             position: relative;
@@ -647,24 +636,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
-            opacity: 0.20;
-            z-index: 0;
-        }
-
-        .fourth-section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .fourth-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
+            background: url('https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
             opacity: 0.20;
             z-index: 0;
         }
@@ -2119,23 +2091,28 @@
         }
 
         @keyframes floatPrimary {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-10px);
             }
         }
 
         @keyframes floatOutline {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-10px);
             }
         }
-        
     </style>
 </head>
 
@@ -2191,12 +2168,14 @@
         <div class="hero-content container">
             <h1 data-aos-once="false" data-aos="fade-down" data-aos-duration="1000">Bernardo Patriarca
             </h1>
-            <h2 class="h4 mb-4" data-aos-once="false" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="150">Desenvolvedor
+            <h2 class="h4 mb-4" data-aos-once="false" data-aos="fade-down" data-aos-duration="1000"
+                data-aos-delay="150">Desenvolvedor
                 FullStack</h2>
             <p data-aos-once="false" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">Criando
                 soluções digitais performáticas
                 e escaláveis com as melhores tecnologias do mercado.</p>
-            <div data-aos-once="false" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="450" class="hero-buttons">
+            <div data-aos-once="false" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="450"
+                class="hero-buttons">
                 <a href="#projects" class="btn btn-primary-custom btn-lg magnetic" data-strength="20">
                     <i class="fas fa-code me-2"></i>Meus Projetos
                 </a>
@@ -2418,7 +2397,7 @@
         </div>
     </section>
 
-    <section id="projects" class="section-padding section-dark">
+    <section id="projects" class="section-padding about-section">
         <div class="container">
             <div class="text-center mb-5" data-aos-once="false" data-aos="fade-up">
                 <h2 class="section-title">Meus <span class="text-primary">Projetos</span></h2>
@@ -2517,7 +2496,7 @@
 
     <section class="section-padding third-section">
         <div class="container">
-            <div class="row align-items-center"> 
+            <div class="row align-items-center">
                 <div class="col-lg-12 mb-5 mb-lg-0 pb-3" data-aos-once="false" data-aos="fade-up">
                     <h2 class="section-title">Meu <span class="text-primary">Código</span></h2>
                     <p class="lead">Aqui está um exemplo do meu código em Java, demonstrando minha abordagem para
@@ -2945,7 +2924,7 @@
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             AOS.refresh();
         });
 
@@ -2970,29 +2949,29 @@
         });
 
         function animateSkills() {
-                const skillsSection = document.getElementById('skills');
-                const skillBars = document.querySelectorAll('.skill-progress');
+            const skillsSection = document.getElementById('skills');
+            const skillBars = document.querySelectorAll('.skill-progress');
 
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            skillBars.forEach(bar => {
-                                bar.style.width = '0';
-                                setTimeout(() => {
-                                    const width = bar.parentElement.previousElementSibling.lastElementChild.textContent;
-                                    bar.style.width = width;
-                                }, 100);
-                            });
-                        } else {
-                            skillBars.forEach(bar => {
-                                bar.style.width = '0';
-                            });
-                        }
-                    });
-                }, { threshold: 0.5 });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        skillBars.forEach(bar => {
+                            bar.style.width = '0';
+                            setTimeout(() => {
+                                const width = bar.parentElement.previousElementSibling.lastElementChild.textContent;
+                                bar.style.width = width;
+                            }, 100);
+                        });
+                    } else {
+                        skillBars.forEach(bar => {
+                            bar.style.width = '0';
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
 
-                observer.observe(skillsSection);
-            }
+            observer.observe(skillsSection);
+        }
         const magneticButtons = document.querySelectorAll('.magnetic');
 
         magneticButtons.forEach(button => {
