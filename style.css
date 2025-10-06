@@ -1834,7 +1834,6 @@ footer::before {
     .navbar-nav {
         margin-top: 1.2rem;
         background: rgba(255, 255, 255, 0.98);
-        padding: 1.5rem;
         border-radius: 15px;
         box-shadow: var(--shadow-xl);
     }
@@ -1989,10 +1988,9 @@ footer::before {
     }
 
     .d-flex.align-items-center.ms-lg-3 {
-        margin-left: 0 !important;
+        margin-left: 48% !important;
         margin-top: 1.5rem;
         justify-content: flex-start;
-        padding: 0 1.2rem;
     }
 
     .theme-toggle,
@@ -2169,5 +2167,18 @@ body {
 
     50% {
         transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-link::before {
+        left: 0px;
+        margin-left: 75px;
+    }
+    .nav-link.active::before {
+        width: 110px;
+    }
+    .nav-link:hover::before {
+        width: 110px;
     }
 }
