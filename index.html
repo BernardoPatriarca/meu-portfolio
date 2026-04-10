@@ -1,902 +1,171 @@
 <!DOCTYPE html>
 <html lang="pt-br" data-theme="dark">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Bernardo Patriarca — Full Stack Developer</title>
-<link rel="icon" href="https://i.imgur.com/JICN3Fa.png" type="image/png"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<style>
-/* ── RESET & TOKENS ──────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:       #03040a;
-  --bg-2:     #050810;
-  --bg-card:  #080d1a;
-  --bg-card2: #0a1020;
-  --border:   rgba(255,255,255,.06);
-  --border-2: rgba(255,255,255,.13);
-  --accent:   #4f8ef7;
-  --accent-2: #00d4ff;
-  --accent-3: #a855f7;
-  --accent-g: linear-gradient(135deg, #4f8ef7 0%, #00d4ff 55%, #a855f7 100%);
-  --text:     #f0f4ff;
-  --muted:    #44526a;
-  --muted-2:  #7a90aa;
-  --font-h: 'Syne', sans-serif;
-  --font-b: 'DM Sans', sans-serif;
-  --font-m: 'JetBrains Mono', monospace;
-  --r-sm: 6px;
-  --r:    14px;
-  --r-lg: 22px;
-  --ease:   cubic-bezier(.25,.8,.25,1);
-  --spring: cubic-bezier(.34,1.56,.64,1);
-}
-
-[data-theme="light"] {
-  --bg:      #f2f4fb;
-  --bg-2:    #eaecf5;
-  --bg-card: #ffffff;
-  --bg-card2:#f8f9fe;
-  --border:  rgba(0,0,0,.07);
-  --border-2:rgba(0,0,0,.13);
-  --text:    #0a0f1e;
-  --muted:   #9aa5b8;
-  --muted-2: #5a6a80;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font-b);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  transition: background .5s, color .5s;
-}
-
-a { text-decoration: none; color: inherit; transition: all .3s; }
-img { max-width: 100%; display: block; }
-
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: linear-gradient(var(--accent), var(--accent-3)); border-radius: 2px; }
-
-/* ── CUSTOM CURSOR ───────────────────────────────────────────────────────── */
-#cursor {
-  position: fixed; width: 12px; height: 12px;
-  background: var(--accent); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width .3s, height .3s, background .3s;
-  mix-blend-mode: screen;
-}
-#cursor-ring {
-  position: fixed; width: 36px; height: 36px;
-  border: 1px solid rgba(79,142,247,.4); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width .4s var(--spring), height .4s var(--spring), border-color .3s, opacity .3s;
-}
-#cursor.hovering { width: 20px; height: 20px; }
-#cursor-ring.hovering { width: 56px; height: 56px; border-color: rgba(79,142,247,.6); }
-@media (hover: none) { #cursor, #cursor-ring { display: none; } }
-
-/* ── PROGRESS BAR ────────────────────────────────────────────────────────── */
-#progress {
-  position: fixed; top: 0; left: 0; height: 2px;
-  background: var(--accent-g); z-index: 9999;
-  width: 0%; transition: width .08s linear;
-}
-
-/* ── CANVAS ──────────────────────────────────────────────────────────────── */
-#particles {
-  position: fixed; inset: 0;
-  pointer-events: none; z-index: 0; opacity: .55;
-}
-
-/* ── LAYOUT ──────────────────────────────────────────────────────────────── */
-.section { padding: 8rem 0; position: relative; z-index: 1; }
-.section-alt { background: var(--bg-2); }
-[data-theme="dark"] .section-alt { background: linear-gradient(180deg, #05080f 0%, #03040a 100%); }
-.container { width: 92%; max-width: 1160px; margin: 0 auto; }
-
-/* ── TYPOGRAPHY ──────────────────────────────────────────────────────────── */
-h1, h2, h3, h4 { font-family: var(--font-h); line-height: 1.1; color: var(--text); }
-
-.chip {
-  display: inline-flex; align-items: center; gap: .5rem;
-  font-family: var(--font-m); font-size: .65rem;
-  letter-spacing: .18em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 1rem;
-}
-.chip::before {
-  content: ''; width: 18px; height: 1px;
-  background: var(--accent); display: inline-block;
-}
-
-.section-title {
-  font-size: clamp(1.5rem, 4vw, 2.8rem);
-  font-weight: 800; margin-bottom: 1rem; letter-spacing: -.03em;
-}
-.section-title em {
-  font-style: italic; font-weight: 900;
-  background: var(--accent-g);
-  padding-right: 4px;
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-
-.section-sub {
-  font-size: .97rem; color: var(--muted-2);
-  margin-bottom: 3.5rem;
-  font-weight: 300; line-height: 1.85;
-}
-
-/* ── NAV ─────────────────────────────────────────────────────────────────── */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 200; padding: 1.5rem 0;
-  transition: all .5s var(--ease);
-}
-.nav.scrolled {
-  background: rgba(3,4,10,.88);
-  backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 0;
-}
-[data-theme="light"] .nav.scrolled { background: rgba(242,244,251,.93); }
-
-.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-
-.nav-brand {
-  font-family: var(--font-m); font-size: .82rem; font-weight: 500;
-  display: flex; align-items: center; gap: .6rem; letter-spacing: .04em;
-}
-.brand-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--accent); animation: pulse-dot 2.5s infinite;
-  box-shadow: 0 0 12px var(--accent);
-}
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: .3; transform: scale(.6); }
-}
-
-.nav-links { display: flex; align-items: center; gap: .05rem; list-style: none; }
-.nav-links a {
-  font-size: .8rem; font-weight: 500;
-  padding: .42rem .8rem; border-radius: var(--r-sm);
-  color: var(--muted-2); letter-spacing: .02em;
-  position: relative; transition: all .25s;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 2px; left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 60%; height: 1px; background: var(--accent);
-  transition: transform .3s var(--spring);
-}
-.nav-links a:hover, .nav-links a.active { color: var(--text); }
-.nav-links a:hover::after, .nav-links a.active::after { transform: translateX(-50%) scaleX(1); }
-
-.nav-actions { display: flex; align-items: center; gap: .4rem; }
-.nav-btn {
-  width: 36px; height: 36px; border-radius: var(--r-sm);
-  border: 1px solid var(--border); background: transparent;
-  color: var(--muted-2); cursor: pointer;
-  display: grid; place-items: center; font-size: .85rem;
-  transition: all .25s;
-}
-.nav-btn:hover { background: var(--border-2); color: var(--text); transform: scale(1.08); }
-.nav-toggle { display: none; }
-
-.nav-mobile {
-  display: none; flex-direction: column;
-  gap: .15rem; padding: 1rem 0;
-  border-top: 1px solid var(--border); margin-top: .75rem;
-}
-.nav-mobile a {
-  font-size: .9rem; font-weight: 500;
-  padding: .65rem 1rem; border-radius: var(--r-sm); color: var(--muted-2);
-  transition: all .2s;
-}
-.nav-mobile a:hover { color: var(--text); background: var(--border); }
-
-/* ── HERO ────────────────────────────────────────────────────────────────── */
-.hero {
-  min-height: 100vh; display: flex; align-items: center;
-  position: relative; overflow: hidden; padding-top: 6rem;
-}
-
-/* noise texture */
-.hero::after {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: .35; pointer-events: none; z-index: 0;
-}
-
-/* Aurora */
-.aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.aurora-blob {
-  position: absolute; border-radius: 50%;
-  filter: blur(110px); will-change: transform;
-}
-.aurora-1 {
-  width: 780px; height: 780px;
-  background: radial-gradient(circle, rgba(79,142,247,.18) 0%, transparent 65%);
-  top: -300px; right: -200px;
-  animation: adrift1 18s ease-in-out infinite alternate;
-}
-.aurora-2 {
-  width: 580px; height: 580px;
-  background: radial-gradient(circle, rgba(0,212,255,.12) 0%, transparent 65%);
-  bottom: -150px; left: -150px;
-  animation: adrift2 22s ease-in-out infinite alternate;
-}
-.aurora-3 {
-  width: 460px; height: 460px;
-  background: radial-gradient(circle, rgba(168,85,247,.1) 0%, transparent 65%);
-  top: 38%; left: 32%;
-  animation: adrift3 16s ease-in-out infinite alternate;
-}
-@keyframes adrift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(60px,40px) scale(1.15); } }
-@keyframes adrift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-40px,55px) scale(1.1); } }
-@keyframes adrift3 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(35px,-45px) scale(1.2); } }
-
-/* subtle grid */
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: linear-gradient(var(--border) 1px, transparent 1px),
-                    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 68px 68px;
-  mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, black 20%, transparent);
-  z-index: 0;
-}
-
-.hero-inner {
-  position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr auto;
-  gap: 5rem; align-items: center;
-}
-
-/* badge */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: .65rem;
-  font-family: var(--font-m); font-size: .7rem;
-  letter-spacing: .1em; color: var(--accent);
-  background: rgba(79,142,247,.07);
-  border: 1px solid rgba(79,142,247,.22);
-  padding: .48rem 1.1rem; border-radius: 99px;
-  margin-bottom: 1.85rem;
-  animation: badge-in .8s var(--spring) both;
-}
-@keyframes badge-in { from { opacity: 0; transform: translateY(-10px) scale(.95); } to { opacity: 1; transform: none; } }
-.hero-badge-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #22c55e; animation: pulse-dot 2s infinite;
-  box-shadow: 0 0 10px rgba(34,197,94,.7);
-}
-
-.hero h1 {
-  font-size: clamp(3.2rem, 9vw, 6rem);
-  font-weight: 800; line-height: .95;
-  margin-bottom: 1rem; letter-spacing: -.04em;
-  animation: hero-title-in .9s var(--spring) .1s both;
-}
-@keyframes hero-title-in { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-.hero h1 .line2 {
-  display: block;
-  background: var(--accent-g);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-
-/* typewriter */
-.typewriter {
-  font-family: var(--font-m); font-size: .88rem;
-  color: var(--accent); margin-bottom: 1.5rem;
-  min-height: 1.5em; letter-spacing: .02em;
-  animation: hero-title-in .9s var(--spring) .2s both;
-}
-.tw-cursor {
-  display: inline-block; width: 2px; height: 1em;
-  background: var(--accent); vertical-align: middle;
-  margin-left: 2px; animation: blink .8s step-end infinite;
-}
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-.hero-desc {
-  font-size: 1.05rem; color: var(--muted-2);
-  max-width: 480px; margin-bottom: 2.75rem;
-  line-height: 1.88; font-weight: 300;
-  animation: hero-desc-in 1s var(--ease) .3s both;
-}
-@keyframes hero-desc-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-
-.hero-btns { display: flex; flex-wrap: wrap; gap: .75rem; animation: hero-desc-in 1s var(--ease) .45s both; }
-
-/* photo */
-.hero-photo { position: relative; flex-shrink: 0; animation: photo-in 1.2s var(--spring) .2s both; }
-@keyframes photo-in { from { opacity: 0; transform: translateX(30px) scale(.96); } to { opacity: 1; transform: none; } }
-.hero-photo-frame { position: relative; width: 300px; height: 370px; }
-.hero-photo-frame img {
-  width: 100%; height: 100%; object-fit: cover;
-  border-radius: var(--r-lg);
-  border: 1px solid var(--border-2);
-  filter: grayscale(12%);
-  transition: filter .5s;
-  position: relative; z-index: 1;
-}
-.hero-photo-frame:hover img { filter: grayscale(0); }
-.hero-photo-frame::before {
-  content: ''; position: absolute;
-  inset: -2px; border-radius: calc(var(--r-lg) + 2px);
-  background: var(--accent-g); z-index: 0; opacity: .55;
-}
-.hero-photo-frame::after {
-  content: ''; position: absolute;
-  inset: -2px; border-radius: calc(var(--r-lg) + 2px);
-  background: var(--accent-g); z-index: 0;
-  filter: blur(22px); opacity: .3;
-  animation: glow-pulse 3s ease-in-out infinite alternate;
-}
-@keyframes glow-pulse { 0% { opacity: .18; transform: scale(.97); } 100% { opacity: .42; transform: scale(1.03); } }
-
-.photo-chip {
-  position: absolute; bottom: -14px; left: -22px; z-index: 2;
-  background: var(--bg-card); border: 1px solid var(--border-2);
-  border-radius: var(--r-sm); padding: .7rem 1.1rem;
-  display: flex; align-items: center; gap: .65rem;
-  backdrop-filter: blur(16px);
-  animation: chip-float 3.5s ease-in-out infinite alternate;
-}
-@keyframes chip-float { 0% { transform: translateY(0); } 100% { transform: translateY(-7px); } }
-.photo-chip-icon {
-  width: 32px; height: 32px; background: rgba(79,142,247,.1);
-  border-radius: 6px; display: grid; place-items: center;
-  color: var(--accent); font-size: .85rem;
-}
-.photo-chip span { font-size: .78rem; font-weight: 600; display: block; }
-.photo-chip small { font-size: .68rem; color: var(--muted-2); }
-
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: .5rem;
-  color: var(--muted); font-size: .68rem; letter-spacing: .14em;
-  font-family: var(--font-m);
-  animation: scroll-anim 2.8s ease-in-out infinite;
-}
-@keyframes scroll-anim {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: .4; }
-  50%       { transform: translateX(-50%) translateY(9px); opacity: 1; }
-}
-
-/* ── BUTTONS ─────────────────────────────────────────────────────────────── */
-.btn {
-  display: inline-flex; align-items: center; gap: .5rem;
-  font-family: var(--font-b); font-size: .88rem; font-weight: 500;
-  padding: .8rem 1.65rem; border-radius: var(--r-sm);
-  border: 1px solid transparent; cursor: pointer;
-  transition: all .3s var(--ease); white-space: nowrap;
-  letter-spacing: .01em; position: relative; overflow: hidden;
-}
-.btn::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255,255,255,.06);
-  transform: translateX(-101%); transition: transform .4s var(--ease);
-}
-.btn:hover::before { transform: translateX(0); }
-
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn-primary:hover { background: #3a7ae8; transform: translateY(-3px); box-shadow: 0 14px 36px rgba(79,142,247,.4); }
-
-.btn-ghost { background: rgba(255,255,255,.06); color: var(--text); border-color: var(--border-2); }
-.btn-ghost:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); }
-
-.btn-outline { background: transparent; color: var(--text); border-color: var(--border-2); }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-
-/* ── ABOUT ───────────────────────────────────────────────────────────────── */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-
-.about-text p { color: var(--muted-2); margin-bottom: 1.3rem; font-size: 1rem; font-weight: 300; line-height: 1.93; }
-
-.about-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem; margin-top: 2.5rem; padding-top: 2.5rem;
-  border-top: 1px solid var(--border);
-}
-.stat-num {
-  font-family: var(--font-h); font-size: 2.6rem; font-weight: 800;
-  background: var(--accent-g);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  letter-spacing: -.04em;
-}
-.stat-label { font-size: .73rem; color: var(--muted); margin-top: .25rem; font-family: var(--font-m); letter-spacing: .06em; }
-
-/* code window */
-.code-window {
-  background: #050810;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--r-lg); overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(79,142,247,.06);
-  transition: transform .4s var(--ease), box-shadow .4s;
-}
-.code-window:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 40px 100px rgba(0,0,0,.7), 0 0 80px rgba(79,142,247,.1);
-}
-.code-bar {
-  display: flex; align-items: center; gap: .5rem;
-  padding: .85rem 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,.05);
-  background: rgba(255,255,255,.018);
-}
-.code-dot { width: 12px; height: 12px; border-radius: 50%; }
-.dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
-.code-fname { margin-left: .75rem; font-family: var(--font-m); font-size: .74rem; color: rgba(255,255,255,.28); }
-.code-body { padding: 1.75rem; overflow-x: auto; }
-pre { font-family: var(--font-m); font-size: .79rem; line-height: 1.9; color: #c9d1d9; }
-.kw { color: #f472b6; } .fn { color: #34d399; } .st { color: #fbbf24; }
-.cm { color: #3c4450; font-style: italic; } .tp { color: #93c5fd; } .nm { color: #a78bfa; } .op { color: #6ee7b7; }
-
-/* ── SERVICES ────────────────────────────────────────────────────────────── */
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
-.service-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 2rem;
-  transition: all .35s var(--ease);
-  position: relative; overflow: hidden; cursor: default;
-}
-.service-card::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
-  background: var(--accent-g);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s var(--ease);
-}
-.service-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 0% 0%, rgba(79,142,247,.05), transparent 60%);
-  opacity: 0; transition: opacity .4s;
-}
-.service-card:hover {
-  border-color: rgba(79,142,247,.22);
-  transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(0,0,0,.35);
-}
-.service-card:hover::before { transform: scaleX(1); }
-.service-card:hover::after { opacity: 1; }
-
-.service-icon {
-  width: 52px; height: 52px; border-radius: var(--r-sm);
-  background: rgba(79,142,247,.08); border: 1px solid rgba(79,142,247,.15);
-  display: grid; place-items: center; font-size: 1.2rem;
-  color: var(--accent); margin-bottom: 1.5rem;
-  transition: all .35s var(--spring); position: relative; z-index: 1;
-}
-.service-card:hover .service-icon {
-  background: var(--accent); color: #fff;
-  border-color: var(--accent); transform: scale(1.1) rotate(-5deg);
-}
-.service-card h3 {
-  font-family: var(--font-b); font-size: 1rem; font-weight: 600;
-  margin-bottom: .6rem; position: relative; z-index: 1;
-}
-.service-card p { font-size: .875rem; color: var(--muted-2); line-height: 1.8; font-weight: 300; position: relative; z-index: 1; }
-
-/* ── SKILLS ──────────────────────────────────────────────────────────────── */
-.skills-wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
-.skill-group {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 2rem;
-  transition: all .35s var(--ease); position: relative; overflow: hidden;
-}
-.skill-group::before {
-  content: ''; position: absolute;
-  top: 0; left: 0; right: 0; height: 1px;
-  background: var(--accent-g);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s var(--ease);
-}
-.skill-group:hover {
-  border-color: rgba(79,142,247,.22);
-  transform: translateY(-3px);
-  box-shadow: 0 16px 48px rgba(0,0,0,.28);
-}
-.skill-group:hover::before { transform: scaleX(1); }
-.skill-group-title {
-  font-family: var(--font-m); font-size: .68rem;
-  letter-spacing: .16em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 1.25rem; opacity: .85;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: .42rem; }
-.skill-tag {
-  font-size: .76rem; padding: .33rem .78rem;
-  border-radius: 99px;
-  background: rgba(79,142,247,.05);
-  border: 1px solid rgba(79,142,247,.13);
-  color: var(--muted-2);
-  transition: all .22s; cursor: default; font-family: var(--font-m);
-}
-.skill-tag:hover {
-  border-color: var(--accent); color: var(--accent);
-  background: rgba(79,142,247,.1); transform: translateY(-2px);
-}
-
-/* ── TIMELINE ────────────────────────────────────────────────────────────── */
-.timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.timeline-group-label {
-  font-family: var(--font-m); font-size: .7rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted-2);
-  margin-bottom: 2rem; display: flex; align-items: center; gap: .6rem;
-}
-.timeline-group-label i { color: var(--accent); }
-.timeline { display: flex; flex-direction: column; }
-.tl-item { position: relative; padding-left: 2.25rem; padding-bottom: 2.5rem; }
-.tl-item:last-child { padding-bottom: 0; }
-.tl-item::before {
-  content: ''; position: absolute; left: 7px; top: 24px; bottom: 0;
-  width: 1px;
-  background: linear-gradient(var(--accent), transparent);
-  opacity: .3;
-}
-.tl-item:last-child::before { display: none; }
-.tl-dot {
-  position: absolute; left: 0; top: 5px;
-  width: 16px; height: 16px; border-radius: 50%;
-  border: 2px solid var(--accent);
-  background: var(--bg); z-index: 1; transition: all .3s var(--spring);
-}
-.tl-item:hover .tl-dot {
-  background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(79,142,247,.14), 0 0 20px rgba(79,142,247,.3);
-}
-.tl-date { font-family: var(--font-m); font-size: .66rem; color: var(--muted); letter-spacing: .08em; margin-bottom: .4rem; }
-.tl-title { font-family: var(--font-b); font-size: 1rem; font-weight: 600; margin-bottom: .2rem; }
-.tl-sub { font-size: .83rem; color: var(--accent); font-weight: 500; margin-bottom: .5rem; }
-.tl-desc { font-size: .83rem; color: var(--muted-2); line-height: 1.78; font-weight: 300; }
-
-/* ── PROJECTS ────────────────────────────────────────────────────────────── */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-.project-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--r-lg); overflow: hidden;
-  transition: all .4s var(--ease);
-}
-.project-card:hover {
-  border-color: rgba(79,142,247,.28);
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 30px 72px rgba(0,0,0,.45), 0 0 50px rgba(79,142,247,.08);
-}
-.project-img-wrap { overflow: hidden; height: 200px; position: relative; }
-.project-img-wrap::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, var(--bg-card));
-  opacity: .6;
-}
-.project-img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
-.project-card:hover .project-img { transform: scale(1.08); }
-.project-body { padding: 1.75rem; }
-.project-title { font-family: var(--font-b); font-size: 1.1rem; font-weight: 700; margin-bottom: .55rem; }
-.project-desc { font-size: .85rem; color: var(--muted-2); margin-bottom: 1.25rem; line-height: 1.78; font-weight: 300; }
-.project-techs { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
-.tech-badge {
-  font-family: var(--font-m); font-size: .66rem; padding: .24rem .6rem;
-  border-radius: 4px; background: rgba(79,142,247,.07);
-  color: var(--accent); border: 1px solid rgba(79,142,247,.15);
-}
-.project-links { display: flex; gap: .75rem; }
-.project-link {
-  flex: 1; text-align: center; padding: .55rem; border-radius: var(--r-sm);
-  font-size: .8rem; font-weight: 600; border: 1px solid var(--border);
-  color: var(--muted-2); transition: all .22s;
-}
-.project-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-.project-link.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.project-link.primary:hover { background: #3a7ae8; transform: translateY(-2px); }
-
-/* ── LANGUAGES ───────────────────────────────────────────────────────────── */
-.lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
-.lang-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 1.75rem;
-  display: flex; align-items: center; gap: 1.25rem;
-  transition: all .32s var(--ease);
-}
-.lang-card:hover { border-color: rgba(79,142,247,.22); transform: translateY(-4px); box-shadow: 0 16px 42px rgba(0,0,0,.25); }
-.lang-flag {
-  font-size: 2.2rem; flex-shrink: 0;
-  width: 54px; height: 54px; display: grid; place-items: center;
-  background: rgba(79,142,247,.06); border-radius: var(--r-sm);
-  border: 1px solid var(--border);
-}
-.lang-info { flex: 1; }
-.lang-name { font-weight: 700; font-size: 1rem; margin-bottom: .3rem; }
-.lang-level { font-size: .78rem; color: var(--muted-2); margin-bottom: .65rem; font-weight: 300; }
-.lang-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.lang-bar-fill {
-  height: 100%; border-radius: 2px;
-  background: var(--accent-g);
-  transform-origin: left; transform: scaleX(0);
-  transition: transform 1.2s var(--ease);
-}
-.lang-bar-fill.animated { transform: scaleX(1); }
-
-/* ── CONTACT ─────────────────────────────────────────────────────────────── */
-.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-.contact-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 2rem; text-align: center;
-  transition: all .35s var(--ease); position: relative; overflow: hidden;
-}
-.contact-card::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: var(--accent-g);
-  transform: scaleX(0); transition: transform .4s var(--ease);
-}
-.contact-card:hover { border-color: rgba(79,142,247,.25); transform: translateY(-6px); box-shadow: 0 20px 52px rgba(0,0,0,.3); }
-.contact-card:hover::after { transform: scaleX(1); }
-.contact-icon {
-  width: 54px; height: 54px; border-radius: var(--r-sm);
-  background: rgba(79,142,247,.08); border: 1px solid rgba(79,142,247,.15);
-  display: grid; place-items: center; font-size: 1.15rem; color: var(--accent);
-  margin: 0 auto 1.25rem; transition: all .3s var(--spring);
-}
-.contact-card:hover .contact-icon { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.1) rotate(-5deg); }
-.contact-card h4 {
-  font-family: var(--font-m); font-size: .66rem;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: .6rem;
-}
-.contact-card p, .contact-card a { font-size: .92rem; color: var(--text); font-weight: 300; }
-.contact-card a:hover { color: var(--accent); }
-
-/* ── FOOTER ──────────────────────────────────────────────────────────────── */
-footer { border-top: 1px solid var(--border); padding: 2.5rem 0; position: relative; z-index: 1; }
-.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-copy { font-size: .78rem; color: var(--muted); font-family: var(--font-m); }
-.footer-social { display: flex; gap: .45rem; }
-.footer-social a {
-  width: 36px; height: 36px; border-radius: var(--r-sm);
-  border: 1px solid var(--border); display: grid; place-items: center;
-  color: var(--muted-2); font-size: .88rem; transition: all .25s var(--spring);
-}
-.footer-social a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px) scale(1.1); }
-
-/* ── BACK TO TOP ─────────────────────────────────────────────────────────── */
-#back-top {
-  position: fixed; bottom: 2rem; right: 2rem;
-  width: 44px; height: 44px;
-  background: var(--accent); color: #fff;
-  border-radius: var(--r-sm); border: none;
-  display: grid; place-items: center; font-size: .9rem;
-  cursor: pointer; opacity: 0; visibility: hidden;
-  transform: translateY(10px); transition: all .35s var(--spring);
-  box-shadow: 0 8px 24px rgba(79,142,247,.45); z-index: 99;
-}
-#back-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-#back-top:hover { background: #3a7ae8; transform: translateY(-4px) scale(1.06); box-shadow: 0 14px 34px rgba(79,142,247,.55); }
-
-/* ── REVEAL ANIMATIONS ───────────────────────────────────────────────────── */
-.reveal {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity .8s var(--ease), transform .8s var(--ease);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-.reveal-left {
-  opacity: 0; transform: translateX(-30px);
-  transition: opacity .8s var(--ease), transform .8s var(--ease);
-}
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-
-.reveal-right {
-  opacity: 0; transform: translateX(30px);
-  transition: opacity .8s var(--ease), transform .8s var(--ease);
-}
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-.reveal-group > * {
-  opacity: 0; transform: translateY(22px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
-}
-.reveal-group.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: .04s; }
-.reveal-group.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: .13s; }
-.reveal-group.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: .22s; }
-.reveal-group.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: .31s; }
-.reveal-group.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: .40s; }
-.reveal-group.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: .49s; }
-
-/* ── TILT & MAGNETIC ─────────────────────────────────────────────────────── */
-.tilt-card { transform-style: preserve-3d; perspective: 1000px; }
-.magnetic  { display: inline-block; }
-
-/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
-@media (max-width: 960px) {
-  .hero-inner       { grid-template-columns: 1fr; }
-  .hero-photo       { display: none; }
-  .about-grid       { grid-template-columns: 1fr; gap: 3rem; }
-  .timeline-grid    { grid-template-columns: 1fr; gap: 2rem; }
-  .contact-grid     { grid-template-columns: 1fr 1fr; }
-  .skills-wrap      { grid-template-columns: 1fr; }
-  .services-grid    { grid-template-columns: 1fr 1fr; }
-  .lang-grid        { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-  .section          { padding: 5.5rem 0; }
-  .nav-links        { display: none; }
-  .nav-toggle       { display: grid; }
-  .nav-mobile.open  { display: flex; }
-  .projects-grid    { grid-template-columns: 1fr; }
-  .services-grid    { grid-template-columns: 1fr; }
-  .contact-grid     { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .hero h1          { font-size: 2.6rem; }
-  .hero-btns        { flex-direction: column; }
-  .btn              { width: 100%; justify-content: center; }
-  .about-stats      { grid-template-columns: 1fr 1fr; }
-  .lang-grid        { grid-template-columns: 1fr; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Bernardo Patriarca — Full Stack Developer</title>
+  <link rel="icon" href="https://i.imgur.com/JICN3Fa.png" type="image/png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
 
-<div id="progress"></div>
+  <div id="progress"></div>
 
-<canvas id="particles"></canvas>
+  <canvas id="particles"></canvas>
 
-<nav class="nav" id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#home" class="nav-brand">
-        <div class="brand-dot"></div>
-        bp.dev
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="active">Início</a></li>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="#services">Serviços</a></li>
-        <li><a href="#skills">Stack</a></li>
-        <li><a href="#experience">Trajetória</a></li>
-        <li><a href="#projects">Projetos</a></li>
-        <li><a href="#languages">Idiomas</a></li>
-        <li><a href="#contact">Contato</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button class="nav-btn" id="themeToggle" aria-label="Alternar tema">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button class="nav-btn nav-toggle" id="navToggle" aria-label="Menu">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </div>
-    <div class="nav-mobile" id="navMobile">
-      <a href="#home">Início</a>
-      <a href="#about">Sobre</a>
-      <a href="#services">Serviços</a>
-      <a href="#skills">Stack</a>
-      <a href="#experience">Trajetória</a>
-      <a href="#projects">Projetos</a>
-      <a href="#languages">Idiomas</a>
-      <a href="#contact">Contato</a>
-    </div>
-  </div>
-</nav>
-
-<section id="home" class="hero">
-  <div class="aurora">
-    <div class="aurora-blob aurora-1"></div>
-    <div class="aurora-blob aurora-2"></div>
-    <div class="aurora-blob aurora-3"></div>
-  </div>
-
-  <div class="container">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          Disponível para oportunidades
-        </div>
-
-        <h1>
-          Bernardo<br/>
-          <span class="line2">Patriarca</span>
-        </h1>
-
-        <div class="typewriter">
-          <span id="tw-text"></span><span class="tw-cursor"></span>
-        </div>
-
-        <p class="hero-desc">
-          Desenvolvedor Full Stack apaixonado por construir interfaces modernas
-          e sistemas robustos. Angular &amp; Java no dia a dia, sempre buscando
-          código limpo e experiências que fazem a diferença.
-        </p>
-
-        <div class="hero-btns">
-          <a href="#projects" class="btn btn-primary magnetic">
-            <i class="fas fa-code"></i> Ver Projetos
-          </a>
-          <a href="#contact" class="btn btn-ghost magnetic">
-            <i class="fas fa-paper-plane"></i> Contato
-          </a>
-          <a href="https://bernardopatriarca.netlify.app" target="_blank" class="btn btn-outline magnetic">
-            <i class="fas fa-external-link-alt"></i> Portfólio
-          </a>
+  <nav class="nav" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#home" class="nav-brand">
+          <div class="brand-dot"></div>
+          bp.dev
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="active">Início</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#services">Serviços</a></li>
+          <li><a href="#skills">Stack</a></li>
+          <li><a href="#experience">Trajetória</a></li>
+          <li><a href="#projects">Projetos</a></li>
+          <li><a href="#languages">Idiomas</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button class="nav-btn" id="themeToggle" aria-label="Alternar tema">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="nav-btn nav-toggle" id="navToggle" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
       </div>
+      <div class="nav-mobile" id="navMobile">
+        <a href="#home">Início</a>
+        <a href="#about">Sobre</a>
+        <a href="#services">Serviços</a>
+        <a href="#skills">Stack</a>
+        <a href="#experience">Trajetória</a>
+        <a href="#projects">Projetos</a>
+        <a href="#languages">Idiomas</a>
+        <a href="#contact">Contato</a>
+      </div>
+    </div>
+  </nav>
 
-      <div class="hero-photo">
-        <div class="hero-photo-frame">
-          <img src="https://i.imgur.com/hkx2zWH.jpeg" alt="Bernardo Patriarca"/>
-          <div class="photo-chip">
-            <div class="photo-chip-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div>
-              <span>Pato Branco, PR</span>
-              <small>Brasil 🇧🇷</small>
+  <section id="home" class="hero">
+    <div class="aurora">
+      <div class="aurora-blob aurora-1"></div>
+      <div class="aurora-blob aurora-2"></div>
+      <div class="aurora-blob aurora-3"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Disponível para oportunidades
+          </div>
+
+          <h1>
+            Bernardo<br />
+            <span class="line2">Patriarca</span>
+          </h1>
+
+          <div class="typewriter">
+            <span id="tw-text"></span><span class="tw-cursor"></span>
+          </div>
+
+          <p class="hero-desc">
+            Desenvolvedor Full Stack apaixonado por construir interfaces modernas
+            e sistemas robustos. Angular &amp; Java no dia a dia, sempre buscando
+            código limpo e experiências que fazem a diferença.
+          </p>
+
+          <div class="hero-btns">
+            <a href="#projects" class="btn btn-primary magnetic">
+              <i class="fas fa-code"></i> Ver Projetos
+            </a>
+            <a href="#contact" class="btn btn-ghost magnetic">
+              <i class="fas fa-paper-plane"></i> Contato
+            </a>
+            <a href="https://bernardopatriarca.netlify.app" target="_blank" class="btn btn-outline magnetic">
+              <i class="fas fa-external-link-alt"></i> Portfólio
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-photo">
+          <div class="hero-photo-frame">
+            <img src="https://i.imgur.com/hkx2zWH.jpeg" alt="Bernardo Patriarca" />
+            <div class="photo-chip">
+              <div class="photo-chip-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <span>Pato Branco, PR</span>
+                <small>Brasil 🇧🇷</small>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="hero-scroll">
-    <span>scroll</span>
-    <i class="fas fa-arrow-down"></i>
-  </div>
-</section>
+    <div class="hero-scroll">
+      <span>scroll</span>
+      <i class="fas fa-arrow-down"></i>
+    </div>
+  </section>
 
-<section id="about" class="section section-alt">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text reveal-left">
-        <div class="chip">sobre mim</div>
-        <h2 class="section-title">Transformando ideias em <em>código</em></h2>
-        <p>Sou um desenvolvedor Full Stack de 20 anos, apaixonado por tecnologia e inovação.
-           Atualmente trabalho na <strong>Supera Sistemas</strong> em Pato Branco — PR,
-           onde construo sistemas web completos, do front ao back-end.</p>
-        <p>Minha jornada começou pelo SENAI com o Técnico em Desenvolvimento de Sistemas,
-           e hoje curso Sistemas de Informação na UNIMATER. Fora do trabalho, participo
-           de hackathons e continuo evoluindo meu portfólio pessoal.</p>
-        <p>Meu objetivo é crescer como engenheiro de software, aprofundando minha expertise
-           em JavaScript moderno, arquiteturas escaláveis e boas práticas de engenharia.</p>
+  <section id="about" class="section section-alt">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text reveal-left">
+          <div class="chip">sobre mim</div>
+          <h2 class="section-title">Transformando ideias em <em>código</em></h2>
+          <p>Sou um desenvolvedor Full Stack de 20 anos, apaixonado por tecnologia e inovação.
+            Atualmente trabalho na <strong>Supera Sistemas</strong> em Pato Branco — PR,
+            onde construo sistemas web completos, do front ao back-end.</p>
+          <p>Minha jornada começou pelo SENAI com o Técnico em Desenvolvimento de Sistemas,
+            e hoje curso Sistemas de Informação na UNIMATER. Fora do trabalho, participo
+            de hackathons e continuo evoluindo meu portfólio pessoal.</p>
+          <p>Meu objetivo é crescer como engenheiro de software, aprofundando minha expertise
+            em JavaScript moderno, arquiteturas escaláveis e boas práticas de engenharia.</p>
 
-        <div class="about-stats">
-          <div>
-            <div class="stat-num">2</div>
-            <div class="stat-label">Anos de experiência</div>
-          </div>
-          <div>
-            <div class="stat-num">2</div>
-            <div class="stat-label">Hackathons</div>
-          </div>
-          <div>
-            <div class="stat-num">15+</div>
-            <div class="stat-label">Tecnologias</div>
+          <div class="about-stats">
+            <div>
+              <div class="stat-num">2</div>
+              <div class="stat-label">Anos de experiência</div>
+            </div>
+            <div>
+              <div class="stat-num">2</div>
+              <div class="stat-label">Hackathons</div>
+            </div>
+            <div>
+              <div class="stat-num">15+</div>
+              <div class="stat-label">Tecnologias</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="reveal-right">
-        <div class="code-window">
-          <div class="code-bar">
-            <div class="code-dot dot-r"></div>
-            <div class="code-dot dot-y"></div>
-            <div class="code-dot dot-g"></div>
-            <span class="code-fname">bernardo.ts</span>
-          </div>
-          <div class="code-body">
-<pre><kw>const</kw> <tp>developer</tp><op>:</op> <tp>Developer</tp> = {
+        <div class="reveal-right">
+          <div class="code-window">
+            <div class="code-bar">
+              <div class="code-dot dot-r"></div>
+              <div class="code-dot dot-y"></div>
+              <div class="code-dot dot-g"></div>
+              <span class="code-fname">bernardo.ts</span>
+            </div>
+            <div class="code-body">
+              <pre><kw>const</kw> <tp>developer</tp><op>:</op> <tp>Developer</tp> = {
   name<op>:</op>     <st>"Bernardo Patriarca"</st>,
   role<op>:</op>     <st>"Full Stack Developer"</st>,
   age<op>:</op>      <nm>20</nm>,
@@ -917,346 +186,372 @@ footer { border-top: 1px solid var(--border); padding: 2.5rem 0; position: relat
     <kw>return true</kw>; <cm>// sempre aberto a oportunidades</cm>
   },
 };</pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="services" class="section">
-  <div class="container">
-    <div class="reveal">
-      <div class="chip">serviços</div>
-      <h2 class="section-title">O que posso <em>fazer</em> por você</h2>
-      <p class="section-sub">Ofereço soluções completas, desde a concepção até o deploy, com foco em qualidade e performance.</p>
-    </div>
-
-    <div class="services-grid reveal-group">
-      <div class="service-card tilt-card">
-        <div class="service-icon"><i class="fas fa-desktop"></i></div>
-        <h3>Desenvolvimento Front-end</h3>
-        <p>Interfaces modernas, responsivas e acessíveis com Angular, React e TypeScript. Do design ao código, com atenção a UX e performance.</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon"><i class="fas fa-server"></i></div>
-        <h3>Desenvolvimento Back-end</h3>
-        <p>APIs REST robustas e escaláveis com Java/Spring Boot e Node.js. Integração com bancos de dados relacionais e NoSQL.</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-        <h3>Desenvolvimento Mobile</h3>
-        <p>Aplicativos multiplataforma com Flutter e Dart, entregando experiência nativa em iOS e Android com uma única base de código.</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon"><i class="fas fa-database"></i></div>
-        <h3>Banco de Dados</h3>
-        <p>Modelagem, otimização e integração com PostgreSQL, SQL Server, MongoDB e Firestore. Queries eficientes e dados bem estruturados.</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon"><i class="fas fa-code-branch"></i></div>
-        <h3>Versionamento &amp; Boas Práticas</h3>
-        <p>Fluxo de trabalho com Git, GitHub e Bitbucket. Metodologias ágeis, code review e colaboração em equipes multidisciplinares.</p>
-      </div>
-      <div class="service-card tilt-card">
-        <div class="service-icon"><i class="fas fa-globe"></i></div>
-        <h3>Landing Pages &amp; Sites</h3>
-        <p>Sites institucionais, landing pages e portfólios rápidos, bonitos e otimizados para SEO, do briefing ao ar em produção.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills" class="section section-alt">
-  <div class="container">
-    <div class="reveal">
-      <div class="chip">habilidades</div>
-      <h2 class="section-title">Stack &amp; <em>Tecnologias</em></h2>
-      <p class="section-sub">Ferramentas e tecnologias que utilizo para criar soluções completas, do front ao back-end.</p>
-    </div>
-
-    <div class="skills-wrap reveal-group">
-      <div class="skill-group">
-        <div class="skill-group-title">// front-end</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Angular</span>
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">HTML5</span>
-          <span class="skill-tag">CSS3</span>
-          <span class="skill-tag">Tailwind CSS</span>
-          <span class="skill-tag">PrimeNG</span>
-          <span class="skill-tag">PrimeFlex</span>
-          <span class="skill-tag">Bootstrap</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">// back-end</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Spring Boot</span>
-          <span class="skill-tag">JSF</span>
-          <span class="skill-tag">Node.js</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">N8N</span>
-          <span class="skill-tag">Agente IA Rag</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">// banco de dados</div>
-        <div class="skill-tags">
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">SQL Server</span>
-          <span class="skill-tag">MongoDB</span>
-          <span class="skill-tag">Firestore</span>
-          <span class="skill-tag">Supabase</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">// mobile &amp; ferramentas</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Flutter</span>
-          <span class="skill-tag">Dart</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">GitHub</span>
-          <span class="skill-tag">Bitbucket</span>
-          <span class="skill-tag">Scrum</span>
-          <span class="skill-tag">Kanban</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="experience" class="section">
-  <div class="container">
-    <div class="reveal">
-      <div class="chip">trajetória</div>
-      <h2 class="section-title">Formação &amp; <em>Experiência</em></h2>
-      <p class="section-sub">Minha jornada acadêmica e profissional até aqui.</p>
-    </div>
-
-    <div class="timeline-grid">
-      <div class="reveal-left">
-        <div class="timeline-group-label">
-          <i class="fas fa-graduation-cap"></i> Acadêmico
-        </div>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2024 — 2028 · Em andamento</div>
-            <div class="tl-title">Sistemas de Informação</div>
-            <div class="tl-sub">UNIMATER · Pato Branco, PR</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2021 — 2023 · Concluído</div>
-            <div class="tl-title">Técnico em Desenvolvimento de Sistemas</div>
-            <div class="tl-sub">SENAI · Pato Branco, PR</div>
-            <div class="tl-desc">Base sólida em lógica de programação, estruturas de dados, desenvolvimento web e boas práticas de engenharia de software.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">2014 — 2019 · Concluído</div>
-            <div class="tl-title">Inglês — 5 anos de formação</div>
-            <div class="tl-sub">PBF · Pato Branco, PR</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal-right">
-        <div class="timeline-group-label">
-          <i class="fas fa-briefcase"></i> Profissional
-        </div>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Mar 2024 — Atual</div>
-            <div class="tl-title">Desenvolvedor Full Stack</div>
-            <div class="tl-sub">Supera Sistemas · Pato Branco, PR</div>
-            <div class="tl-desc">
-              Desenvolvimento de sistemas web completos. Correção de bugs e melhorias com integração a bancos de dados. Criação de interfaces responsivas com foco em UX. Atuação em equipe multidisciplinar com Git e metodologias ágeis.
             </div>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Destaque</div>
-            <div class="tl-title">2× Hackathon</div>
-            <div class="tl-sub">Soluções criativas e escaláveis sob pressão</div>
-            <div class="tl-desc">Participação em dois hackathons, desenvolvendo projetos completos do zero com foco em inovação, entrega rápida e trabalho em equipe.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="chip">serviços</div>
+        <h2 class="section-title">O que posso <em>fazer</em> por você</h2>
+        <p class="section-sub">Ofereço soluções completas, desde a concepção até o deploy, com foco em qualidade e
+          performance.</p>
+      </div>
+
+      <div class="services-grid reveal-group">
+        <div class="service-card tilt-card">
+          <div class="service-icon"><i class="fas fa-desktop"></i></div>
+          <h3>Desenvolvimento Front-end</h3>
+          <p>Interfaces modernas, responsivas e acessíveis com Angular, React e TypeScript. Do design ao código, com
+            atenção a UX e performance.</p>
+        </div>
+        <div class="service-card tilt-card">
+          <div class="service-icon"><i class="fas fa-server"></i></div>
+          <h3>Desenvolvimento Back-end</h3>
+          <p>APIs REST robustas e escaláveis com Java/Spring Boot e Node.js. Integração com bancos de dados relacionais
+            e NoSQL.</p>
+        </div>
+        <div class="service-card tilt-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Desenvolvimento Mobile</h3>
+          <p>Aplicativos multiplataforma com Flutter e Dart, entregando experiência nativa em iOS e Android com uma
+            única base de código.</p>
+        </div>
+        <div class="service-card tilt-card">
+          <div class="service-icon"><i class="fas fa-database"></i></div>
+          <h3>Banco de Dados</h3>
+          <p>Modelagem, otimização e integração com PostgreSQL, SQL Server, MongoDB e Firestore. Queries eficientes e
+            dados bem estruturados.</p>
+        </div>
+        <div class="service-card tilt-card">
+          <div class="service-icon"><i class="fas fa-code-branch"></i></div>
+          <h3>Versionamento &amp; Boas Práticas</h3>
+          <p>Fluxo de trabalho com Git, GitHub e Bitbucket. Metodologias ágeis, code review e colaboração em equipes
+            multidisciplinares.</p>
+        </div>
+        <div class="service-card tilt-card">
+          <div class="service-icon"><i class="fas fa-globe"></i></div>
+          <h3>Landing Pages &amp; Sites</h3>
+          <p>Sites institucionais, landing pages e portfólios rápidos, bonitos e otimizados para SEO, do briefing ao ar
+            em produção.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section section-alt">
+    <div class="container">
+      <div class="reveal">
+        <div class="chip">habilidades</div>
+        <h2 class="section-title">Stack &amp; <em>Tecnologias</em></h2>
+        <p class="section-sub">Ferramentas e tecnologias que utilizo para criar soluções completas, do front ao
+          back-end.</p>
+      </div>
+
+      <div class="skills-wrap reveal-group">
+        <div class="skill-group">
+          <div class="skill-group-title">// front-end</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Angular</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag">PrimeNG</span>
+            <span class="skill-tag">PrimeFlex</span>
+            <span class="skill-tag">Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">// back-end</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">JSF</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">N8N</span>
+            <span class="skill-tag">Agente IA Rag</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">// banco de dados</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Firestore</span>
+            <span class="skill-tag">Supabase</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">// mobile &amp; ferramentas</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Flutter</span>
+            <span class="skill-tag">Dart</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Bitbucket</span>
+            <span class="skill-tag">Scrum</span>
+            <span class="skill-tag">Kanban</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="projects" class="section section-alt">
-  <div class="container">
-    <div class="reveal">
-      <div class="chip">projetos</div>
-      <h2 class="section-title">Trabalhos <em>Recentes</em></h2>
-      <p class="section-sub">Alguns dos projetos que desenvolvi — do conceito ao deploy.</p>
-    </div>
-
-    <div class="projects-grid reveal-group">
-      <div class="project-card tilt-card">
-        <div class="project-img-wrap">
-          <img src="https://i.imgur.com/iPoISZ6.png" class="project-img" alt="Cordeiro Santo"/>
-        </div>
-        <div class="project-body">
-          <h3 class="project-title">Cordeiro Santo</h3>
-          <p class="project-desc">Landing page completa para a igreja Cordeiro Santo com galeria, informações de eventos e página de contato.</p>
-          <div class="project-techs">
-            <span class="tech-badge">HTML</span>
-            <span class="tech-badge">CSS</span>
-            <span class="tech-badge">JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a href="https://cordeirosanto.com.br" target="_blank" class="project-link primary">
-              <i class="fas fa-external-link-alt"></i> Demo
-            </a>
-            <a href="https://github.com/BernardoPatriarca/CordeiroSanto" target="_blank" class="project-link">
-              <i class="fab fa-github"></i> Código
-            </a>
-          </div>
-        </div>
+  <section id="experience" class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="chip">trajetória</div>
+        <h2 class="section-title">Formação &amp; <em>Experiência</em></h2>
+        <p class="section-sub">Minha jornada acadêmica e profissional até aqui.</p>
       </div>
 
-      <div class="project-card tilt-card">
-        <div class="project-img-wrap">
-          <img src="https://i.imgur.com/HVjQmdu.png" class="project-img" alt="Construtora Patriarca"/>
-        </div>
-        <div class="project-body">
-          <h3 class="project-title">Construtora Patriarca</h3>
-          <p class="project-desc">Site institucional da Construtora Patriarca com portfólio de projetos e formulário de contato.</p>
-          <div class="project-techs">
-            <span class="tech-badge">HTML</span>
-            <span class="tech-badge">CSS</span>
-            <span class="tech-badge">JavaScript</span>
+      <div class="timeline-grid">
+        <div class="reveal-left">
+          <div class="timeline-group-label">
+            <i class="fas fa-graduation-cap"></i> Acadêmico
           </div>
-          <div class="project-links">
-            <a href="https://construtorapatriarca.netlify.app" target="_blank" class="project-link primary">
-              <i class="fas fa-external-link-alt"></i> Demo
-            </a>
-            <a href="https://github.com/BernardoPatriarca/ConstrutoraPatriarca" target="_blank" class="project-link">
-              <i class="fab fa-github"></i> Código
-            </a>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">2024 — 2028 · Em andamento</div>
+              <div class="tl-title">Sistemas de Informação</div>
+              <div class="tl-sub">UNIMATER · Pato Branco, PR</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">2021 — 2023 · Concluído</div>
+              <div class="tl-title">Técnico em Desenvolvimento de Sistemas</div>
+              <div class="tl-sub">SENAI · Pato Branco, PR</div>
+              <div class="tl-desc">Base sólida em lógica de programação, estruturas de dados, desenvolvimento web e boas
+                práticas de engenharia de software.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">2014 — 2019 · Concluído</div>
+              <div class="tl-title">Inglês — 5 anos de formação</div>
+              <div class="tl-sub">PBF · Pato Branco, PR</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="project-card tilt-card">
-        <div class="project-img-wrap">
-          <img src="https://i.imgur.com/zUd9yFR.png" class="project-img" alt="Sabor Elegante"/>
-        </div>
-        <div class="project-body">
-          <h3 class="project-title">Sabor Elegante</h3>
-          <p class="project-desc">Apresentação digital de restaurante com cardápio, serviços e canais de atendimento ao cliente.</p>
-          <div class="project-techs">
-            <span class="tech-badge">HTML</span>
-            <span class="tech-badge">CSS</span>
-            <span class="tech-badge">JavaScript</span>
+        <div class="reveal-right">
+          <div class="timeline-group-label">
+            <i class="fas fa-briefcase"></i> Profissional
           </div>
-          <div class="project-links">
-            <a href="https://saborelegante.netlify.app" target="_blank" class="project-link primary">
-              <i class="fas fa-external-link-alt"></i> Demo
-            </a>
-            <a href="https://github.com/BernardoPatriarca/SaborElegante" target="_blank" class="project-link">
-              <i class="fab fa-github"></i> Código
-            </a>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">Mar 2024 — Atual</div>
+              <div class="tl-title">Desenvolvedor Full Stack</div>
+              <div class="tl-sub">Supera Sistemas · Pato Branco, PR</div>
+              <div class="tl-desc">
+                Desenvolvimento de sistemas web completos. Correção de bugs e melhorias com integração a bancos de
+                dados. Criação de interfaces responsivas com foco em UX. Atuação em equipe multidisciplinar com Git e
+                metodologias ágeis.
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-date">Destaque</div>
+              <div class="tl-title">2× Hackathon</div>
+              <div class="tl-sub">Soluções criativas e escaláveis sob pressão</div>
+              <div class="tl-desc">Participação em dois hackathons, desenvolvendo projetos completos do zero com foco em
+                inovação, entrega rápida e trabalho em equipe.</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div style="text-align:center;margin-top:3rem" class="reveal">
-      <a href="https://github.com/BernardoPatriarca?tab=repositories" target="_blank" class="btn btn-outline magnetic">
-        <i class="fab fa-github"></i> Ver todos no GitHub
-      </a>
-    </div>
-  </div>
-</section>
+  <section id="projects" class="section section-alt">
+    <div class="container">
+      <div class="reveal">
+        <div class="chip">projetos</div>
+        <h2 class="section-title">Trabalhos <em>Recentes</em></h2>
+        <p class="section-sub">Alguns dos projetos que desenvolvi — do conceito ao deploy.</p>
+      </div>
 
-<section id="languages" class="section">
-  <div class="container">
-    <div class="reveal">
-      <div class="chip">idiomas</div>
-      <h2 class="section-title">Línguas que <em>falo</em></h2>
-      <p class="section-sub">Comunicação eficaz em diferentes contextos, inclusive com equipes e documentação internacional.</p>
-    </div>
+      <div class="projects-grid reveal-group">
+        <div class="project-card tilt-card">
+          <div class="project-img-wrap">
+            <img src="https://i.imgur.com/iPoISZ6.png" class="project-img" alt="Cordeiro Santo" />
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Cordeiro Santo</h3>
+            <p class="project-desc">Landing page completa para a igreja Cordeiro Santo com galeria, informações de
+              eventos e página de contato.</p>
+            <div class="project-techs">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="https://cordeirosanto.com.br" target="_blank" class="project-link primary">
+                <i class="fas fa-external-link-alt"></i> Demo
+              </a>
+              <a href="https://github.com/BernardoPatriarca/CordeiroSanto" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> Código
+              </a>
+            </div>
+          </div>
+        </div>
 
-    <div class="lang-grid reveal-group">
-      <div class="lang-card">
-        <div class="lang-flag">🇧🇷</div>
-        <div class="lang-info">
-          <div class="lang-name">Português</div>
-          <div class="lang-level">Nativo · C2</div>
-          <div class="lang-bar"><div class="lang-bar-fill" data-width="1"></div></div>
+        <div class="project-card tilt-card">
+          <div class="project-img-wrap">
+            <img src="https://i.imgur.com/HVjQmdu.png" class="project-img" alt="Construtora Patriarca" />
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Construtora Patriarca</h3>
+            <p class="project-desc">Site institucional da Construtora Patriarca com portfólio de projetos e formulário
+              de contato.</p>
+            <div class="project-techs">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="https://construtorapatriarca.netlify.app" target="_blank" class="project-link primary">
+                <i class="fas fa-external-link-alt"></i> Demo
+              </a>
+              <a href="https://github.com/BernardoPatriarca/ConstrutoraPatriarca" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> Código
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card tilt-card">
+          <div class="project-img-wrap">
+            <img src="https://i.imgur.com/zUd9yFR.png" class="project-img" alt="Sabor Elegante" />
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Sabor Elegante</h3>
+            <p class="project-desc">Apresentação digital de restaurante com cardápio, serviços e canais de atendimento
+              ao cliente.</p>
+            <div class="project-techs">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="https://saborelegante.netlify.app" target="_blank" class="project-link primary">
+                <i class="fas fa-external-link-alt"></i> Demo
+              </a>
+              <a href="https://github.com/BernardoPatriarca/SaborElegante" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> Código
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="lang-card">
-        <div class="lang-flag">🇺🇸</div>
-        <div class="lang-info">
-          <div class="lang-name">Inglês</div>
-          <div class="lang-level">Avançado · C1 · 5 anos de formação (PBF)</div>
-          <div class="lang-bar"><div class="lang-bar-fill" data-width=".85"></div></div>
+
+      <div style="text-align:center;margin-top:3rem" class="reveal">
+        <a href="https://github.com/BernardoPatriarca?tab=repositories" target="_blank"
+          class="btn btn-outline magnetic">
+          <i class="fab fa-github"></i> Ver todos no GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="languages" class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="chip">idiomas</div>
+        <h2 class="section-title">Línguas que <em>falo</em></h2>
+        <p class="section-sub">Comunicação eficaz em diferentes contextos, inclusive com equipes e documentação
+          internacional.</p>
+      </div>
+
+      <div class="lang-grid reveal-group">
+        <div class="lang-card">
+          <div class="lang-flag">🇧🇷</div>
+          <div class="lang-info">
+            <div class="lang-name">Português</div>
+            <div class="lang-level">Nativo · C2</div>
+            <div class="lang-bar">
+              <div class="lang-bar-fill" data-width="1"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lang-card">
+          <div class="lang-flag">🇺🇸</div>
+          <div class="lang-info">
+            <div class="lang-name">Inglês</div>
+            <div class="lang-level">Avançado · C1 · 5 anos de formação (PBF)</div>
+            <div class="lang-bar">
+              <div class="lang-bar-fill" data-width=".85"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact" class="section section-alt">
-  <div class="container">
-    <div class="reveal" style="text-align:center">
-      <div class="chip" style="justify-content:center">contato</div>
-      <h2 class="section-title">Vamos <em>conversar</em></h2>
-      <p class="section-sub" style="margin:0 auto 3.5rem">
-        Estou disponível para novas oportunidades, freelances e colaborações. Entre em contato!
-      </p>
-    </div>
+  <section id="contact" class="section section-alt">
+    <div class="container">
+      <div class="reveal" style="text-align:center">
+        <div class="chip" style="justify-content:center">contato</div>
+        <h2 class="section-title">Vamos <em>conversar</em></h2>
+        <p class="section-sub" style="margin:0 auto 3.5rem">
+          Estou disponível para novas oportunidades, freelances e colaborações. Entre em contato!
+        </p>
+      </div>
 
-    <div class="contact-grid reveal-group">
-      <div class="contact-card">
-        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-        <h4>Localização</h4>
-        <p>Pato Branco, PR<br/>Brasil</p>
-      </div>
-      <div class="contact-card">
-        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-        <h4>E-mail</h4>
-        <p><a href="mailto:bernardopatriarca25@gmail.com">bernardopatriarca25@gmail.com</a></p>
-      </div>
-      <div class="contact-card">
-        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-        <h4>WhatsApp</h4>
-        <p><a href="https://wa.me/5546988120972">+55 (46) 9 8812-0972</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <p class="footer-copy">© 2025 Bernardo Patriarca — Feito com <span style="color:var(--accent)">♥</span></p>
-      <div class="footer-social">
-        <a href="https://github.com/BernardoPatriarca" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/bernardopatriarca/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://wa.me/5546988120972" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://www.instagram.com/bernardopatriarca/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <div class="contact-grid reveal-group">
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h4>Localização</h4>
+          <p>Pato Branco, PR<br />Brasil</p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <h4>E-mail</h4>
+          <p><a href="mailto:bernardopatriarca25@gmail.com">bernardopatriarca25@gmail.com</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+          <h4>WhatsApp</h4>
+          <p><a href="https://wa.me/5546988120972">+55 (46) 9 8812-0972</a></p>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<button id="back-top" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">© 2026 Bernardo Patriarca — Feito com <span style="color:var(--accent)">♥</span></p>
+        <div class="footer-social">
+          <a href="https://github.com/BernardoPatriarca" target="_blank" aria-label="GitHub"><i
+              class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/bernardopatriarca/" target="_blank" aria-label="LinkedIn"><i
+              class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/5546988120972" target="_blank" aria-label="WhatsApp"><i
+              class="fab fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/bernardopatriarca/" target="_blank" aria-label="Instagram"><i
+              class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-<script src="script.js"></script>
+  <button id="back-top" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
