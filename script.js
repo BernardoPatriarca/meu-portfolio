@@ -1,9 +1,11 @@
+/* ── CURSOR ────────────────────────────────────────────────────────────────── */
 const cursor = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursor-ring');
 let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
 document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
     cursor.style.left = mouseX + 'px';
     cursor.style.top = mouseY + 'px';
 });
@@ -17,23 +19,69 @@ document.addEventListener('mousemove', e => {
 })();
 
 document.querySelectorAll('a, button, .skill-tag, .tilt-card, .nav-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.classList.add('hovering'); cursorRing.classList.add('hovering'); });
-    el.addEventListener('mouseleave', () => { cursor.classList.remove('hovering'); cursorRing.classList.remove('hovering'); });
+    el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hovering');
+        cursorRing.classList.add('hovering');
+    });
+    el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hovering');
+        cursorRing.classList.remove('hovering');
+    });
 });
 
+/* ── NEON TRAIL ─────────────────────────────────────────────────────────────── */
+const TRAIL_N = 14;
+const trailEls = [];
+const trailPos = Array.from({ length: TRAIL_N }, () => ({ x: 0, y: 0 }));
+// Color ramp: blue → cyan → purple along the tail
+const trailPalette = ['#4f8ef7', '#4aaaff', '#00d4ff', '#60aaee', '#9966ee', '#a855f7'];
+
+for (let i = 0; i < TRAIL_N; i++) {
+    const el = document.createElement('div');
+    el.className = 'cursor-trail';
+    const t = i / (TRAIL_N - 1);                           // 0 = head, 1 = tail end
+    const size = Math.max(2, Math.round(9.5 - t * 7.2));   // 9.5px → 2px
+    const colorIdx = Math.round(t * (trailPalette.length - 1));
+    const color = trailPalette[colorIdx];
+    const opacity = (1 - t * 0.88) * 0.6;
+    const glow = size * 2.8;
+    el.style.cssText = `width:${size}px;height:${size}px;background:${color};opacity:${opacity};box-shadow:0 0 ${glow}px ${color},0 0 ${size}px ${color};`;
+    document.body.appendChild(el);
+    trailEls.push(el);
+}
+
+(function animTrail() {
+    // Each trail dot lerps toward the one ahead of it
+    // The lead dot follows the actual cursor position
+    trailPos[0].x += (mouseX - trailPos[0].x) * 0.45;
+    trailPos[0].y += (mouseY - trailPos[0].y) * 0.45;
+    for (let i = 1; i < TRAIL_N; i++) {
+        const factor = 0.42 * (1 - (i / TRAIL_N) * 0.38);
+        trailPos[i].x += (trailPos[i - 1].x - trailPos[i].x) * factor;
+        trailPos[i].y += (trailPos[i - 1].y - trailPos[i].y) * factor;
+    }
+    trailEls.forEach((el, i) => {
+        el.style.left = trailPos[i].x + 'px';
+        el.style.top = trailPos[i].y + 'px';
+    });
+    requestAnimationFrame(animTrail);
+})();
+
+/* ── PROGRESS BAR ───────────────────────────────────────────────────────────── */
 const progressBar = document.getElementById('progress');
 window.addEventListener('scroll', () => {
     const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = pct + '%';
 });
 
+/* ── PARTICLES CANVAS ───────────────────────────────────────────────────────── */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
 
 function resizeCanvas() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 resizeCanvas();
-window.addEventListener('resize', () => { resizeCanvas(); });
+window.addEventListener('resize', resizeCanvas);
 
 class Particle {
     constructor() { this.reset(); }
@@ -47,7 +95,8 @@ class Particle {
         this.c = Math.random() > .55 ? 'rgba(79,142,247,' : 'rgba(168,85,247,';
     }
     update() {
-        this.x += this.vx; this.y += this.vy;
+        this.x += this.vx;
+        this.y += this.vy;
         if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
     }
     draw() {
@@ -86,6 +135,7 @@ function drawConnections() {
     requestAnimationFrame(animParticles);
 })();
 
+/* ── NAV SCROLL & BACK TO TOP ────────────────────────────────────────────────── */
 const navbar = document.getElementById('navbar');
 const backTop = document.getElementById('back-top');
 
@@ -94,6 +144,7 @@ window.addEventListener('scroll', () => {
     backTop.classList.toggle('show', window.scrollY > 400);
 });
 
+/* ── ACTIVE NAV LINK ─────────────────────────────────────────────────────────── */
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -109,6 +160,7 @@ sections.forEach(sec => {
     }, { threshold: 0.35 }).observe(sec);
 });
 
+/* ── THEME TOGGLE ───────────────────────────────────────────────────────────── */
 const themeBtn = document.getElementById('themeToggle');
 const htmlEl = document.documentElement;
 const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -122,13 +174,27 @@ themeBtn.addEventListener('click', () => {
     themeBtn.querySelector('i').className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 });
 
+/* ── MOBILE MENU ─────────────────────────────────────────────────────────────── */
 document.getElementById('navToggle').addEventListener('click', () => {
     document.getElementById('navMobile').classList.toggle('open');
 });
+
 document.querySelectorAll('.nav-mobile a').forEach(a => {
     a.addEventListener('click', () => document.getElementById('navMobile').classList.remove('open'));
 });
 
+// Close mobile menu on outside click
+document.addEventListener('click', e => {
+    const navMobile = document.getElementById('navMobile');
+    const navToggle = document.getElementById('navToggle');
+    if (navMobile.classList.contains('open') &&
+        !navMobile.contains(e.target) &&
+        !navToggle.contains(e.target)) {
+        navMobile.classList.remove('open');
+    }
+});
+
+/* ── SMOOTH SCROLL ───────────────────────────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
@@ -139,32 +205,39 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+/* ── REVEAL ANIMATIONS (re-triggers on scroll up AND down) ─────────────────── */
+// Elements animate in when entering the viewport and animate out when leaving.
+// Removing unobserve() enables re-triggering every time the user scrolls past.
 const revealObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            revealObs.unobserve(e.target);
-        }
+        e.target.classList.toggle('visible', e.isIntersecting);
     });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-group').forEach(el => revealObs.observe(el));
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-group')
+    .forEach(el => revealObs.observe(el));
 
+/* ── LANGUAGE BARS (re-animate on scroll) ────────────────────────────────────── */
 const barObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
         if (e.isIntersecting) {
             e.target.querySelectorAll('.lang-bar-fill').forEach((bar, i) => {
                 setTimeout(() => {
                     bar.style.transform = `scaleX(${bar.dataset.width})`;
-                    bar.classList.add('animated');
                 }, 280 + i * 120);
             });
-            barObs.unobserve(e.target);
+        } else {
+            // Reset bars when leaving so they re-animate next time
+            e.target.querySelectorAll('.lang-bar-fill').forEach(bar => {
+                bar.style.transform = 'scaleX(0)';
+            });
         }
     });
 }, { threshold: 0.3 });
+
 document.querySelectorAll('.lang-card').forEach(c => barObs.observe(c));
 
+/* ── TYPEWRITER ──────────────────────────────────────────────────────────────── */
 const phrases = ['Full Stack Developer', 'Angular & Java Dev', 'UI/UX Enthusiast', 'Problem Solver', 'Open to Opportunities'];
 let phraseIndex = 0, charIndex = 0, deleting = false;
 const twEl = document.getElementById('tw-text');
@@ -191,6 +264,7 @@ function typeWriter() {
 }
 setTimeout(typeWriter, 1100);
 
+/* ── 3D TILT CARDS ───────────────────────────────────────────────────────────── */
 document.querySelectorAll('.tilt-card').forEach(card => {
     card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
@@ -198,9 +272,18 @@ document.querySelectorAll('.tilt-card').forEach(card => {
         const y = ((e.clientY - rect.top) / rect.height - .5) * -14;
         card.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg) translateY(-6px)`;
     });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+    });
+    card.addEventListener('mousedown', () => {
+        card.style.transform = `perspective(1000px) translateY(-2px) scale(.99)`;
+    });
+    card.addEventListener('mouseup', () => {
+        card.style.transform = '';
+    });
 });
 
+/* ── MAGNETIC BUTTONS ────────────────────────────────────────────────────────── */
 document.querySelectorAll('.magnetic').forEach(btn => {
     btn.addEventListener('mousemove', e => {
         const rect = btn.getBoundingClientRect();
@@ -208,5 +291,25 @@ document.querySelectorAll('.magnetic').forEach(btn => {
         const y = (e.clientY - rect.top - rect.height / 2) * .22;
         btn.style.transform = `translate(${x}px, ${y}px)`;
     });
-    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+    });
+});
+
+/* ── RIPPLE EFFECT ON CLICK ──────────────────────────────────────────────────── */
+// Adds a circular ripple at click position on interactive elements
+const rippleTargets = '.btn, .project-link, .service-card, .skill-group, .lang-card, .contact-card, .nav-btn';
+
+document.querySelectorAll(rippleTargets).forEach(el => {
+    el.addEventListener('click', function (e) {
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        const size = Math.max(rect.width, rect.height) * 1.4;
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 700);
+    });
 });
