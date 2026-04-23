@@ -33,26 +33,44 @@ document.querySelectorAll('a, button, .skill-tag, .tilt-card, .nav-btn').forEach
 const TRAIL_N = 14;
 const trailEls = [];
 const trailPos = Array.from({ length: TRAIL_N }, () => ({ x: 0, y: 0 }));
-// Color ramp: blue → cyan → purple along the tail
-const trailPalette = ['#4f8ef7', '#4aaaff', '#00d4ff', '#60aaee', '#9966ee', '#a855f7'];
+
+const trailPaletteDark  = ['#4f8ef7','#4aaaff','#00d4ff','#60aaee','#9966ee','#a855f7'];
+const trailPaletteLight = ['#537fe6','#4087d8','#0088bb','#5978cf','#773ddd','#944bdd'];
+
+function getTrailPalette() {
+    return document.documentElement.getAttribute('data-theme') === 'light'
+        ? trailPaletteLight
+        : trailPaletteDark;
+}
 
 for (let i = 0; i < TRAIL_N; i++) {
     const el = document.createElement('div');
     el.className = 'cursor-trail';
-    const t = i / (TRAIL_N - 1);                           // 0 = head, 1 = tail end
-    const size = Math.max(2, Math.round(9.5 - t * 7.2));   // 9.5px → 2px
-    const colorIdx = Math.round(t * (trailPalette.length - 1));
-    const color = trailPalette[colorIdx];
-    const opacity = (1 - t * 0.88) * 0.6;
-    const glow = size * 2.8;
-    el.style.cssText = `width:${size}px;height:${size}px;background:${color};opacity:${opacity};box-shadow:0 0 ${glow}px ${color},0 0 ${size}px ${color};`;
     document.body.appendChild(el);
     trailEls.push(el);
 }
 
+function updateTrailStyles() {
+    const palette = getTrailPalette();
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const blendMode = isLight ? 'multiply' : 'screen';
+
+    trailEls.forEach((el, i) => {
+        const t = i / (TRAIL_N - 1);
+        const size = Math.max(2, Math.round(9.5 - t * 7.2));
+        const colorIdx = Math.round(t * (palette.length - 1));
+        const color = palette[colorIdx];
+        const opacity = isLight
+            ? (1 - t * 0.75) * 0.85
+            : (1 - t * 0.88) * 0.60;
+        const glow = size * 2.8;
+        el.style.cssText = `width:${size}px;height:${size}px;background:${color};opacity:${opacity};mix-blend-mode:${blendMode};box-shadow:0 0 ${glow}px ${color},0 0 ${size}px ${color};`;
+    });
+}
+
+updateTrailStyles(); // aplica ao carregar
+
 (function animTrail() {
-    // Each trail dot lerps toward the one ahead of it
-    // The lead dot follows the actual cursor position
     trailPos[0].x += (mouseX - trailPos[0].x) * 0.45;
     trailPos[0].y += (mouseY - trailPos[0].y) * 0.45;
     for (let i = 1; i < TRAIL_N; i++) {
@@ -62,7 +80,7 @@ for (let i = 0; i < TRAIL_N; i++) {
     }
     trailEls.forEach((el, i) => {
         el.style.left = trailPos[i].x + 'px';
-        el.style.top = trailPos[i].y + 'px';
+        el.style.top  = trailPos[i].y + 'px';
     });
     requestAnimationFrame(animTrail);
 })();
@@ -172,6 +190,7 @@ themeBtn.addEventListener('click', () => {
     htmlEl.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
     themeBtn.querySelector('i').className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    updateTrailStyles(); // ← adicione esta linha
 });
 
 /* ── MOBILE MENU ─────────────────────────────────────────────────────────────── */
@@ -296,20 +315,3 @@ document.querySelectorAll('.magnetic').forEach(btn => {
     });
 });
 
-/* ── RIPPLE EFFECT ON CLICK ──────────────────────────────────────────────────── */
-// Adds a circular ripple at click position on interactive elements
-const rippleTargets = '.btn, .project-link, .service-card, .skill-group, .lang-card, .contact-card, .nav-btn';
-
-document.querySelectorAll(rippleTargets).forEach(el => {
-    el.addEventListener('click', function (e) {
-        const rect = this.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        const size = Math.max(rect.width, rect.height) * 1.4;
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
-        this.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 700);
-    });
-});
