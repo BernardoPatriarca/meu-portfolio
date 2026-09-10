@@ -16,18 +16,6 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
-
-  <!-- Triagem de baixo consumo antes do primeiro paint: em maquina fraca o
-       fundo animado e o ruido de tela cheia sao pintados estaticos. O JS
-       (assets/js/core/perf.js) ainda mede o FPS real e degrada se preciso. -->
-  <script>
-    (function () {
-      var n = navigator, low = false;
-      try { low = sessionStorage.getItem('perf') === 'low'; } catch (e) { }
-      if (low || (n.hardwareConcurrency || 8) <= 4 || (n.deviceMemory || 8) <= 4)
-        document.documentElement.dataset.perf = 'low';
-    })();
-  </script>
 </head>
 
 <body>
