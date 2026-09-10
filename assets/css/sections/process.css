@@ -52,6 +52,8 @@
     width: max-content;
     /* centraliza o 1º e o último card na tela */
     padding-inline: calc((100% - var(--card-w)) / 2);
+    padding-top: 25px;
+    padding-bottom: 50px;
     will-change: transform;
 }
 
@@ -68,7 +70,7 @@
     /* --f: 0 distante · 1 centralizado (via JS) */
     transform: scale(calc(.78 + .3 * var(--f, 1)));
     opacity: calc(.28 + .72 * var(--f, 1));
-    box-shadow: 0 30px 70px -40px rgba(0, 0, 0, calc(var(--f, 0) * .9));
+    box-shadow: 0 30px 30px -30px rgba(0, 0, 0, calc(var(--f, 0) * .9));
     transition: border-color .3s var(--ease), box-shadow .4s var(--ease);
     will-change: transform, opacity;
 }
