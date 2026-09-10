@@ -1,6 +1,5 @@
 import { start } from './core/raf.js';
 import { bindAnchors } from './core/smooth-scroll.js';
-import { lowPower, watchFps } from './core/perf.js';
 
 import { initPreloader } from './components/preloader.js';
 import { initTheme } from './components/theme.js';
@@ -40,29 +39,19 @@ initGitHub();
 initTerminal();
 initCommandPalette();
 
+initCursor();
 initWorkSlides();
 
 initReveal();
 initCounters();
 initLangBars();
 initScramble();
+initMagnetic();
+initSpotlight();
 initMarquee();
+initParallax();
 initTimeline();
 initManifesto();
 initProcess();
 
-// efeitos que escrevem estilo a cada frame ou a cada mousemove: em maquina
-// fraca eles sao o que trava o hero, entao ficam de fora
-if (!lowPower) {
-    initCursor();
-    initMagnetic();
-    initSpotlight();
-    initParallax();
-}
-
 start();
-
-// segunda triagem: hardware que passou nos numeros mas renderiza por software.
-// o CSS congela o fundo na hora; os efeitos de JS ja iniciados so ficam de
-// fora na proxima navegacao, quando o script do <head> le a decisao salva.
-watchFps();

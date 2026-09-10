@@ -84,8 +84,6 @@ Um arquivo por responsabilidade, tanto no CSS quanto no JS. Nada de `style.css` 
 
 **Movimento é opcional.** `utils/reduced-motion.css` e a flag `reduced` em `core/dom.js` desligam animação, parallax e slideshow para quem pediu menos movimento no sistema.
 
-**Baixo consumo é automático.** Um script inline no `<head>` faz a triagem por núcleos e memória antes do primeiro paint; `core/perf.js` ainda mede o FPS real para pegar GPU fraca ou render por software. Em `[data-perf="low"]` as orbs e o grain param de animar e cursor, magnetic, spotlight e parallax não são iniciados — o layout e as cores continuam iguais.
-
 ## Notas
 
 - O CSS usa `@import`, que carrega em cascata. Em produção com muita latência, vale concatenar os arquivos em um só.
