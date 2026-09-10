@@ -28,9 +28,13 @@ const measure = () => { maxScroll = document.documentElement.scrollHeight - inne
 
 export function start() {
     measure();
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) invalidate(); });
     new ResizeObserver(measure).observe(document.body);
 
     requestAnimationFrame(function loop(time) {
+        // aba em segundo plano: nada do que roda aqui e visivel
+        if (document.hidden) return requestAnimationFrame(loop);
+
         for (const fn of frameTasks) fn(time);
 
         const y = scrollY;
