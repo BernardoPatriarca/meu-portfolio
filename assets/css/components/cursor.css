@@ -1,0 +1,78 @@
+.cursor,
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8500;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0;
+    will-change: transform;
+}
+
+.cursor {
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px;
+    border: 1px solid var(--line-2);
+    display: grid;
+    place-items: center;
+    transition: width .3s var(--ease), height .3s var(--ease),
+        margin .3s var(--ease), background .3s, border-color .3s, opacity .3s;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--accent);
+    transition: opacity .3s, transform .2s;
+}
+
+.cursor-label {
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+.cursor.on-link {
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.cursor.on-plus {
+    width: 46px;
+    height: 46px;
+    margin: -23px 0 0 -23px;
+    border-color: var(--accent-surface);
+    background: var(--accent-surface);
+}
+
+.cursor.on-plus .cursor-label {
+    opacity: 1;
+}
+
+.cursor.on-plus~.cursor-dot {
+    opacity: 0 !important;
+}
+
+body.cursor-ready .cursor,
+body.cursor-ready .cursor-dot {
+    opacity: 1;
+}
+
+@media (hover: none),
+(pointer: coarse) {
+
+    .cursor,
+    .cursor-dot {
+        display: none;
+    }
+}

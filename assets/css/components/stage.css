@@ -1,0 +1,149 @@
+.stage {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.orb {
+    position: absolute;
+    display: block;
+    will-change: transform;
+}
+
+.orb i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    will-change: transform;
+}
+
+.orb-1 {
+    width: 92vw;
+    height: 92vw;
+    top: -22vw;
+    right: -18vw;
+    opacity: var(--o1, .9);
+    transition: opacity 1.2s var(--ease);
+}
+
+.orb-1 i {
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 52%, transparent), transparent 68%);
+    animation: drift-a 26s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+    width: 76vw;
+    height: 76vw;
+    bottom: -20vw;
+    left: -14vw;
+    opacity: var(--o2, .5);
+    transition: opacity 1.2s var(--ease);
+}
+
+.orb-2 i {
+    background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 42%, transparent), transparent 66%);
+    animation: drift-b 34s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+    width: 68vw;
+    height: 68vw;
+    top: 34%;
+    left: 26%;
+    opacity: var(--o3, .4);
+    transition: opacity 1.2s var(--ease);
+}
+
+.orb-3 i {
+    background: radial-gradient(circle, color-mix(in srgb, #4CC9FF 38%, transparent), transparent 64%);
+    animation: drift-c 42s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .orb-1 i {
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 46%, transparent), transparent 70%);
+}
+
+[data-theme="light"] .orb-2 i {
+    background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 46%, transparent), transparent 68%);
+}
+
+[data-theme="light"] .orb-3 i {
+    background: radial-gradient(circle, color-mix(in srgb, #12A9E8 42%, transparent), transparent 66%);
+}
+
+[data-theme="light"] .stage-veil {
+    background: color-mix(in srgb, var(--bg) 22%, transparent);
+}
+
+.stage-veil {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--bg) 44%, transparent);
+}
+
+@keyframes drift-a {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(-6%, 8%, 0) scale(1.12);
+    }
+
+    100% {
+        transform: translate3d(4%, -6%, 0) scale(.95);
+    }
+}
+
+@keyframes drift-b {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1.05);
+    }
+
+    50% {
+        transform: translate3d(10%, -7%, 0) scale(.92);
+    }
+
+    100% {
+        transform: translate3d(-5%, 5%, 0) scale(1.15);
+    }
+}
+
+@keyframes drift-c {
+    0% {
+        transform: translate3d(0, 0, 0) scale(.95);
+    }
+
+    50% {
+        transform: translate3d(-9%, -5%, 0) scale(1.14);
+    }
+
+    100% {
+        transform: translate3d(7%, 6%, 0) scale(1);
+    }
+}
+
+main,
+.foot {
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="light"] .cell,
+[data-theme="light"] .gh-stat,
+[data-theme="light"] .gh-langs,
+[data-theme="light"] .gh-repos,
+[data-theme="light"] .lang,
+[data-theme="light"] .cmdk-panel,
+[data-theme="light"] .photo-chip {
+    box-shadow: var(--shadow-soft);
+}
+
+[data-theme="light"] .cell:hover,
+[data-theme="light"] .gh-stat:hover {
+    box-shadow: var(--shadow);
+}

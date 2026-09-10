@@ -1,0 +1,189 @@
+.proc {
+    position: relative;
+    --card-w: clamp(270px, 32vw, 430px);
+    height: 320vh;
+    background: color-mix(in srgb, var(--bg-2) 86%, transparent);
+}
+
+.proc-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 2.8rem);
+    overflow: hidden;
+}
+
+.proc-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.proc-hint {
+    color: var(--accent-text);
+    white-space: nowrap;
+}
+
+.proc-hint .hint-drag {
+    display: none;
+}
+
+@media (max-width: 820px) {
+    .proc-hint .hint-scroll {
+        display: none;
+    }
+
+    .proc-hint .hint-drag {
+        display: inline;
+    }
+}
+
+.proc-viewport {
+    overflow: hidden;
+}
+
+.proc-track {
+    display: flex;
+    gap: clamp(1rem, 1.6vw, 1.6rem);
+    width: max-content;
+    /* centraliza o 1º e o último card na tela */
+    padding-inline: calc((100% - var(--card-w)) / 2);
+    will-change: transform;
+}
+
+.proc-card {
+    width: var(--card-w);
+    min-height: clamp(300px, 44vh, 440px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.4rem, 2.2vw, 2.2rem);
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    /* --f: 0 distante · 1 centralizado (via JS) */
+    transform: scale(calc(.78 + .3 * var(--f, 1)));
+    opacity: calc(.28 + .72 * var(--f, 1));
+    box-shadow: 0 30px 70px -40px rgba(0, 0, 0, calc(var(--f, 0) * .9));
+    transition: border-color .3s var(--ease), box-shadow .4s var(--ease);
+    will-change: transform, opacity;
+}
+
+.proc-card:hover {
+    border-color: var(--accent);
+}
+
+.proc-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    border: 1px solid var(--accent);
+    opacity: calc(var(--f, 0) * var(--f, 0) * .8);
+    pointer-events: none;
+    transition: opacity .3s var(--ease);
+}
+
+.proc-card {
+    position: relative;
+}
+
+.proc-num {
+    transition: color .4s var(--ease);
+}
+
+.proc-num {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -.05em;
+    color: var(--accent-text);
+}
+
+.proc-card h3 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.proc-card p {
+    font-size: .92rem;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+.proc-list {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.proc-list li {
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    letter-spacing: .04em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+
+.proc-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+
+.proc-card-cta {
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    border-color: transparent;
+    justify-content: center;
+}
+
+.proc-card-cta .proc-num,
+.proc-card-cta p {
+    color: color-mix(in srgb, var(--accent-ink) 90%, transparent);
+}
+
+.proc-card-cta .btn {
+    align-self: flex-start;
+    margin-top: .8rem;
+    background: var(--accent-ink);
+    color: var(--accent-surface);
+}
+
+.proc-card-cta .btn::before {
+    background: var(--bg);
+}
+
+.proc-bar {
+    width: var(--shell);
+    margin: 0 auto;
+    height: 2px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.proc-bar i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(var(--pp, 0));
+    transform-origin: left;
+    will-change: transform;
+}

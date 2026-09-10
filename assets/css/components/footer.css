@@ -1,0 +1,21 @@
+.foot {
+    background: var(--bg);
+    padding: 1.6rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.foot-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.foot-top {
+    transition: color .25s;
+}
+
+.foot-top:hover {
+    color: var(--accent-text);
+}

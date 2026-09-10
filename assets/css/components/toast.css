@@ -1,0 +1,22 @@
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 2rem;
+    z-index: 8900;
+    padding: .75rem 1.35rem;
+    border-radius: 99px;
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    letter-spacing: .06em;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 16px);
+    transition: opacity .3s var(--ease), transform .4s var(--ease);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}

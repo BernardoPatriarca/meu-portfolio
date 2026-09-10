@@ -1,0 +1,103 @@
+.contact {
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    padding: clamp(4.5rem, 10vw, 9rem) 0 clamp(3.5rem, 7vw, 6rem);
+}
+
+.contact .mono-label {
+    color: color-mix(in srgb, var(--accent-ink) 90%, transparent);
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.ci {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    transition: transform .35s var(--ease);
+}
+
+.contact-row:hover .ci {
+    transform: scale(1.15);
+}
+
+.contact-title {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(2.9rem, 13vw, 11rem);
+    line-height: .85;
+    letter-spacing: -.05em;
+    text-transform: uppercase;
+    margin: .6rem 0 clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.contact-title .serif {
+    text-transform: none;
+    font-size: 1.1em;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid color-mix(in srgb, var(--accent-ink) 22%, transparent);
+}
+
+.contact-row {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: clamp(1.1rem, 2.4vw, 1.8rem) clamp(.4rem, 1.4vw, 1.2rem);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent-ink) 22%, transparent);
+    overflow: hidden;
+}
+
+.contact-grid>*:nth-child(odd) {
+    border-right: 1px solid color-mix(in srgb, var(--accent-ink) 22%, transparent);
+}
+
+.contact-val {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 2vw, 1.6rem);
+    letter-spacing: -.025em;
+    transition: transform .5s var(--ease);
+}
+
+.contact-row:not(.contact-static)::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: var(--accent-ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .55s var(--ease);
+}
+
+.contact-row:hover::before {
+    transform: scaleX(1);
+}
+
+.contact-row:hover .contact-val {
+    transform: translateX(10px);
+}
+
+.arr-c {
+    position: absolute;
+    right: clamp(.4rem, 1.4vw, 1.2rem);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    opacity: 0;
+    transition: opacity .35s, transform .45s var(--ease);
+}
+
+.contact-row:hover .arr-c {
+    opacity: 1;
+    transform: translateY(-50%) translateX(-4px);
+}

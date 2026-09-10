@@ -1,0 +1,58 @@
+.rails {
+    display: flex;
+    flex-direction: column;
+}
+
+.rail.reveal.in {
+    padding-bottom: 12px;
+}
+
+.rail-label {
+    display: block;
+    width: var(--shell);
+    margin: 0 auto .7rem;
+    color: var(--accent-text);
+}
+
+.rail-mask {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.rail-track {
+    display: flex;
+    gap: .6rem;
+    width: max-content;
+    animation: scroll-x var(--dur, 34s) linear infinite;
+    will-change: transform;
+}
+
+.rail-track.rail-rev {
+    animation-direction: reverse;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: .62rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    background: var(--surface);
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(.88rem, 1.35vw, 1.15rem);
+    letter-spacing: -.01em;
+    white-space: nowrap;
+    transition: background .25s, color .25s, border-color .25s;
+}
+
+.rail:hover .rail-track {
+    animation-play-state: paused;
+}
+
+.tag:hover {
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}

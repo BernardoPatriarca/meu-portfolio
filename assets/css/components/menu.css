@@ -1,0 +1,84 @@
+.menu {
+    position: fixed;
+    inset: 0;
+    z-index: 5500;
+    background: var(--bg);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path .8s var(--ease);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+body.menu-open .menu {
+    clip-path: inset(0 0 0 0);
+    pointer-events: auto;
+}
+
+.menu-inner {
+    width: var(--shell);
+    padding-top: 5rem;
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+}
+
+.menu-links a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: clamp(.6rem, 2.2vw, 1.1rem) 0;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 8vw, 4rem);
+    line-height: 1;
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .5s var(--ease), transform .6s var(--ease), color .25s;
+}
+
+body.menu-open .menu-links a {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(.16s + var(--i, 0) * .06s);
+}
+
+.menu-links a i {
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: .68rem;
+    color: var(--accent-text);
+    letter-spacing: .1em;
+}
+
+.menu-links a:hover {
+    color: var(--accent-text);
+}
+
+.menu-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.menu-foot>div {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.menu-foot a {
+    font-size: .92rem;
+    transition: color .2s;
+}
+
+.menu-foot a:hover {
+    color: var(--accent-text);
+}
