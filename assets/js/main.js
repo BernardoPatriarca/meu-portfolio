@@ -25,6 +25,7 @@ import { initTimeline } from './effects/timeline.js';
 import { initManifesto } from './effects/manifesto.js';
 import { initProcess } from './effects/process.js';
 import { initWorkFloat } from './effects/work-float.js';
+import { initWorkSlides } from './effects/work-slides.js';
 
 initTheme();
 initPreloader();
@@ -41,6 +42,7 @@ initCommandPalette();
 
 const cursorPos = initCursor();
 initWorkFloat(cursorPos);
+initWorkSlides();
 
 initReveal();
 initCounters();

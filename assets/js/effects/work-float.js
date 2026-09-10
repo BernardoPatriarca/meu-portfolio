@@ -5,7 +5,7 @@ export function initWorkFloat(cursorPos) {
     const float = $('#workFloat');
     if (!fine || !float || !cursorPos) return;
 
-    const items = $$('#workFloat img, #workFloat .wf-item');
+    const items = $$('#workFloat > img, #workFloat > .wf-item');
     const pos = { x: 0, y: 0 };
     let active = false;
 

@@ -138,10 +138,6 @@
         margin-bottom: .4rem;
     }
 
-    .work-thumb.shot {
-        display: grid;
-    }
-
     .scroll-cue {
         display: none;
     }
