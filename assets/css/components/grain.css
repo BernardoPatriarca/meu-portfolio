@@ -1,6 +1,8 @@
 .grain {
     position: fixed;
-    inset: -50%;
+    /* as keyframes deslocam no maximo 3%, entao -4% ja cobre a folga.
+       com -50% a camada tinha 4x a area da viewport, de graca. */
+    inset: -4%;
     z-index: 8000;
     pointer-events: none;
     opacity: .05;

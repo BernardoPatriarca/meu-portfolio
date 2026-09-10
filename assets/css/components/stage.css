@@ -4,6 +4,7 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    contain: paint;
     background: var(--bg);
 }
 
@@ -91,35 +92,35 @@
     }
 
     50% {
-        transform: translate3d(-6%, 8%, 0) scale(1.12);
+        transform: translate3d(-6%, 8%, 0) scale(1.06);
     }
 
     100% {
-        transform: translate3d(4%, -6%, 0) scale(.95);
+        transform: translate3d(4%, -6%, 0) scale(.97);
     }
 }
 
 @keyframes drift-b {
     0% {
-        transform: translate3d(0, 0, 0) scale(1.05);
+        transform: translate3d(0, 0, 0) scale(1.03);
     }
 
     50% {
-        transform: translate3d(10%, -7%, 0) scale(.92);
+        transform: translate3d(10%, -7%, 0) scale(.96);
     }
 
     100% {
-        transform: translate3d(-5%, 5%, 0) scale(1.15);
+        transform: translate3d(-5%, 5%, 0) scale(1.06);
     }
 }
 
 @keyframes drift-c {
     0% {
-        transform: translate3d(0, 0, 0) scale(.95);
+        transform: translate3d(0, 0, 0) scale(.97);
     }
 
     50% {
-        transform: translate3d(-9%, -5%, 0) scale(1.14);
+        transform: translate3d(-9%, -5%, 0) scale(1.06);
     }
 
     100% {

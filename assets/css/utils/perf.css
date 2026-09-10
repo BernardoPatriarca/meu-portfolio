@@ -1,0 +1,21 @@
+/* Modo baixo consumo — as camadas continuam visíveis, só param de repintar.
+   Ativado por assets/js/core/perf.js (ou pelo script inline do <head>).
+   O cursor custom e o parallax são desligados no JS. */
+
+/* as três orbs param de escalar: mesmas cores e posições, sem re-raster */
+[data-perf="low"] .orb i {
+    animation: none;
+}
+
+/* o ruído continua na tela, só deixa de se deslocar */
+[data-perf="low"] .grain {
+    animation: none;
+}
+
+/* nada mais se move nessas camadas, então liberamos a memória de layer */
+[data-perf="low"] .orb,
+[data-perf="low"] .orb i,
+[data-perf="low"] .grain,
+[data-perf="low"] .seal svg {
+    will-change: auto;
+}
