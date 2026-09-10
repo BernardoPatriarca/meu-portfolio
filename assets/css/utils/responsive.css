@@ -62,8 +62,17 @@
 
     .work {
         grid-template-columns: 3rem minmax(0, 1fr);
+        grid-template-areas: none;
         row-gap: 1rem;
         align-items: start;
+    }
+
+    .work-num,
+    .work-main,
+    .work-tags,
+    .work-links,
+    .work-thumb {
+        grid-area: auto;
     }
 
     .work-num {
@@ -74,6 +83,13 @@
     .work-links {
         grid-column: 2 / -1;
         justify-self: start;
+    }
+
+    .work-thumb {
+        grid-column: 1 / -1;
+        aspect-ratio: 16/9;
+        order: -1;
+        margin-bottom: .4rem;
     }
 }
 
@@ -128,14 +144,6 @@
 
     .contact-grid>*:nth-child(odd) {
         border-right: none;
-    }
-
-    .work-thumb {
-        display: block;
-        grid-column: 1 / -1;
-        aspect-ratio: 16/9;
-        order: -1;
-        margin-bottom: .4rem;
     }
 
     .scroll-cue {
