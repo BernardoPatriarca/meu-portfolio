@@ -1,0 +1,38 @@
+/* base → componentes → seções → utilitários */
+
+@import url('base/tokens.css');
+@import url('base/reset.css');
+@import url('base/typography.css');
+@import url('base/layout.css');
+
+@import url('components/preloader.css');
+@import url('components/stage.css');
+@import url('components/grain.css');
+@import url('components/cursor.css');
+@import url('components/progress.css');
+@import url('components/nav.css');
+@import url('components/menu.css');
+@import url('components/button.css');
+@import url('components/marquee.css');
+@import url('components/terminal.css');
+@import url('components/command-palette.css');
+@import url('components/dots.css');
+@import url('components/toast.css');
+@import url('components/back-to-top.css');
+@import url('components/footer.css');
+
+@import url('sections/hero.css');
+@import url('sections/about.css');
+@import url('sections/manifesto.css');
+@import url('sections/services.css');
+@import url('sections/process.css');
+@import url('sections/stack.css');
+@import url('sections/path.css');
+@import url('sections/languages.css');
+@import url('sections/work.css');
+@import url('sections/github.css');
+@import url('sections/contact.css');
+
+@import url('utils/reveal.css');
+@import url('utils/responsive.css');
+@import url('utils/reduced-motion.css');

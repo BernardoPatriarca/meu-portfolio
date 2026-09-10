@@ -1,0 +1,75 @@
+.idx {
+    border-top: 1px solid var(--line);
+}
+
+.idx-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr) minmax(0, 1.1fr) 3rem;
+    align-items: center;
+    gap: 1.5rem;
+    padding: clamp(1.3rem, 2.6vw, 2.1rem) clamp(.6rem, 1.6vw, 1.6rem);
+    border-bottom: 1px solid var(--line);
+    isolation: isolate;
+    cursor: default;
+}
+
+.idx-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-surface);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform .55s var(--ease);
+    z-index: -1;
+}
+
+.idx-row:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+.idx-row h3 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.35rem, 3.1vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    transition: transform .55s var(--ease), color .35s;
+}
+
+.idx-row p {
+    font-size: .93rem;
+    line-height: 1.65;
+    color: var(--muted);
+    transition: color .35s;
+}
+
+.idx-num {
+    transition: color .35s;
+}
+
+.idx-arrow {
+    justify-self: end;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--muted);
+    transition: transform .5s var(--ease), color .35s;
+}
+
+.idx-row:hover h3,
+.idx-row:hover p,
+.idx-row:hover .idx-num,
+.idx-row:hover .idx-arrow {
+    color: var(--accent-ink);
+}
+
+.idx-row:hover h3 {
+    transform: translateX(14px);
+}
+
+.idx-row:hover .idx-arrow {
+    transform: translate(4px, -4px) rotate(45deg);
+}

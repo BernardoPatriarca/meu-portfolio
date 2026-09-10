@@ -1,0 +1,76 @@
+.dots {
+    position: fixed;
+    right: 1.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4200;
+    display: flex;
+    flex-direction: column;
+    gap: .85rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s var(--ease);
+}
+
+.dots.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dots a {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+}
+
+.dots a span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line-2);
+    transition: background .3s var(--ease), transform .35s var(--ease);
+}
+
+.dots a:hover span {
+    background: var(--accent-text);
+    transform: scale(1.3);
+}
+
+.dots a.on span {
+    background: var(--accent);
+    transform: scale(1.5);
+}
+
+.dots a::after {
+    content: attr(data-label);
+    position: absolute;
+    right: calc(100% + .7rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    padding: .28rem .6rem;
+    border-radius: 99px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: var(--f-mono);
+    font-size: .6rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s var(--ease), transform .3s var(--ease);
+}
+
+.dots a:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 1180px) {
+    .dots {
+        display: none;
+    }
+}

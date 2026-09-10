@@ -1,0 +1,26 @@
+.manifesto {
+    padding: clamp(4rem, 11vw, 9rem) 0;
+}
+
+.manifesto-text {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4.4vw, 3.4rem);
+    line-height: 1.22;
+    letter-spacing: -.035em;
+    margin-top: 1.4rem;
+    max-width: 20ch;
+}
+
+.manifesto-text .w {
+    opacity: .14;
+    transition: opacity .45s var(--ease), color .45s var(--ease);
+}
+
+.manifesto-text .w.on {
+    opacity: 1;
+}
+
+.manifesto-text .w.hot.on {
+    color: var(--accent-text);
+}
