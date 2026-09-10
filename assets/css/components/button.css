@@ -1,0 +1,71 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .95rem 1.7rem;
+    border-radius: 99px;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: .92rem;
+    letter-spacing: -.01em;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color .3s var(--ease), border-color .3s, transform .35s var(--ease);
+    will-change: transform;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--text);
+    transform: translateY(101%);
+    transition: transform .5s var(--ease);
+    /* -1: fica atrás do texto solto, não só dos filhos */
+    z-index: -1;
+}
+
+.btn:hover::before {
+    transform: translateY(0);
+}
+
+.btn-solid {
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+}
+
+.btn-solid:hover {
+    color: var(--bg);
+}
+
+.btn-line {
+    border-color: var(--line-2);
+    color: var(--text);
+}
+
+.btn-line::before {
+    background: var(--accent-surface);
+}
+
+.btn-line:hover {
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+
+.arr {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .4s var(--ease);
+}
+
+.btn:hover .arr,
+a:hover>.arr {
+    transform: translate(3px, -3px);
+}

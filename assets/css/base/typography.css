@@ -1,0 +1,29 @@
+.shell {
+    width: var(--shell);
+    margin-inline: auto;
+}
+
+.mono-label {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: .68rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.serif {
+    font-family: var(--f-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -.01em;
+}
+
+.hl {
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    padding: 0 .18em;
+    border-radius: 3px;
+    white-space: nowrap;
+}

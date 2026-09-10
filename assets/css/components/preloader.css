@@ -1,0 +1,58 @@
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    gap: 1.2rem;
+    transition: transform 1s var(--ease), opacity .4s .5s;
+}
+
+.loader.done {
+    transform: translateY(-101%);
+    pointer-events: none;
+}
+
+.loader-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.loader-label {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 5vw, 3rem);
+    letter-spacing: -.03em;
+    line-height: 1;
+}
+
+.loader-count {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 12vw, 8rem);
+    line-height: .85;
+    letter-spacing: -.05em;
+    color: var(--accent-text);
+}
+
+.loader-track {
+    height: 2px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.loader-fill {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+}
+
+body.loading {
+    overflow: hidden;
+}

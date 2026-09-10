@@ -1,0 +1,42 @@
+.sec {
+    position: relative;
+    padding: clamp(5rem, 11vw, 10rem) 0;
+}
+
+.sec-alt {
+    background: color-mix(in srgb, var(--bg-2) 86%, transparent);
+}
+
+.sec-head {
+    margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.sec-head-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+}
+
+.sec-title {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 6.4vw, 5.2rem);
+    line-height: .95;
+    letter-spacing: -.04em;
+    text-transform: uppercase;
+    margin-top: .7rem;
+}
+
+.sec-title .serif {
+    text-transform: none;
+    font-size: 1.12em;
+    color: var(--accent-text);
+}
+
+.sec-note {
+    font-size: clamp(.95rem, 1.15vw, 1.08rem);
+    color: var(--muted);
+    max-width: 44ch;
+    padding-bottom: .5rem;
+}

@@ -1,0 +1,40 @@
+.langs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.2rem, 3vw, 2.5rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--line);
+}
+
+.lang-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .8rem;
+}
+
+.lang h3 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2.4vw, 1.9rem);
+    letter-spacing: -.03em;
+    text-transform: uppercase;
+}
+
+.lang-bar {
+    display: block;
+    height: 4px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.lang-bar i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.3s var(--ease);
+}

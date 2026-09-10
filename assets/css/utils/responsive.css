@@ -1,0 +1,263 @@
+@media (max-width: 1180px) {
+    .kbd-btn kbd {
+        display: none;
+    }
+
+    .kbd-btn {
+        padding: .45rem;
+        width: 38px;
+        height: 38px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1080px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .cell-text {
+        grid-column: span 12;
+        grid-row: auto;
+    }
+
+    .cell-stats,
+    .cell-now,
+    .cell-code,
+    .cell-learn {
+        grid-column: span 6;
+    }
+
+    .sec-head-split {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+
+    .idx-row {
+        grid-template-columns: 3rem minmax(0, 1fr) 2rem;
+        align-items: start;
+    }
+
+    .idx-num {
+        padding-top: .3rem;
+    }
+
+    .idx-row h3 {
+        grid-column: 2;
+    }
+
+    .idx-row p {
+        grid-column: 2 / -1;
+        margin-top: .5rem;
+    }
+
+    .idx-arrow {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .work {
+        grid-template-columns: 3rem minmax(0, 1fr);
+        row-gap: 1rem;
+        align-items: start;
+    }
+
+    .work-num {
+        padding-top: .35rem;
+    }
+
+    .work-tags,
+    .work-links {
+        grid-column: 2 / -1;
+        justify-self: start;
+    }
+}
+
+@media (max-width: 820px) {
+    :root {
+        --shell: 90vw;
+    }
+
+    .hero {
+        padding-top: 7rem;
+    }
+
+    .hero-top {
+        flex-direction: column;
+        gap: .6rem;
+    }
+
+    .hero-meta {
+        text-align: left;
+    }
+
+    .hero-bottom {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .portrait {
+        justify-self: start;
+        width: min(280px, 78%);
+    }
+
+    .pill-btn {
+        display: none;
+    }
+
+    .cell-stats,
+    .cell-now,
+    .cell-code,
+    .cell-learn {
+        grid-column: span 12;
+    }
+
+    .cell-stats {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .langs,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-grid>*:nth-child(odd) {
+        border-right: none;
+    }
+
+    .work-thumb {
+        display: block;
+        grid-column: 1 / -1;
+        aspect-ratio: 16/9;
+        order: -1;
+        margin-bottom: .4rem;
+    }
+
+    .work-thumb.shot {
+        display: grid;
+    }
+
+    .scroll-cue {
+        display: none;
+    }
+
+    .work-main p {
+        max-width: none;
+    }
+
+    .band {
+        transform: rotate(-2.6deg) scale(1.1);
+    }
+
+    .foot-inner {
+        justify-content: center;
+        text-align: center;
+    }
+
+        .proc {
+        height: auto;
+    }
+
+    .proc-sticky {
+        position: static;
+        height: auto;
+        padding: clamp(4rem, 10vw, 6rem) 0;
+    }
+
+    .proc-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .8rem;
+    }
+
+    .proc-viewport {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .proc-viewport::-webkit-scrollbar {
+        display: none;
+    }
+
+    .proc-track {
+        transform: none !important;
+        padding-inline: 5vw;
+    }
+
+    .proc-card {
+        width: min(78vw, 340px);
+        scroll-snap-align: center;
+                transform: none;
+        opacity: 1;
+    }
+
+    .proc-card::after {
+        opacity: 0;
+    }
+
+    .proc-bar {
+        display: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero-title {
+        font-size: 3.4rem;
+        letter-spacing: -.03em;
+    }
+
+    .hero-title .stroke {
+        -webkit-text-stroke-width: 1px;
+    }
+
+    .idx-row {
+        grid-template-columns: 2.4rem minmax(0, 1fr);
+        gap: .8rem;
+    }
+
+    .idx-arrow {
+        display: none;
+    }
+
+    .work {
+        grid-template-columns: 1fr;
+    }
+
+    .work-num {
+        display: none;
+    }
+
+    .work-tags,
+    .work-links,
+    .work-thumb {
+        grid-column: 1 / -1;
+    }
+
+    .work-links {
+        width: 100%;
+    }
+
+    .work-links a {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .to-top {
+        right: 1rem;
+        bottom: 1rem;
+        width: 42px;
+        height: 42px;
+    }
+}

@@ -5,550 +5,904 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Bernardo Patriarca — Full Stack Developer</title>
+  <meta name="description"
+    content="Bernardo Patriarca — Desenvolvedor Full Stack em Pato Branco, PR. Angular, Java, Quarkus e Spring Boot para construir produtos web robustos e bem projetados." />
+  <meta name="theme-color" content="#08070D" />
   <link rel="icon" href="https://i.imgur.com/JICN3Fa.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body>
 
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+  <!-- PRELOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-row">
+      <span class="loader-label">Bernardo Patriarca</span>
+      <span class="loader-count" id="loaderCount">0</span>
+    </div>
+    <div class="loader-track"><span class="loader-fill" id="loaderFill"></span></div>
+  </div>
 
-  <div id="progress"></div>
+  <!-- CAMADA DE FUNDO VIVA -->
+  <div class="stage" id="stage" aria-hidden="true">
+    <span class="orb orb-1"><i></i></span>
+    <span class="orb orb-2"><i></i></span>
+    <span class="orb orb-3"><i></i></span>
+    <span class="stage-veil"></span>
+  </div>
 
-  <canvas id="particles"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <nav class="nav" id="navbar">
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#home" class="nav-brand">
-          <div class="brand-dot"></div>
-          bp.dev
-        </a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#home" class="active">Início</a></li>
-          <li><a href="#about">Sobre</a></li>
-          <li><a href="#services">Serviços</a></li>
-          <li><a href="#skills">Stack</a></li>
-          <li><a href="#experience">Trajetória</a></li>
-          <li><a href="#projects">Projetos</a></li>
-          <li><a href="#languages">Idiomas</a></li>
-          <li><a href="#contact">Contato</a></li>
-        </ul>
-        <div class="nav-actions">
-          <button class="nav-btn" id="themeToggle" aria-label="Alternar tema">
-            <i class="fas fa-moon"></i>
-          </button>
-          <button class="nav-btn nav-toggle" id="navToggle" aria-label="Menu">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-      </div>
-      <div class="nav-mobile" id="navMobile">
-        <a href="#home">Início</a>
-        <a href="#about">Sobre</a>
-        <a href="#services">Serviços</a>
-        <a href="#skills">Stack</a>
-        <a href="#experience">Trajetória</a>
-        <a href="#projects">Projetos</a>
-        <a href="#languages">Idiomas</a>
-        <a href="#contact">Contato</a>
+  <!-- HEADER -->
+  <header class="nav" id="nav">
+    <div class="shell nav-inner">
+      <a href="#top" class="brand" data-cursor="link">
+        <span class="brand-mark">BP</span>
+        <span class="brand-txt">Bernardo<br />Patriarca</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Seções">
+        <a href="#about" data-cursor="link"><i>01</i> Sobre</a>
+        <a href="#services" data-cursor="link"><i>02</i> Serviços</a>
+        <a href="#process" data-cursor="link"><i>03</i> Processo</a>
+        <a href="#stack" data-cursor="link"><i>04</i> Stack</a>
+        <a href="#work" data-cursor="link"><i>06</i> Projetos</a>
+        <a href="#playground" data-cursor="link"><i>08</i> Lab</a>
+      </nav>
+
+      <div class="nav-side">
+        <button class="kbd-btn" id="cmdkBtn" data-cursor="link" aria-label="Abrir busca de comandos">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.4" />
+            <path d="M20 20l-4.2-4.2" stroke-linecap="round" />
+          </svg>
+          <kbd>⌘K</kbd>
+        </button>
+        <button class="icon-btn" id="themeBtn" aria-label="Alternar tema" data-cursor="link">
+          <svg viewBox="0 0 24 24" class="ic-sun" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" />
+            <g stroke-linecap="round">
+              <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6" />
+            </g>
+          </svg>
+          <svg viewBox="0 0 24 24" class="ic-moon" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z" />
+          </svg>
+        </button>
+        <a href="#contact" class="pill-btn" data-cursor="link">Contato</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <section id="home" class="hero">
-    <div class="aurora">
-      <div class="aurora-blob aurora-1"></div>
-      <div class="aurora-blob aurora-2"></div>
-      <div class="aurora-blob aurora-3"></div>
-    </div>
-
-    <div class="container">
-      <div class="hero-inner">
+  <!-- FULLSCREEN MENU -->
+  <div class="menu" id="menu">
+    <div class="shell menu-inner">
+      <div class="menu-links">
+        <a href="#about"><i>01</i> Sobre</a>
+        <a href="#services"><i>02</i> Serviços</a>
+        <a href="#process"><i>03</i> Processo</a>
+        <a href="#stack"><i>04</i> Stack</a>
+        <a href="#path"><i>05</i> Trajetória</a>
+        <a href="#work"><i>06</i> Projetos</a>
+        <a href="#github"><i>07</i> GitHub</a>
+        <a href="#playground"><i>08</i> Lab</a>
+        <a href="#contact"><i>09</i> Contato</a>
+      </div>
+      <div class="menu-foot">
         <div>
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Disponível para oportunidades
-          </div>
+          <span class="mono-label">E-mail</span>
+          <a href="mailto:bernardopatriarca2026@gmail.com">bernardopatriarca2026@gmail.com</a>
+        </div>
+        <div>
+          <span class="mono-label">Social</span>
+          <a href="https://github.com/BernardoPatriarca" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/bernardopatriarca/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/bernardopatriarca/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <h1>
-            Bernardo<br />
-            <span class="line2">Patriarca</span>
-          </h1>
+  <main id="top">
 
-          <div class="typewriter">
-            <span id="tw-text"></span><span class="tw-cursor"></span>
-          </div>
-
-          <p class="hero-desc">
-            Desenvolvedor Full Stack apaixonado por construir interfaces modernas
-            e sistemas robustos. Angular &amp; Java no dia a dia, sempre buscando
-            código limpo e experiências que fazem a diferença.
-          </p>
-
-          <div class="hero-btns">
-            <a href="#projects" class="btn btn-primary magnetic">
-              <i class="fas fa-code"></i> Ver Projetos
-            </a>
-            <a href="#contact" class="btn btn-ghost magnetic">
-              <i class="fas fa-paper-plane"></i> Contato
-            </a>
-          </div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="shell">
+        <div class="hero-top">
+          <p class="mono-label hero-eyebrow"><span class="dot"></span> Disponível para oportunidades</p>
+          <p class="mono-label hero-meta">Pato Branco, PR · BR<br /><span id="clockTop">--:--</span> horário local</p>
         </div>
 
-        <div class="hero-photo">
-          <div class="hero-photo-frame">
-            <img src="https://i.imgur.com/hkx2zWH.jpeg" alt="Bernardo Patriarca" />
-            <div class="photo-chip">
-              <div class="photo-chip-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div>
-                <span>Pato Branco, PR</span>
-                <small>Brasil 🇧🇷</small>
-              </div>
+        <h1 class="hero-title">
+          <span class="mask"><span class="mask-in" style="--i:0">Bernardo</span></span>
+          <span class="mask"><span class="mask-in stroke" style="--i:1">Patriarca</span></span>
+        </h1>
+
+        <div class="hero-bottom">
+          <div class="hero-lead">
+            <p class="reveal">
+              Desenvolvedor <span class="hl">Full&nbsp;Stack</span> apaixonado por construir interfaces modernas
+              e sistemas robustos. Angular &amp; Java no dia a dia, sempre buscando código limpo e
+              experiências que <em class="serif">fazem a diferença</em>.
+            </p>
+            <div class="hero-actions reveal">
+              <a href="#work" class="btn btn-solid magnetic" data-cursor="link">
+                Ver projetos <svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15L15 5M7 5h8v8" /></svg>
+              </a>
+              <a href="#contact" class="btn btn-line magnetic" data-cursor="link">Fale comigo</a>
             </div>
           </div>
+
+          <figure class="portrait reveal">
+            <img src="https://i.imgur.com/hkx2zWH.jpeg" alt="Bernardo Patriarca" width="420" height="520" />
+            <figcaption class="mono-label">Full Stack Developer · 21 anos</figcaption>
+
+            <div class="seal" id="seal" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <defs>
+                  <path id="sealPath" d="M60,60 m-43,0 a43,43 0 1,1 86,0 a43,43 0 1,1 -86,0" />
+                </defs>
+                <text>
+                  <textPath href="#sealPath">DISPONÍVEL PARA PROJETOS • FULL STACK DEVELOPER •</textPath>
+                </text>
+              </svg>
+              <span class="seal-core">↓</span>
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" data-cursor="link" aria-label="Rolar para baixo">
+        <span class="mono-label">Role</span>
+        <span class="scroll-line"></span>
+      </a>
+    </section>
+
+    <!-- MARQUEE BAND -->
+    <div class="band" aria-hidden="true">
+      <div class="band-row band-solid">
+        <div class="band-track" data-marquee>
+          <span>Angular</span><b>✳</b><span>Java</span><b>✳</b><span>TypeScript</span><b>✳</b><span>Quarkus</span><b>✳</b>
+          <span>Docker</span><b>✳</b><span>Node.js</span><b>✳</b><span>Flutter</span><b>✳</b><span>PostgreSQL</span><b>✳</b>
+          <span>Angular</span><b>✳</b><span>Java</span><b>✳</b><span>TypeScript</span><b>✳</b><span>Quarkus</span><b>✳</b>
+          <span>Docker</span><b>✳</b><span>Node.js</span><b>✳</b><span>Flutter</span><b>✳</b><span>PostgreSQL</span><b>✳</b>
+        </div>
+      </div>
+      <div class="band-row band-ghost">
+        <div class="band-track band-rev" data-marquee>
+          <span>Clean Code</span><b>✳</b><span>UI/UX</span><b>✳</b><span>APIs REST</span><b>✳</b><span>Scrum</span><b>✳</b>
+          <span>Hackathons</span><b>✳</b><span>Performance</span><b>✳</b>
+          <span>Clean Code</span><b>✳</b><span>UI/UX</span><b>✳</b><span>APIs REST</span><b>✳</b><span>Scrum</span><b>✳</b>
+          <span>Hackathons</span><b>✳</b><span>Performance</span><b>✳</b>
         </div>
       </div>
     </div>
 
-    <div class="hero-scroll">
-      <span>scroll</span>
-      <i class="fas fa-arrow-down"></i>
-    </div>
-  </section>
+    <!-- ABOUT / BENTO -->
+    <section class="sec" id="about">
+      <div class="shell">
+        <header class="sec-head reveal">
+          <span class="mono-label" data-scramble>(01) — Sobre mim</span>
+          <h2 class="sec-title">Transformando ideias<br />em <em class="serif">código</em></h2>
+        </header>
 
-  <section id="about" class="section section-alt">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text reveal-left">
-          <div class="chip">sobre mim</div>
-          <h2 class="section-title">Transformando ideias em <em>código</em></h2>
-          <p>Sou um desenvolvedor Full Stack de 20 anos, apaixonado por tecnologia e inovação.
-            Atualmente trabalho na <strong>Supera Sistemas</strong> em Pato Branco — PR,
-            onde construo sistemas web completos, do front ao back-end.</p>
-          <p>Minha jornada começou pelo SENAI com o Técnico em Desenvolvimento de Sistemas,
-            e hoje curso Sistemas de Informação na UNIMATER. Fora do trabalho, participo
-            de hackathons e continuo evoluindo meu portfólio pessoal.</p>
-          <p>Meu objetivo é crescer como engenheiro de software, aprofundando minha expertise
-            em JavaScript moderno, arquiteturas escaláveis e boas práticas de engenharia.</p>
+        <div class="bento">
+          <article class="cell cell-text reveal">
+            <p>Sou um desenvolvedor Full Stack de 21 anos, apaixonado por tecnologia e inovação.
+              Atualmente trabalho na <strong>IDS Software e Assessoria</strong>, em Pato Branco — PR, onde
+              atuo no módulo de Saúde de soluções de Gestão Pública Municipal, construindo sistemas que
+              conectam cidadãos aos serviços públicos do município.</p>
+            <p>Minha jornada começou pelo SENAI com o técnico em Análise de Sistemas de Computação, e hoje curso
+              Sistemas de Informação na UNIMATER. Fora do trabalho, participo de hackathons e continuo
+              evoluindo meu portfólio pessoal.</p>
+            <p>Meu objetivo é crescer como engenheiro de software, aprofundando minha expertise em
+              JavaScript moderno, arquiteturas escaláveis e boas práticas de engenharia.</p>
+          </article>
 
-          <div class="about-stats">
-            <div>
-              <div class="stat-num">2</div>
-              <div class="stat-label">Anos de experiência</div>
+          <article class="cell cell-stats reveal">
+            <div class="stat">
+              <span class="stat-num" data-count="2" data-suffix="+">0</span>
+              <span class="mono-label">Anos de experiência</span>
             </div>
-            <div>
-              <div class="stat-num">2</div>
-              <div class="stat-label">Hackathons</div>
+            <div class="stat">
+              <span class="stat-num" data-count="2">0</span>
+              <span class="mono-label">Hackathons</span>
             </div>
-            <div>
-              <div class="stat-num">15+</div>
-              <div class="stat-label">Tecnologias</div>
+            <div class="stat">
+              <span class="stat-num" data-count="15" data-suffix="+">0</span>
+              <span class="mono-label">Tecnologias</span>
             </div>
-          </div>
-        </div>
+          </article>
 
-        <div class="reveal-right">
-          <div class="code-window">
+          <article class="cell cell-now reveal">
+            <span class="mono-label">Agora</span>
+            <p class="now-role">Full Stack @ <strong>IDS Software e Assessoria</strong></p>
+            <div class="now-clock">
+              <span id="clockBento">--:--:--</span>
+              <span class="mono-label">Pato Branco, PR · UTC−3</span>
+            </div>
+          </article>
+
+          <article class="cell cell-code reveal">
             <div class="code-bar">
-              <div class="code-dot dot-r"></div>
-              <div class="code-dot dot-y"></div>
-              <div class="code-dot dot-g"></div>
-              <span class="code-fname">bernardo.ts</span>
+              <span class="mono-label">bernardo.ts</span>
+              <span class="code-dots"><i></i><i></i><i></i></span>
             </div>
-            <div class="code-body">
-              <pre><kw>const</kw> <tp>developer</tp><op>:</op> <tp>Developer</tp> = {
-  name<op>:</op>     <st>"Bernardo Patriarca"</st>,
-  role<op>:</op>     <st>"Full Stack Developer"</st>,
-  age<op>:</op>      <nm>20</nm>,
-  location<op>:</op> <st>"Pato Branco, PR 🇧🇷"</st>,
-
-  stack<op>:</op> {
-    frontend<op>:</op> [<st>"Angular"</st>, <st>"React"</st>, <st>"TypeScript"</st>],
-    backend<op>:</op>  [<st>"Java"</st>, <st>"Spring"</st>, <st>"Node.js"</st>],
-    database<op>:</op> [<st>"PostgreSQL"</st>, <st>"MongoDB"</st>],
-    mobile<op>:</op>   [<st>"Flutter"</st>, <st>"Dart"</st>],
+            <pre><code><span class="c-kw">const</span> <span class="c-tp">dev</span>: <span class="c-tp">Developer</span> = {
+  name:     <span class="c-st">"Bernardo Patriarca"</span>,
+  role:     <span class="c-st">"Full Stack Developer"</span>,
+  location: <span class="c-st">"Pato Branco, PR"</span>,
+  stack: {
+    front: [<span class="c-st">"Angular"</span>, <span class="c-st">"React"</span>, <span class="c-st">"TypeScript"</span>],
+    back:  [<span class="c-st">"Java"</span>, <span class="c-st">"Quarkus"</span>, <span class="c-st">"Spring"</span>],
+    infra: [<span class="c-st">"Docker"</span>, <span class="c-st">"Kubernetes"</span>],
+    data:  [<span class="c-st">"PostgreSQL"</span>, <span class="c-st">"MongoDB"</span>],
   },
+  <span class="c-fn">available</span>: () => <span class="c-kw">true</span>, <span class="c-cm">// sempre</span>
+};</code></pre>
+          </article>
 
-  <fn>currentlyLearning</fn>()<op>:</op> <tp>string[]</tp> {
-    <kw>return</kw> [<st>"NestJS"</st>, <st>"Docker"</st>];
-  },
-
-  <fn>available</fn>()<op>:</op> <tp>boolean</tp> {
-    <kw>return true</kw>; <cm>// sempre aberto a oportunidades</cm>
-  },
-};</pre>
-            </div>
-          </div>
+          <article class="cell cell-learn reveal">
+            <span class="mono-label">Estudando agora</span>
+            <ul class="learn-list">
+              <li>NestJS</li>
+              <li>Arquiteturas escaláveis</li>
+            </ul>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="services" class="section">
-    <div class="container">
-      <div class="reveal">
-        <div class="chip">serviços</div>
-        <h2 class="section-title">O que posso <em>fazer</em> por você</h2>
-        <p class="section-sub">Ofereço soluções completas, desde a concepção até o deploy, com foco em qualidade e
-          performance.</p>
-      </div>
-
-      <div class="services-grid reveal-group">
-        <div class="service-card tilt-card">
-          <div class="service-icon"><i class="fas fa-desktop"></i></div>
-          <h3>Desenvolvimento Front-end</h3>
-          <p>Interfaces modernas, responsivas e acessíveis com Angular, React e TypeScript. Do design ao código, com
-            atenção a UX e performance.</p>
-        </div>
-        <div class="service-card tilt-card">
-          <div class="service-icon"><i class="fas fa-server"></i></div>
-          <h3>Desenvolvimento Back-end</h3>
-          <p>APIs REST robustas e escaláveis com Java/Spring Boot e Node.js. Integração com bancos de dados relacionais
-            e NoSQL.</p>
-        </div>
-        <div class="service-card tilt-card">
-          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-          <h3>Desenvolvimento Mobile</h3>
-          <p>Aplicativos multiplataforma com Flutter e Dart, entregando experiência nativa em iOS e Android com uma
-            única base de código.</p>
-        </div>
-        <div class="service-card tilt-card">
-          <div class="service-icon"><i class="fas fa-database"></i></div>
-          <h3>Banco de Dados</h3>
-          <p>Modelagem, otimização e integração com PostgreSQL, SQL Server, MongoDB e Firestore. Queries eficientes e
-            dados bem estruturados.</p>
-        </div>
-        <div class="service-card tilt-card">
-          <div class="service-icon"><i class="fas fa-code-branch"></i></div>
-          <h3>Versionamento &amp; Boas Práticas</h3>
-          <p>Fluxo de trabalho com Git, GitHub e Bitbucket. Metodologias ágeis, code review e colaboração em equipes
-            multidisciplinares.</p>
-        </div>
-        <div class="service-card tilt-card">
-          <div class="service-icon"><i class="fas fa-globe"></i></div>
-          <h3>Landing Pages &amp; Sites</h3>
-          <p>Sites institucionais, landing pages e portfólios rápidos, bonitos e otimizados para SEO, do briefing ao ar
-            em produção.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills" class="section section-alt">
-    <div class="container">
-      <div class="reveal">
-        <div class="chip">habilidades</div>
-        <h2 class="section-title">Stack &amp; <em>Tecnologias</em></h2>
-        <p class="section-sub">Ferramentas e tecnologias que utilizo para criar soluções completas, do front ao
-          back-end.</p>
-      </div>
-
-      <div class="skills-wrap reveal-group">
-        <div class="skill-group">
-          <div class="skill-group-title">// front-end</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Angular</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">Tailwind CSS</span>
-            <span class="skill-tag">PrimeNG</span>
-            <span class="skill-tag">PrimeFlex</span>
-            <span class="skill-tag">Bootstrap</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title">// back-end</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">Spring Boot</span>
-            <span class="skill-tag">JSF</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">N8N</span>
-            <span class="skill-tag">Agente IA Rag</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title">// banco de dados</div>
-          <div class="skill-tags">
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">SQL Server</span>
-            <span class="skill-tag">MongoDB</span>
-            <span class="skill-tag">Firestore</span>
-            <span class="skill-tag">Supabase</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title">// mobile &amp; ferramentas</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Flutter</span>
-            <span class="skill-tag">Dart</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
-            <span class="skill-tag">Bitbucket</span>
-            <span class="skill-tag">Scrum</span>
-            <span class="skill-tag">Kanban</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience" class="section">
-    <div class="container">
-      <div class="reveal">
-        <div class="chip">trajetória</div>
-        <h2 class="section-title">Formação &amp; <em>Experiência</em></h2>
-        <p class="section-sub">Minha jornada acadêmica e profissional até aqui.</p>
-      </div>
-
-      <div class="timeline-grid">
-        <div class="reveal-left">
-          <div class="timeline-group-label">
-            <i class="fas fa-graduation-cap"></i> Acadêmico
-          </div>
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">2024 — 2028 · Em andamento</div>
-              <div class="tl-title">Sistemas de Informação</div>
-              <div class="tl-sub">UNIMATER · Pato Branco, PR</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">2021 — 2023 · Concluído</div>
-              <div class="tl-title">Técnico em Desenvolvimento de Sistemas</div>
-              <div class="tl-sub">SENAI · Pato Branco, PR</div>
-              <div class="tl-desc">Base sólida em lógica de programação, estruturas de dados, desenvolvimento web e boas
-                práticas de engenharia de software.</div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">2014 — 2019 · Concluído</div>
-              <div class="tl-title">Inglês — 5 anos de formação</div>
-              <div class="tl-sub">PBF · Pato Branco, PR</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal-right">
-          <div class="timeline-group-label">
-            <i class="fas fa-briefcase"></i> Profissional
-          </div>
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">Mar 2024 — Atual</div>
-              <div class="tl-title">Desenvolvedor Full Stack</div>
-              <div class="tl-sub">Supera Sistemas · Pato Branco, PR</div>
-              <div class="tl-desc">
-                Desenvolvimento de sistemas web completos. Correção de bugs e melhorias com integração a bancos de
-                dados. Criação de interfaces responsivas com foco em UX. Atuação em equipe multidisciplinar com Git e
-                metodologias ágeis.
-              </div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-date">Destaque</div>
-              <div class="tl-title">2× Hackathon</div>
-              <div class="tl-sub">Soluções criativas e escaláveis sob pressão</div>
-              <div class="tl-desc">Participação em dois hackathons, desenvolvendo projetos completos do zero com foco em
-                inovação, entrega rápida e trabalho em equipe.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="section section-alt">
-    <div class="container">
-      <div class="reveal">
-        <div class="chip">projetos</div>
-        <h2 class="section-title">Trabalhos <em>Recentes</em></h2>
-        <p class="section-sub">Alguns dos projetos que desenvolvi — do conceito ao deploy.</p>
-      </div>
-
-      <div class="projects-grid reveal-group">
-        <div class="project-card tilt-card">
-          <div class="project-img-wrap">
-            <img src="https://i.imgur.com/iPoISZ6.png" class="project-img" alt="Cordeiro Santo" />
-          </div>
-          <div class="project-body">
-            <h3 class="project-title">Cordeiro Santo</h3>
-            <p class="project-desc">Landing page completa para a igreja Cordeiro Santo com galeria, informações de
-              eventos e página de contato.</p>
-            <div class="project-techs">
-              <span class="tech-badge">HTML</span>
-              <span class="tech-badge">CSS</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-            <div class="project-links">
-              <a href="https://cordeirosanto.com.br" target="_blank" class="project-link primary">
-                <i class="fas fa-external-link-alt"></i> Demo
-              </a>
-              <a href="https://github.com/BernardoPatriarca/CordeiroSanto" target="_blank" class="project-link">
-                <i class="fab fa-github"></i> Código
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card tilt-card">
-          <div class="project-img-wrap">
-            <img src="https://i.imgur.com/HVjQmdu.png" class="project-img" alt="Construtora Patriarca" />
-          </div>
-          <div class="project-body">
-            <h3 class="project-title">Construtora Patriarca</h3>
-            <p class="project-desc">Site institucional da Construtora Patriarca com portfólio de projetos e formulário
-              de contato.</p>
-            <div class="project-techs">
-              <span class="tech-badge">HTML</span>
-              <span class="tech-badge">CSS</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-            <div class="project-links">
-              <a href="https://construtorapatriarca.netlify.app" target="_blank" class="project-link primary">
-                <i class="fas fa-external-link-alt"></i> Demo
-              </a>
-              <a href="https://github.com/BernardoPatriarca/ConstrutoraPatriarca" target="_blank" class="project-link">
-                <i class="fab fa-github"></i> Código
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card tilt-card">
-          <div class="project-img-wrap">
-            <img src="https://i.imgur.com/zUd9yFR.png" class="project-img" alt="Sabor Elegante" />
-          </div>
-          <div class="project-body">
-            <h3 class="project-title">Sabor Elegante</h3>
-            <p class="project-desc">Apresentação digital de restaurante com cardápio, serviços e canais de atendimento
-              ao cliente.</p>
-            <div class="project-techs">
-              <span class="tech-badge">HTML</span>
-              <span class="tech-badge">CSS</span>
-              <span class="tech-badge">JavaScript</span>
-            </div>
-            <div class="project-links">
-              <a href="https://saborelegante.netlify.app" target="_blank" class="project-link primary">
-                <i class="fas fa-external-link-alt"></i> Demo
-              </a>
-              <a href="https://github.com/BernardoPatriarca/SaborElegante" target="_blank" class="project-link">
-                <i class="fab fa-github"></i> Código
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:3rem" class="reveal">
-        <a href="https://github.com/BernardoPatriarca?tab=repositories" target="_blank"
-          class="btn btn-outline magnetic">
-          <i class="fab fa-github"></i> Ver todos no GitHub
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="languages" class="section">
-    <div class="container">
-      <div class="reveal">
-        <div class="chip">idiomas</div>
-        <h2 class="section-title">Línguas que <em>falo</em></h2>
-        <p class="section-sub">Comunicação eficaz em diferentes contextos, inclusive com equipes e documentação
-          internacional.</p>
-      </div>
-
-      <div class="lang-grid reveal-group">
-        <div class="lang-card">
-          <div class="lang-flag">🇧🇷</div>
-          <div class="lang-info">
-            <div class="lang-name">Português</div>
-            <div class="lang-level">Nativo · C2</div>
-            <div class="lang-bar">
-              <div class="lang-bar-fill" data-width="1"></div>
-            </div>
-          </div>
-        </div>
-        <div class="lang-card">
-          <div class="lang-flag">🇺🇸</div>
-          <div class="lang-info">
-            <div class="lang-name">Inglês</div>
-            <div class="lang-level">Avançado · C1 · 5 anos de formação (PBF)</div>
-            <div class="lang-bar">
-              <div class="lang-bar-fill" data-width=".85"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="section section-alt">
-    <div class="container">
-      <div class="reveal" style="text-align:center">
-        <div class="chip" style="justify-content:center">contato</div>
-        <h2 class="section-title">Vamos <em>conversar</em></h2>
-        <p class="section-sub" style="margin:0 auto 3.5rem">
-          Estou disponível para novas oportunidades, freelances e colaborações. Entre em contato!
+    <!-- MANIFESTO -->
+    <section class="manifesto" id="manifesto" aria-label="Manifesto">
+      <div class="shell">
+        <span class="mono-label" data-scramble>Manifesto</span>
+        <p class="manifesto-text" data-words>
+          Código limpo não é luxo. É o que permite que um produto continue evoluindo
+          depois que a empolgação inicial passa — e é isso que eu entrego.
         </p>
       </div>
+    </section>
 
-      <div class="contact-grid reveal-group">
-        <div class="contact-card">
-          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-          <h4>Localização</h4>
-          <p>Pato Branco, PR<br />Brasil</p>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-          <h4>E-mail</h4>
-          <p><a href="mailto:bernardopatriarca25@gmail.com">bernardopatriarca25@gmail.com</a></p>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-          <h4>WhatsApp</h4>
-          <p><a href="https://wa.me/5546988120972">+55 (46) 9 8812-0972</a></p>
+    <!-- SERVICES -->
+    <section class="sec sec-alt" id="services">
+      <div class="shell">
+        <header class="sec-head sec-head-split reveal">
+          <div>
+            <span class="mono-label" data-scramble>(02) — Serviços</span>
+            <h2 class="sec-title">O que posso<br /><em class="serif">fazer</em> por você</h2>
+          </div>
+          <p class="sec-note">Soluções completas, da concepção ao deploy, com foco em qualidade,
+            performance e código que continua fácil de manter depois.</p>
+        </header>
+
+        <div class="idx">
+          <article class="idx-row reveal">
+            <span class="idx-num mono-label">01</span>
+            <h3>Front-end</h3>
+            <p>Interfaces modernas, responsivas e acessíveis com Angular, React e TypeScript — do design ao
+              código, com atenção a UX e performance.</p>
+            <span class="idx-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="idx-row reveal">
+            <span class="idx-num mono-label">02</span>
+            <h3>Back-end</h3>
+            <p>APIs REST robustas e escaláveis com Java/Spring Boot e Node.js, integradas a bancos
+              relacionais e NoSQL.</p>
+            <span class="idx-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="idx-row reveal">
+            <span class="idx-num mono-label">03</span>
+            <h3>Mobile</h3>
+            <p>Aplicativos multiplataforma com Flutter e Dart, entregando experiência nativa em iOS e
+              Android com uma única base de código.</p>
+            <span class="idx-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="idx-row reveal">
+            <span class="idx-num mono-label">04</span>
+            <h3>Banco de dados</h3>
+            <p>Modelagem, otimização e integração com PostgreSQL, SQL Server, MongoDB e Firestore —
+              queries eficientes e dados bem estruturados.</p>
+            <span class="idx-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="idx-row reveal">
+            <span class="idx-num mono-label">05</span>
+            <h3>Versionamento &amp; boas práticas</h3>
+            <p>Fluxo com Git, GitHub e Bitbucket. Metodologias ágeis, code review e colaboração em equipes
+              multidisciplinares.</p>
+            <span class="idx-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="idx-row reveal">
+            <span class="idx-num mono-label">06</span>
+            <h3>Landing pages &amp; sites</h3>
+            <p>Sites institucionais, landing pages e portfólios rápidos, bonitos e otimizados para SEO —
+              do briefing ao ar em produção.</p>
+            <span class="idx-arrow" aria-hidden="true">↗</span>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <p class="footer-copy">© 2026 Bernardo Patriarca — Feito com <span style="color:var(--accent)">♥</span></p>
-        <div class="footer-social">
-          <a href="https://github.com/BernardoPatriarca" target="_blank" aria-label="GitHub"><i
-              class="fab fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/bernardopatriarca/" target="_blank" aria-label="LinkedIn"><i
-              class="fab fa-linkedin-in"></i></a>
-          <a href="https://wa.me/5546988120972" target="_blank" aria-label="WhatsApp"><i
-              class="fab fa-whatsapp"></i></a>
-          <a href="https://www.instagram.com/bernardopatriarca/" target="_blank" aria-label="Instagram"><i
-              class="fab fa-instagram"></i></a>
+    <!-- PROCESS — HORIZONTAL SCROLL -->
+    <section class="proc" id="process">
+      <div class="proc-sticky">
+        <div class="shell proc-head">
+          <div>
+            <span class="mono-label" data-scramble>(03) — Processo</span>
+            <h2 class="sec-title">Como eu <em class="serif">trabalho</em></h2>
+          </div>
+          <p class="proc-hint mono-label">
+            <span class="hint-scroll">Role para avançar</span>
+            <span class="hint-drag">Arraste para o lado</span>
+            <span aria-hidden="true">→</span>
+          </p>
+        </div>
+
+        <div class="proc-viewport">
+          <div class="proc-track" id="procTrack">
+            <article class="proc-card">
+              <span class="proc-num">01</span>
+              <h3>Descoberta</h3>
+              <p>Entendo o problema antes de pensar em solução: quem usa, o que trava hoje e
+                qual resultado importa. Sem essa etapa, o resto é chute caro.</p>
+              <ul class="proc-list">
+                <li>Levantamento de requisitos</li>
+                <li>Mapeamento de fluxos</li>
+                <li>Definição de sucesso</li>
+              </ul>
+            </article>
+
+            <article class="proc-card">
+              <span class="proc-num">02</span>
+              <h3>Planejamento</h3>
+              <p>Desenho a arquitetura, escolho a stack pelo problema (não pela moda) e
+                quebro o escopo em entregas que fazem sentido isoladamente.</p>
+              <ul class="proc-list">
+                <li>Arquitetura e modelagem</li>
+                <li>Escopo em fatias entregáveis</li>
+                <li>Prazos realistas</li>
+              </ul>
+            </article>
+
+            <article class="proc-card">
+              <span class="proc-num">03</span>
+              <h3>Desenvolvimento</h3>
+              <p>Código limpo, componentizado e versionado. Entregas frequentes para você
+                ver evolução real em vez de esperar semanas por uma surpresa.</p>
+              <ul class="proc-list">
+                <li>Front + back integrados</li>
+                <li>Commits e code review</li>
+                <li>Ajustes a cada entrega</li>
+              </ul>
+            </article>
+
+            <article class="proc-card">
+              <span class="proc-num">04</span>
+              <h3>Entrega</h3>
+              <p>Deploy, validação em produção e documentação do que foi feito. Depois do
+                ar, sigo por perto para ajustes e evolução.</p>
+              <ul class="proc-list">
+                <li>Deploy e testes finais</li>
+                <li>Documentação</li>
+                <li>Suporte e melhorias</li>
+              </ul>
+            </article>
+
+            <article class="proc-card proc-card-cta">
+              <span class="proc-num">→</span>
+              <h3>Bora começar?</h3>
+              <p>Se o seu projeto se encaixa nesse fluxo, me chama para conversar sobre
+                prazo e escopo.</p>
+              <a href="#contact" class="btn btn-solid magnetic" data-cursor="link">
+                Falar comigo
+                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5 15L15 5M7 5h8v8" />
+                </svg>
+              </a>
+            </article>
+          </div>
+        </div>
+
+        <div class="proc-bar" aria-hidden="true"><i id="procBar"></i></div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section class="sec" id="stack">
+      <div class="shell">
+        <header class="sec-head reveal">
+          <span class="mono-label" data-scramble>(04) — Stack</span>
+          <h2 class="sec-title">Ferramentas do<br /><em class="serif">ofício</em></h2>
+        </header>
+      </div>
+
+      <div class="rails">
+        <div class="rail reveal">
+          <span class="mono-label rail-label">Front-end</span>
+          <div class="rail-mask">
+            <div class="rail-track" data-marquee style="--dur:34s">
+              <span class="tag">Angular</span><span class="tag">React</span><span class="tag">TypeScript</span>
+              <span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+              <span class="tag">Tailwind CSS</span><span class="tag">PrimeNG</span><span class="tag">PrimeFlex</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">Angular</span><span class="tag">React</span><span class="tag">TypeScript</span>
+              <span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+              <span class="tag">Tailwind CSS</span><span class="tag">PrimeNG</span><span class="tag">PrimeFlex</span>
+              <span class="tag">Bootstrap</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail reveal">
+          <span class="mono-label rail-label">Back-end</span>
+          <div class="rail-mask">
+            <div class="rail-track rail-rev" data-marquee style="--dur:30s">
+              <span class="tag">Java</span><span class="tag">Quarkus</span><span class="tag">Spring Boot</span>
+              <span class="tag">JSF</span><span class="tag">Node.js</span><span class="tag">REST APIs</span>
+              <span class="tag">N8N</span><span class="tag">Agente IA RAG</span>
+              <span class="tag">Java</span><span class="tag">Quarkus</span><span class="tag">Spring Boot</span>
+              <span class="tag">JSF</span><span class="tag">Node.js</span><span class="tag">REST APIs</span>
+              <span class="tag">N8N</span><span class="tag">Agente IA RAG</span>
+              <span class="tag">Java</span><span class="tag">Quarkus</span><span class="tag">Spring Boot</span>
+              <span class="tag">JSF</span><span class="tag">Node.js</span><span class="tag">REST APIs</span>
+              <span class="tag">N8N</span><span class="tag">Agente IA RAG</span>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="rail reveal">
+          <span class="mono-label rail-label">Dados</span>
+          <div class="rail-mask">
+            <div class="rail-track" data-marquee style="--dur:38s">
+              <span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span>
+              <span class="tag">Firestore</span><span class="tag">Supabase</span>
+              <span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span>
+              <span class="tag">Firestore</span><span class="tag">Supabase</span>
+              <span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span>
+              <span class="tag">Firestore</span><span class="tag">Supabase</span>
+              <span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span>
+              <span class="tag">Firestore</span><span class="tag">Supabase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail reveal">
+          <span class="mono-label rail-label">DevOps &amp; Infraestrutura</span>
+          <div class="rail-mask">
+            <div class="rail-track" data-marquee style="--dur:36s">
+              <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
+              <span class="tag">Portainer</span><span class="tag">RabbitMQ</span><span class="tag">Redis</span>
+              <span class="tag">Flyway</span>
+              <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
+              <span class="tag">Portainer</span><span class="tag">RabbitMQ</span><span class="tag">Redis</span>
+              <span class="tag">Flyway</span>
+              <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
+              <span class="tag">Portainer</span><span class="tag">RabbitMQ</span><span class="tag">Redis</span>
+              <span class="tag">Flyway</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rail reveal">
+          <span class="mono-label rail-label">Mobile &amp; ferramentas</span>
+          <div class="rail-mask">
+            <div class="rail-track rail-rev" data-marquee style="--dur:32s">
+              <span class="tag">Flutter</span><span class="tag">React Native</span><span class="tag">Dart</span>
+              <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Bitbucket</span>
+              <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Testes unitários</span>
+              <span class="tag">Claude Code</span><span class="tag">Scrum</span><span class="tag">Kanban</span>
+              <span class="tag">Flutter</span><span class="tag">React Native</span><span class="tag">Dart</span>
+              <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Bitbucket</span>
+              <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">Testes unitários</span>
+              <span class="tag">Claude Code</span><span class="tag">Scrum</span><span class="tag">Kanban</span>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
+    </section>
+
+    <!-- PATH -->
+    <section class="sec sec-alt" id="path">
+      <div class="shell">
+        <header class="sec-head sec-head-split reveal">
+          <div>
+            <span class="mono-label" data-scramble>(05) — Trajetória</span>
+            <h2 class="sec-title">Formação &amp;<br /><em class="serif">experiência</em></h2>
+          </div>
+          <p class="sec-note">Do primeiro "Hello World" no SENAI ao desenvolvimento de sistemas em
+            produção — a linha do tempo até aqui.</p>
+        </header>
+
+        <div class="tl" id="timeline">
+          <span class="tl-line" aria-hidden="true"><i class="tl-fill" id="tlFill"></i></span>
+
+          <article class="tl-item reveal">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <span class="mono-label">Mai 2026 — Atual</span>
+              <span class="badge">Trabalho</span>
+            </div>
+            <h3>Desenvolvedor Full Stack</h3>
+            <p class="tl-org">IDS Software e Assessoria · Pato Branco, PR</p>
+            <p class="tl-desc">Atuo no time responsável pelo módulo de Saúde, desenvolvendo soluções de
+              Gestão Pública Municipal que conectam cidadãos aos serviços públicos municipais. No back-end,
+              trabalho com Java e Quarkus na construção de APIs, Docker para containerização de serviços e
+              PostgreSQL como banco de dados. No front-end, desenvolvo interfaces com Angular e PrimeNG, com
+              foco em usabilidade e performance. Participo ativamente das sprints do time, atuando na
+              resolução de falhas, evolução de funcionalidades e melhoria contínua do produto.</p>
+          </article>
+
+          <article class="tl-item reveal">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <span class="mono-label">Mai 2024 — Mai 2026 · 2 anos 1 mês</span>
+              <span class="badge">Trabalho</span>
+            </div>
+            <h3>Desenvolvedor de Sistemas</h3>
+            <p class="tl-org">Supera Sistemas · Pato Branco, PR</p>
+            <p class="tl-desc">Atuei como Desenvolvedor Full Stack Java, com foco em sistemas de gestão de
+              entidades e CRM. Trabalhei em todas as etapas do processo — levantamento de requisitos,
+              análise, desenvolvimento, manutenção, evolução e sustentação — incluindo criação e melhoria de
+              telas, resolução de problemas, correção de bugs e refatoração de código. Também fui
+              responsável pelo gerenciamento de publicações e versionamento. Tecnologias: Angular,
+              PrimeFaces, PostgreSQL, SQL Server, MongoDB, Firestore, além de integrações com APIs externas
+              (Google, WhatsApp).</p>
+          </article>
+
+          <article class="tl-item reveal">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <span class="mono-label">2024 — 2028 · Em andamento</span>
+              <span class="badge">Graduação</span>
+            </div>
+            <h3>Sistemas de Informação</h3>
+            <p class="tl-org">UNIMATER · Pato Branco, PR</p>
+          </article>
+
+          <article class="tl-item reveal">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <span class="mono-label">Destaque</span>
+              <span class="badge badge-fill">2× Hackathon</span>
+            </div>
+            <h3>Soluções criativas sob pressão</h3>
+            <p class="tl-desc">Participação em dois hackathons, desenvolvendo projetos completos do zero
+              com foco em inovação, entrega rápida e trabalho em equipe.</p>
+          </article>
+
+          <article class="tl-item reveal">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <span class="mono-label">Ago 2022 — Dez 2023 · Concluído</span>
+              <span class="badge">Técnico</span>
+            </div>
+            <h3>Análise de Sistemas de Computação</h3>
+            <p class="tl-org">SENAI · Pato Branco, PR</p>
+            <p class="tl-desc">Base sólida em lógica de programação, estruturas de dados, desenvolvimento
+              web e boas práticas de engenharia de software.</p>
+          </article>
+
+          <article class="tl-item reveal">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <span class="mono-label">2014 — 2019 · Concluído</span>
+              <span class="badge">Idioma</span>
+            </div>
+            <h3>Inglês — 5 anos de formação</h3>
+            <p class="tl-org">PBF · Pato Branco, PR</p>
+          </article>
+        </div>
+
+        <div class="langs">
+          <div class="lang reveal">
+            <div class="lang-top">
+              <h3>Português</h3>
+              <span class="mono-label">Nativo · C2</span>
+            </div>
+            <span class="lang-bar"><i data-fill="1"></i></span>
+          </div>
+          <div class="lang reveal">
+            <div class="lang-top">
+              <h3>Inglês</h3>
+              <span class="mono-label">Avançado · C1 · 5 anos (PBF)</span>
+            </div>
+            <span class="lang-bar"><i data-fill=".85"></i></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="sec" id="work">
+      <div class="shell">
+        <header class="sec-head sec-head-split reveal">
+          <div>
+            <span class="mono-label" data-scramble>(06) — Projetos</span>
+            <h2 class="sec-title">Trabalhos<br /><em class="serif">recentes</em></h2>
+          </div>
+          <p class="sec-note">Projetos full-stack que desenvolvi para estudar e resolver problemas reais.
+            Passe o mouse para espiar — clique para ver o código no GitHub.</p>
+        </header>
+
+        <div class="works" id="works">
+          <article class="work reveal" data-img="0">
+            <span class="work-num mono-label">01</span>
+            <div class="work-main">
+              <h3>Catálogo de Filmes e Séries</h3>
+              <p>Catálogo de filmes e séries com cadastro de títulos, gêneros e elenco, avaliações com nota e comentário, dashboard com estatísticas e busca avançada. Projeto de estudo full-stack.</p>
+            </div>
+            <span class="work-tags mono-label">Java · Quarkus · Angular · PostgreSQL · PrimeNG · Flyway</span>
+            <div class="work-links">
+              <a href="https://github.com/BernardoPatriarca/catalogo-filmes-series" target="_blank" rel="noopener"
+                data-cursor="link">Código
+                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5 15L15 5M7 5h8v8" />
+                </svg>
+              </a>
+            </div>
+            <div class="work-thumb shot" aria-hidden="true">
+              <span class="shot-repo">catalogo-filmes-series</span>
+              <span class="mono-label">imagem em breve</span>
+            </div>
+          </article>
+
+          <article class="work reveal" data-img="1">
+            <span class="work-num mono-label">02</span>
+            <div class="work-main">
+              <h3>Multi Plataform</h3>
+              <p>Sistema fullstack de login e gestão de usuários (web e mobile). Back-end em Java/Spring Boot com PostgreSQL e Flyway, autenticação JWT. Front-end em Angular + Ionic + Capacitor, gerando app web e nativo.</p>
+            </div>
+            <span class="work-tags mono-label">Java · Spring Boot · Angular · Ionic · SQL · Flyway</span>
+            <div class="work-links">
+              <a href="https://github.com/BernardoPatriarca/multi-plataform" target="_blank" rel="noopener"
+                data-cursor="link">Código
+                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5 15L15 5M7 5h8v8" />
+                </svg>
+              </a>
+            </div>
+            <div class="work-thumb shot" aria-hidden="true">
+              <span class="shot-repo">multi-plataform</span>
+              <span class="mono-label">imagem em breve</span>
+            </div>
+          </article>
+
+          <article class="work reveal" data-img="2">
+            <span class="work-num mono-label">03</span>
+            <div class="work-main">
+              <h3>Prime CRM</h3>
+              <p>Sistema de gestão de relacionamento com clientes moderno, completo e configurável. Possui autenticação, dashboard, funil de vendas, entre outras funcionalidades.</p>
+            </div>
+            <span class="work-tags mono-label">Java · Spring Boot · Angular · PostgreSQL · PrimeNG · SQL</span>
+            <div class="work-links">
+              <a href="https://github.com/BernardoPatriarca/prime-crm" target="_blank" rel="noopener"
+                data-cursor="link">Código
+                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5 15L15 5M7 5h8v8" />
+                </svg>
+              </a>
+            </div>
+            <div class="work-thumb shot" aria-hidden="true">
+              <span class="shot-repo">prime-crm</span>
+              <span class="mono-label">imagem em breve</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="works-more reveal">
+          <a href="https://github.com/BernardoPatriarca?tab=repositories" target="_blank" rel="noopener"
+            class="btn btn-line magnetic" data-cursor="link">
+            Todos os repositórios <svg class="arr" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15L15 5M7 5h8v8" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="work-float" id="workFloat" aria-hidden="true">
+        <div class="wf-item shot"><span class="shot-repo">catalogo-filmes-series</span><span class="mono-label">imagem em breve</span></div>
+        <div class="wf-item shot"><span class="shot-repo">multi-plataform</span><span class="mono-label">imagem em breve</span></div>
+        <div class="wf-item shot"><span class="shot-repo">prime-crm</span><span class="mono-label">imagem em breve</span></div>
+      </div>
+    </section>
+
+    <!-- GITHUB LIVE -->
+    <section class="sec gh" id="github">
+      <div class="shell">
+        <header class="sec-head sec-head-split reveal">
+          <div>
+            <span class="mono-label" data-scramble>(07) — GitHub</span>
+            <h2 class="sec-title">Atividade <em class="serif">ao vivo</em></h2>
+          </div>
+          <p class="sec-note">Dados puxados direto da API pública do GitHub — atualiza sozinho,
+            sem eu precisar mexer no código.</p>
+        </header>
+
+        <div class="gh-wrap reveal" id="ghWrap" data-state="loading">
+          <div class="gh-stats" id="ghStats">
+            <div class="gh-stat">
+              <span class="gh-num" data-gh="repos">—</span>
+              <span class="mono-label">Repositórios</span>
+            </div>
+            <div class="gh-stat">
+              <span class="gh-num" data-gh="stars">—</span>
+              <span class="mono-label">Stars recebidas</span>
+            </div>
+            <div class="gh-stat">
+              <span class="gh-num" data-gh="followers">—</span>
+              <span class="mono-label">Seguidores</span>
+            </div>
+            <div class="gh-stat">
+              <span class="gh-num" data-gh="since">—</span>
+              <span class="mono-label">No GitHub desde</span>
+            </div>
+          </div>
+
+          <div class="gh-cols">
+            <div class="gh-langs">
+              <span class="mono-label">Linguagens mais usadas</span>
+              <div class="gh-bar" id="ghBar" aria-hidden="true"></div>
+              <ul class="gh-legend" id="ghLegend"></ul>
+            </div>
+
+            <div class="gh-repos">
+              <span class="mono-label">Últimos repositórios atualizados</span>
+              <ul id="ghRepos" class="gh-repo-list"></ul>
+            </div>
+          </div>
+
+          <p class="gh-fallback mono-label" id="ghFallback">
+            Não consegui carregar os dados agora —
+            <a href="https://github.com/BernardoPatriarca" target="_blank" rel="noopener" data-cursor="link">ver perfil
+              no GitHub ↗</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAYGROUND -->
+    <section class="sec sec-alt play" id="playground">
+      <div class="shell">
+        <header class="sec-head sec-head-split reveal">
+          <div>
+            <span class="mono-label" data-scramble>(08) — Lab</span>
+            <h2 class="sec-title">Brinca com o<br /><em class="serif">terminal</em></h2>
+          </div>
+          <p class="sec-note">Um terminal de verdade rodando no navegador. Digite
+            <code>help</code> para ver os comandos — ou aperte <kbd>⌘K</kbd> em qualquer lugar do site
+            para abrir a busca rápida.</p>
+        </header>
+
+        <div class="term reveal" id="term" data-cursor="text">
+          <div class="term-bar">
+            <span class="term-dots"><i></i><i></i><i></i></span>
+            <span class="mono-label">bernardo@portfolio — bash</span>
+            <button class="term-clear mono-label" id="termClear" data-cursor="link">limpar</button>
+          </div>
+          <div class="term-body" id="termBody" role="log" aria-live="polite"></div>
+          <form class="term-form" id="termForm" autocomplete="off">
+            <label class="term-prompt" for="termInput"><span class="prompt-full">visitante@bernardo</span>:~$</label>
+            <input id="termInput" class="term-input" type="text" spellcheck="false"
+              aria-label="Comando do terminal" placeholder="digite help e aperte enter" />
+            <span class="term-caret" aria-hidden="true"></span>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="sec contact" id="contact">
+      <div class="shell">
+        <span class="mono-label reveal" data-scramble>(09) — Contato</span>
+        <h2 class="contact-title">
+          <span class="mask"><span class="mask-in">Vamos</span></span>
+          <span class="mask"><span class="mask-in"><em class="serif">conversar</em>?</span></span>
+        </h2>
+
+        <div class="contact-grid">
+          <a class="contact-row reveal" href="mailto:bernardopatriarca2026@gmail.com" data-cursor="link">
+            <span class="mono-label"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l8.1 6a1.5 1.5 0 0 0 1.8 0l8.1-6" stroke-linecap="round"/></svg>E-mail</span>
+            <span class="contact-val">bernardopatriarca2026@gmail.com</span>
+            <span class="arr-c" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row reveal" href="https://wa.me/5546988120972" target="_blank" rel="noopener"
+            data-cursor="link">
+            <span class="mono-label"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.2 20.8l1.3-4.6A8.5 8.5 0 1 1 7.9 19.5l-4.7 1.3z" stroke-linejoin="round"/><path d="M9 8.4c.2-.5.4-.5.7-.5h.6c.2 0 .5 0 .7.6l.8 2c.1.2.1.4 0 .5l-.4.6c-.1.2-.3.3-.1.6.5.9 1.3 1.7 2.3 2.2.3.2.5.1.6 0l.7-.8c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.4 0 .6-.3 1.4-.6 1.6-.5.4-1.2.6-2 .5-1.6-.3-3.5-1.3-5-3-1-1.2-1.6-2.5-1.7-3.6-.1-.9.2-1.6.5-1.9z"/></svg>WhatsApp</span>
+            <span class="contact-val">+55 (46) 9 8812-0972</span>
+            <span class="arr-c" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row reveal" href="https://www.linkedin.com/in/bernardopatriarca/" target="_blank"
+            rel="noopener" data-cursor="link">
+            <span class="mono-label"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.6 10.6v6.2" stroke-linecap="round"/><circle cx="7.6" cy="7.5" r="1.15" fill="currentColor" stroke="none"/><path d="M11.4 16.8v-3.5a2.35 2.35 0 0 1 4.7 0v3.5M11.4 16.8v-6.2" stroke-linecap="round"/></svg>LinkedIn</span>
+            <span class="contact-val">/in/bernardopatriarca</span>
+            <span class="arr-c" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row reveal" href="https://github.com/BernardoPatriarca" target="_blank" rel="noopener"
+            data-cursor="link">
+            <span class="mono-label"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 19.5c-3 .9-3-1.5-4.2-1.8m8.4 3.3v-2.9c0-.8.1-1.2-.4-1.6 2.3-.3 4.6-1.1 4.6-5a3.9 3.9 0 0 0-1.1-2.7 3.6 3.6 0 0 0-.1-2.7s-.9-.3-2.9 1.1a10 10 0 0 0-5 0C6.5 5.8 5.6 6.1 5.6 6.1a3.6 3.6 0 0 0-.1 2.7 3.9 3.9 0 0 0-1.1 2.7c0 3.9 2.3 4.7 4.6 5-.3.3-.5.7-.4 1.1v3" stroke-linecap="round" stroke-linejoin="round"/></svg>GitHub</span>
+            <span class="contact-val">@BernardoPatriarca</span>
+            <span class="arr-c" aria-hidden="true">↗</span>
+          </a>
+          <a class="contact-row reveal" href="https://www.instagram.com/bernardopatriarca/" target="_blank"
+            rel="noopener" data-cursor="link">
+            <span class="mono-label"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg>Instagram</span>
+            <span class="contact-val">@bernardopatriarca</span>
+            <span class="arr-c" aria-hidden="true">↗</span>
+          </a>
+          <div class="contact-row contact-static reveal">
+            <span class="mono-label"><svg class="ci" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z" stroke-linejoin="round"/><circle cx="12" cy="10.4" r="2.6"/></svg>Base</span>
+            <span class="contact-val">Pato Branco, PR — Brasil</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="shell foot-inner">
+      <span class="mono-label">© 2026 Bernardo Patriarca</span>
+      <span class="mono-label">Pato Branco, BR · <span id="clockFoot">--:--</span></span>
+      <a href="#top" class="mono-label foot-top" data-cursor="link">Voltar ao topo ↑</a>
     </div>
   </footer>
 
-  <button id="back-top" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></button>
+  <!-- SIDE DOT NAV -->
+  <nav class="dots" id="dots" aria-label="Navegação por seções">
+    <a href="#top" data-label="Início"><span></span></a>
+    <a href="#about" data-label="Sobre"><span></span></a>
+    <a href="#services" data-label="Serviços"><span></span></a>
+    <a href="#process" data-label="Processo"><span></span></a>
+    <a href="#stack" data-label="Stack"><span></span></a>
+    <a href="#path" data-label="Trajetória"><span></span></a>
+    <a href="#work" data-label="Projetos"><span></span></a>
+    <a href="#github" data-label="GitHub"><span></span></a>
+    <a href="#playground" data-label="Lab"><span></span></a>
+    <a href="#contact" data-label="Contato"><span></span></a>
+  </nav>
 
-  <script src="script.js"></script>
+  <button class="to-top" id="toTop" aria-label="Voltar ao topo" data-cursor="link">
+    <svg class="tt-ring" viewBox="0 0 48 48" aria-hidden="true">
+      <circle class="tt-track" cx="24" cy="24" r="21" />
+      <circle class="tt-prog" id="ttProg" cx="24" cy="24" r="21" />
+    </svg>
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <!-- COMMAND PALETTE -->
+  <div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Busca de comandos" hidden>
+    <div class="cmdk-panel">
+      <div class="cmdk-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.4" />
+          <path d="M20 20l-4.2-4.2" stroke-linecap="round" />
+        </svg>
+        <input id="cmdkInput" type="text" spellcheck="false" placeholder="Buscar seções, links e ações..."
+          aria-label="Buscar comandos" />
+        <kbd>esc</kbd>
+      </div>
+      <ul class="cmdk-list" id="cmdkList" role="listbox"></ul>
+      <div class="cmdk-foot">
+        <span><kbd>↑</kbd><kbd>↓</kbd> navegar</span>
+        <span><kbd>↵</kbd> selecionar</span>
+        <span><kbd>esc</kbd> fechar</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 
 </html>

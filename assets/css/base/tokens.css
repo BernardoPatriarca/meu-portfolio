@@ -1,0 +1,43 @@
+:root {
+    --bg: #08070D;
+    --bg-2: #0D0B14;
+    --surface: #13111C;
+    --surface-2: #1A1726;
+    --text: #EDEAF7;
+    --muted: #8B87A3;
+    --line: rgba(237, 234, 247, .12);
+    --line-2: rgba(237, 234, 247, .25);
+    --accent: #7C5CFF;
+    /* fundo de blocos com texto por cima */
+    --accent-surface: #6743E8;
+    --accent-ink: #FFFFFF;
+    --accent-text: #A392FF;
+    --magenta: #FF4D8D;
+
+    --f-display: 'Space Grotesk', sans-serif;
+    --f-body: 'DM Sans', sans-serif;
+    --f-serif: 'Instrument Serif', Georgia, serif;
+    --f-mono: 'JetBrains Mono', monospace;
+
+    --r: 18px;
+    --r-lg: 28px;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    --ease-io: cubic-bezier(.65, .05, .36, 1);
+    --shell: min(1440px, 90vw);
+}
+
+[data-theme="light"] {
+    --bg: #F1EDFF;
+    --bg-2: #E2DAFA;
+    --surface: #FFFFFF;
+    --surface-2: #F4F0FF;
+    --text: #0A0714;
+    --muted: #3E395C;
+    --line: rgba(10, 7, 20, .16);
+    --line-2: rgba(10, 7, 20, .36);
+    --accent: #5B2EFF;
+    --accent-surface: #4A21E0;
+    --accent-text: #4A21E0;
+    --shadow: 0 24px 50px -28px rgba(74, 33, 224, .5);
+    --shadow-soft: 0 10px 30px -18px rgba(74, 33, 224, .45);
+}

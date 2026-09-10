@@ -1,0 +1,71 @@
+.band {
+    position: relative;
+    z-index: 2;
+    margin: clamp(1rem, 4vw, 3rem) 0;
+    transform: rotate(-2.2deg) scale(1.06) skewY(var(--sk, 0deg));
+    transform-origin: center;
+    user-select: none;
+}
+
+.band-row {
+    overflow: hidden;
+    padding: .6rem 0;
+    border-block: 1px solid var(--line);
+}
+
+.band-solid {
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    border-color: transparent;
+}
+
+.band-ghost {
+    background: transparent;
+    border-top: none;
+}
+
+.band-track {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    width: max-content;
+    animation: scroll-x 42s linear infinite;
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.15rem, 3.1vw, 2.4rem);
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+    will-change: transform;
+}
+
+.band-track.band-rev {
+    animation-direction: reverse;
+    animation-duration: 52s;
+}
+
+.band-ghost .band-track {
+    color: transparent;
+    -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 38%, transparent);
+}
+
+.band-track b {
+    color: currentColor;
+    font-size: .55em;
+    opacity: .6;
+}
+
+.band-ghost .band-track b {
+    -webkit-text-stroke: 0;
+    color: var(--accent-text);
+    opacity: 1;
+}
+
+@keyframes scroll-x {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+[data-marquee].paused {
+    animation-play-state: paused;
+}
