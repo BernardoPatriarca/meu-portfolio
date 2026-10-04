@@ -9,8 +9,8 @@
 <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white">
 <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white">
 <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
-<img alt="Sem build" src="https://img.shields.io/badge/build-nenhum-8B5CF6?style=flat-square">
-<img alt="Sem dependências" src="https://img.shields.io/badge/depend%C3%AAncias-0-8B5CF6?style=flat-square">
+<img alt="Sem build" src="https://img.shields.io/badge/build-nenhum-1F7AE0?style=flat-square">
+<img alt="Sem dependências" src="https://img.shields.io/badge/depend%C3%AAncias-0-1F7AE0?style=flat-square">
 
 <br>
 

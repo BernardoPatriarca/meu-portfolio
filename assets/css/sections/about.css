@@ -133,9 +133,9 @@
 }
 
 [data-theme="light"] .cell-code {
-        --muted: #918DB8;
-    --accent-text: #A392FF;
-    background: #0B0A12;
+        --muted: #8FA0B5;
+    --accent-text: #7CC0FF;
+    background: #0A0F17;
     border-color: transparent;
 }
 
@@ -181,23 +181,23 @@
 }
 
 .c-kw {
-    color: #FF4D8D;
+    color: #6CB6FF;
 }
 
 .c-tp {
-    color: #8BA6FF;
+    color: #7DD3FC;
 }
 
 .c-st {
-    color: #A392FF;
+    color: #6EE7B7;
 }
 
 .c-fn {
-    color: #5EE3C0;
+    color: #5EEAD4;
 }
 
 .c-cm {
-    color: #7B77A0;
+    color: #76869B;
     font-style: italic;
 }
 

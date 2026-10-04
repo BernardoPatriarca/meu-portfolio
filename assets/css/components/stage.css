@@ -46,7 +46,7 @@
 }
 
 .orb-2 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 42%, transparent), transparent 66%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 42%, transparent), transparent 66%);
     animation: drift-b 34s ease-in-out infinite alternate;
 }
 
@@ -69,7 +69,7 @@
 }
 
 [data-theme="light"] .orb-2 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 46%, transparent), transparent 68%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 46%, transparent), transparent 68%);
 }
 
 [data-theme="light"] .orb-3 i {

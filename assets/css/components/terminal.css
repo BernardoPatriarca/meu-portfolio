@@ -1,9 +1,9 @@
 .term {
     /* sempre escuro: não herda o tema claro */
-    --text: #EDEAF7;
-    --muted: #918DB8;
-    --accent-text: #A392FF;
-    background: #0B0A12;
+    --text: #E8EEF5;
+    --muted: #8FA0B5;
+    --accent-text: #7CC0FF;
+    background: #0A0F17;
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
     overflow: hidden;
@@ -20,8 +20,8 @@
     justify-content: space-between;
     gap: 1rem;
     padding: .8rem 1.1rem;
-    border-bottom: 1px solid rgba(237, 234, 247, .1);
-    background: rgba(237, 234, 247, .03);
+    border-bottom: 1px solid rgba(232, 238, 245, .1);
+    background: rgba(232, 238, 245, .03);
 }
 
 .term-dots {
@@ -33,7 +33,7 @@
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: rgba(237, 234, 247, .22);
+    background: rgba(232, 238, 245, .22);
 }
 
 .term-dots i:first-child {
@@ -60,7 +60,7 @@
     font-family: var(--f-mono);
     font-size: .78rem;
     line-height: 1.8;
-    color: #C4C0DB;
+    color: #C3CEDB;
     scrollbar-width: thin;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .term-body::-webkit-scrollbar-thumb {
-    background: rgba(237, 234, 247, .16);
+    background: rgba(232, 238, 245, .16);
     border-radius: 3px;
 }
 
@@ -100,11 +100,11 @@
 }
 
 .term-line.err {
-    color: var(--magenta);
+    color: #F87171;
 }
 
 .term-line.ok {
-    color: #5EE3C0;
+    color: #6EE7B7;
 }
 
 .term-line b {
@@ -123,7 +123,7 @@
     align-items: center;
     gap: .55rem;
     padding: .85rem 1.2rem;
-    border-top: 1px solid rgba(237, 234, 247, .1);
+    border-top: 1px solid rgba(232, 238, 245, .1);
 }
 
 .term-prompt {
@@ -141,11 +141,11 @@
     outline: none;
     font-family: var(--f-mono);
     font-size: .78rem;
-    color: #EDEAF7;
+    color: #E8EEF5;
 }
 
 .term-input::placeholder {
-    color: #56526E;
+    color: #4F5D6E;
 }
 
 @media (max-width: 620px) {

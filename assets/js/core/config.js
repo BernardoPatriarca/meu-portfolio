@@ -23,4 +23,4 @@ export const SECTIONS = {
     lab: '#playground', contato: '#contact', contact: '#contact', topo: '#top', home: '#top'
 };
 
-export const THEME_COLORS = { dark: '#08070D', light: '#F1EDFF' };
+export const THEME_COLORS = { dark: '#070B12', light: '#EEF4F8' };
