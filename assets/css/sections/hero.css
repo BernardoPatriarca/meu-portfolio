@@ -130,12 +130,10 @@ body.ready .mask-in,
     aspect-ratio: 4/5;
     object-fit: cover;
     border-radius: var(--r-lg);
-    filter: grayscale(1) contrast(1.06);
-    transition: filter .6s var(--ease), transform .8s var(--ease);
+    transition: transform .8s var(--ease);
 }
 
 .portrait:hover img {
-    filter: grayscale(0) contrast(1);
     transform: scale(1.015);
 }
 
