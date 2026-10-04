@@ -9,7 +9,7 @@ const LANG_COLORS = {
     Java: '#B07219', Dart: '#00B4AB', Python: '#3572A5', PHP: '#4F5D95',
     'C#': '#178600', Shell: '#89E051', Vue: '#41B883', SCSS: '#C6538C'
 };
-const FALLBACK = ['#4FA3F7', '#34D399', '#7DD3FC', '#6EE7B7', '#93C5FD'];
+const FALLBACK = ['#FF6A1A', '#F2B33D', '#B23C00', '#C9D67A', '#8F8070'];
 
 let data = null;
 export const ghData = () => data;

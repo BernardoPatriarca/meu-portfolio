@@ -141,10 +141,20 @@ main,
 [data-theme="light"] .lang,
 [data-theme="light"] .cmdk-panel,
 [data-theme="light"] .photo-chip {
+    border-color: var(--text);
     box-shadow: var(--shadow-soft);
 }
 
 [data-theme="light"] .cell:hover,
 [data-theme="light"] .gh-stat:hover {
     box-shadow: var(--shadow);
+}
+
+/* sem brilhos difusos: o fundo é papel chapado + granulado */
+.orb {
+    display: none;
+}
+
+.stage-veil {
+    display: none;
 }

@@ -1,19 +1,20 @@
 :root {
-    --bg: #070B12;
-    --bg-2: #0B111B;
-    --surface: #111823;
-    --surface-2: #18212E;
-    --text: #E8EEF5;
-    --muted: #8A97A8;
-    --line: rgba(232, 238, 245, .12);
-    --line-2: rgba(232, 238, 245, .25);
-    --accent: #4FA3F7;
-    /* fundo de blocos com texto por cima */
-    --accent-surface: #1D6FD1;
-    --accent-ink: #FFFFFF;
-    --accent-text: #7CC0FF;
-    /* secundária: detalhes e brilhos do fundo */
-    --accent-2: #34D399;
+    /* escuro: carvão quente, texto bege */
+    --bg: #15110D;
+    --bg-2: #1B1611;
+    --surface: #221C16;
+    --surface-2: #2A231B;
+    --text: #F2E8D5;
+    --muted: #A8998A;
+    --line: rgba(242, 232, 213, .14);
+    --line-2: rgba(242, 232, 213, .32);
+    --accent: #FF6A1A;
+    /* fundo de blocos com texto por cima: laranja chapado + tinta escura */
+    --accent-surface: #FF6A1A;
+    --accent-ink: #15110D;
+    --accent-text: #FF8A47;
+    /* secundária: mostarda, para detalhes pontuais */
+    --accent-2: #F2B33D;
 
     --f-display: 'Space Grotesk', sans-serif;
     --f-body: 'DM Sans', sans-serif;
@@ -28,18 +29,21 @@
 }
 
 [data-theme="light"] {
-    --bg: #EEF4F8;
-    --bg-2: #DCE8F0;
-    --surface: #FFFFFF;
-    --surface-2: #F3F8FB;
-    --text: #0A1420;
-    --muted: #3B4A5C;
-    --line: rgba(10, 20, 32, .16);
-    --line-2: rgba(10, 20, 32, .36);
-    --accent: #1F7AE0;
-    --accent-surface: #1663C7;
-    --accent-text: #1663C7;
-    --accent-2: #10B981;
-    --shadow: 0 24px 50px -28px rgba(22, 99, 199, .45);
-    --shadow-soft: 0 10px 30px -18px rgba(22, 99, 199, .4);
+    /* claro (padrão): papel bege, tinta quase preta */
+    --bg: #F2E8D5;
+    --bg-2: #E8DBC2;
+    --surface: #FBF6EC;
+    --surface-2: #F6EEDD;
+    --text: #1C1712;
+    --muted: #574B3F;
+    --line: rgba(28, 23, 18, .18);
+    --line-2: rgba(28, 23, 18, .42);
+    --accent: #FF5F15;
+    --accent-surface: #FF5F15;
+    --accent-ink: #1C1712;
+    --accent-text: #B23C00;
+    --accent-2: #E3A21A;
+    /* sombra dura deslocada, de impresso, no lugar de brilho difuso */
+    --shadow: 7px 7px 0 var(--text);
+    --shadow-soft: 4px 4px 0 var(--text);
 }

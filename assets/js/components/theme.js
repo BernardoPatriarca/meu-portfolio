@@ -14,6 +14,6 @@ export function toggleTheme() {
 }
 
 export function initTheme() {
-    root.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    root.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
     btn()?.addEventListener('click', toggleTheme);
 }

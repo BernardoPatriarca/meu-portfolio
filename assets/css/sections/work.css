@@ -160,7 +160,7 @@
     justify-content: center;
     gap: .5rem;
     background:
-        radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+        repeating-linear-gradient(-45deg, transparent 0 10px, color-mix(in srgb, var(--text) 7%, transparent) 10px 11px),
         var(--surface-2);
     border-style: dashed;
     border-color: var(--line-2);

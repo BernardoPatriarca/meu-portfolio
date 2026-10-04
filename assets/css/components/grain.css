@@ -12,7 +12,7 @@
 }
 
 [data-theme="light"] .grain {
-    opacity: .05;
+    opacity: .09;
 }
 
 @keyframes grain-shift {
