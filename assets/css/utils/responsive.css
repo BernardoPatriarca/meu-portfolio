@@ -117,8 +117,16 @@
     }
 
     .portrait {
-        justify-self: start;
-        width: min(280px, 78%);
+        justify-self: center;
+        /* sobra espaço para o círculo laranja que sai 10px para fora */
+        width: min(340px, calc(100% - 14px));
+    }
+
+    .seal {
+        left: -12px;
+        top: -28px;
+        width: 88px;
+        height: 88px;
     }
 
     .pill-btn {
@@ -212,9 +220,55 @@
 }
 
 @media (max-width: 520px) {
+    .sec {
+        padding: 3.75rem 0;
+    }
+
+    .manifesto {
+        padding: 3.25rem 0;
+    }
+
+    .sec-head {
+        margin-bottom: 2rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-bottom: 3rem;
+    }
+
     .hero-title {
-        font-size: 3.4rem;
+        /* ocupa a largura da tela sem estourar: PATRIARCA tem ~5em de largura */
+        font-size: clamp(2.6rem, 15vw, 4.2rem);
         letter-spacing: -.03em;
+    }
+
+    /* Serviços e Processo têm o mesmo fundo: sem isso os paddings somam um vão */
+    .proc-sticky {
+        padding-top: 1.5rem;
+    }
+
+    .cell-stats {
+        gap: .75rem;
+    }
+
+    .stat .mono-label {
+        letter-spacing: .1em;
+    }
+
+    .lang-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .25rem;
+    }
+
+    .term-bar .mono-label:not(.term-clear) {
+        display: none;
+    }
+
+    .contact-grid a,
+    .contact-grid > * {
+        overflow-wrap: anywhere;
     }
 
     .hero-title .stroke {
