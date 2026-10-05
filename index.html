@@ -249,16 +249,36 @@
     infra: [<span class="c-st">"Docker"</span>, <span class="c-st">"Kubernetes"</span>],
     data:  [<span class="c-st">"PostgreSQL"</span>, <span class="c-st">"MongoDB"</span>],
   },
+  learning: [<span class="c-st">"AWS"</span>, <span class="c-st">"Terraform"</span>, <span class="c-st">"GitHub Actions"</span>],
   <span class="c-fn">available</span>: () => <span class="c-kw">true</span>, <span class="c-cm">// sempre</span>
-};</code></pre>
+};
+
+<span class="c-cm">// o que estou estudando, em forma de pipeline</span>
+<span class="c-kw">async function</span> <span class="c-fn">deploy</span>(app: <span class="c-tp">App</span>) {
+  <span class="c-kw">await</span> <span class="c-fn">test</span>(app);
+  <span class="c-kw">const</span> img = <span class="c-kw">await</span> <span class="c-fn">buildNative</span>(app); <span class="c-cm">// GraalVM</span>
+  <span class="c-kw">await</span> terraform.<span class="c-fn">apply</span>();          <span class="c-cm">// IaC</span>
+  <span class="c-kw">await</span> lambda.<span class="c-fn">publish</span>(img);        <span class="c-cm">// + API Gateway</span>
+  <span class="c-kw">await</span> s3.<span class="c-fn">sync</span>(<span class="c-st">"dist/"</span>);
+  <span class="c-kw">await</span> cloudfront.<span class="c-fn">invalidate</span>(<span class="c-st">"/*"</span>);
+  <span class="c-kw">return</span> <span class="c-fn">monitor</span>(app);              <span class="c-cm">// CloudWatch</span>
+}</code></pre>
           </article>
 
           <article class="cell cell-learn reveal">
             <span class="mono-label">Estudando agora</span>
-            <ul class="learn-list">
-              <li>NestJS</li>
-              <li>Arquiteturas escaláveis</li>
-            </ul>
+            <h3 class="learn-title">Deploy de ponta a ponta na AWS</h3>
+            <p class="learn-sub">Do commit à produção: build, infraestrutura como código, segurança e
+              observabilidade.</p>
+            <ol class="learn-flow">
+              <li><b>Quarkus nativo</b><span>GraalVM · cold start baixo</span></li>
+              <li><b>CI/CD</b><span>GitHub Actions · testes · deploy automático</span></li>
+              <li><b>Terraform</b><span>infraestrutura como código</span></li>
+              <li><b>Lambda + API Gateway</b><span>back-end serverless</span></li>
+              <li><b>S3 + CloudFront</b><span>front-end com CDN e HTTPS</span></li>
+              <li><b>Cognito + MFA</b><span>autenticação com 2º fator · JWT</span></li>
+              <li><b>CloudWatch + X-Ray</b><span>logs, métricas e tracing</span></li>
+            </ol>
           </article>
         </div>
       </div>
@@ -637,39 +657,47 @@
             Cada card mostra as telas do projeto em sequência — clique para ver o código no GitHub.</p>
         </header>
 
+        <!-- projeto atual em destaque, fora da lista -->
+        <article class="work-feature reveal">
+          <div class="wf-body">
+            <div class="work-meta">
+              <span class="badge badge-fill">Em andamento</span>
+              <span class="mono-label">Projeto atual · TCC · UNIMATER · Defesa prevista dez/2026</span>
+            </div>
+            <h3 class="wf-title">ZELA</h3>
+            <p class="wf-lead">Plataforma web de gestão financeira e prestação de contas para processos de curatela e
+              tutela. Busca facilitar o trabalho de curadores e tutores, que hoje costumam juntar planilhas, papéis e
+              extratos soltos para prestar contas à Justiça.</p>
+            <ul class="wf-points">
+              <li>Conciliação com extratos bancários OFX/CSV</li>
+              <li>Relatório em PDF determinístico, com hash SHA-256</li>
+              <li>Trilha de auditoria de cada alteração</li>
+              <li>Alertas de prazo legal por e-mail</li>
+            </ul>
+            <div class="wf-tags">
+              <span class="tag">Java 21</span><span class="tag">Quarkus</span><span class="tag">Angular</span>
+              <span class="tag">PrimeNG</span><span class="tag">PostgreSQL</span><span class="tag">AWS Lambda</span>
+              <span class="tag">CloudFront</span>
+            </div>
+            <a href="https://github.com/BernardoPatriarca/zela" target="_blank" rel="noopener"
+              class="btn btn-solid magnetic wf-cta" data-cursor="link">Ver código no GitHub
+              <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M5 15L15 5M7 5h8v8" />
+              </svg>
+            </a>
+          </div>
+          <!-- TODO: trocar este placeholder por screenshots reais do ZELA quando houver telas prontas
+               (ex.: assets/img/work/zela-1.png), no mesmo padrão de slides dos outros cards:
+               <div class="wf-thumb slides" data-slides> com <img class="slide on"> + <img class="slide"> -->
+          <div class="wf-thumb work-thumb-ph" aria-hidden="true">
+            <span class="work-thumb-ph-name">ZELA</span>
+            <span class="mono-label">MVP em desenvolvimento</span>
+          </div>
+        </article>
+
         <div class="works" id="works">
           <article class="work reveal">
             <span class="work-num mono-label">01</span>
-            <div class="work-main">
-              <div class="work-meta">
-                <span class="badge badge-fill">Em andamento</span>
-                <span class="mono-label">TCC · UNIMATER · Defesa prevista dez/2026</span>
-              </div>
-              <h3>ZELA</h3>
-              <p>Plataforma web em desenvolvimento para prestação de contas em processos de curatela e tutela.
-                Busca facilitar o registro de receitas e despesas, a conciliação com extratos bancários e a geração
-                do relatório exigido pela Justiça.</p>
-            </div>
-            <span class="work-tags mono-label">Java · Quarkus · Angular · PostgreSQL · PrimeNG · AWS Lambda</span>
-            <div class="work-links">
-              <a href="https://github.com/BernardoPatriarca/zela" target="_blank" rel="noopener"
-                data-cursor="link">Código
-                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
-                  <path d="M5 15L15 5M7 5h8v8" />
-                </svg>
-              </a>
-            </div>
-            <!-- TODO: trocar este placeholder por screenshots reais do ZELA quando houver telas prontas
-                 (ex.: assets/img/work/zela-1.png) usando o mesmo padrão dos outros cards:
-                 <div class="work-thumb slides" data-slides> com <img class="slide on"> + <img class="slide"> -->
-            <div class="work-thumb work-thumb-ph" aria-hidden="true">
-              <span class="work-thumb-ph-name">ZELA</span>
-              <span class="mono-label">MVP em desenvolvimento</span>
-            </div>
-          </article>
-
-          <article class="work reveal">
-            <span class="work-num mono-label">02</span>
             <div class="work-main">
               <h3>Catálogo de Filmes e Séries</h3>
               <p>Catálogo de filmes e séries com cadastro de títulos, gêneros e elenco, avaliações com nota e comentário, dashboard com estatísticas e busca avançada. Projeto de estudo full-stack.</p>
@@ -694,7 +722,7 @@
           </article>
 
           <article class="work reveal">
-            <span class="work-num mono-label">03</span>
+            <span class="work-num mono-label">02</span>
             <div class="work-main">
               <h3>Multi Plataform</h3>
               <p>Sistema fullstack de login e gestão de usuários (web e mobile). Back-end em Java/Spring Boot com PostgreSQL e Flyway, autenticação JWT. Front-end em Angular + Ionic + Capacitor, gerando app web e nativo.</p>
@@ -719,7 +747,7 @@
           </article>
 
           <article class="work reveal">
-            <span class="work-num mono-label">04</span>
+            <span class="work-num mono-label">03</span>
             <div class="work-main">
               <h3>Prime CRM</h3>
               <p>Sistema de gestão de relacionamento com clientes moderno, completo e configurável. Possui autenticação, dashboard, funil de vendas, entre outras funcionalidades.</p>
