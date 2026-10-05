@@ -657,39 +657,47 @@
             Cada card mostra as telas do projeto em sequência — clique para ver o código no GitHub.</p>
         </header>
 
+        <!-- projeto atual em destaque, fora da lista -->
+        <article class="work-feature reveal">
+          <div class="wf-body">
+            <div class="work-meta">
+              <span class="badge badge-fill">Em andamento</span>
+              <span class="mono-label">Projeto atual · TCC · UNIMATER · Defesa prevista dez/2026</span>
+            </div>
+            <h3 class="wf-title">ZELA</h3>
+            <p class="wf-lead">Plataforma web de gestão financeira e prestação de contas para processos de curatela e
+              tutela. Busca facilitar o trabalho de curadores e tutores, que hoje costumam juntar planilhas, papéis e
+              extratos soltos para prestar contas à Justiça.</p>
+            <ul class="wf-points">
+              <li>Conciliação com extratos bancários OFX/CSV</li>
+              <li>Relatório em PDF determinístico, com hash SHA-256</li>
+              <li>Trilha de auditoria de cada alteração</li>
+              <li>Alertas de prazo legal por e-mail</li>
+            </ul>
+            <div class="wf-tags">
+              <span class="tag">Java 21</span><span class="tag">Quarkus</span><span class="tag">Angular</span>
+              <span class="tag">PrimeNG</span><span class="tag">PostgreSQL</span><span class="tag">AWS Lambda</span>
+              <span class="tag">CloudFront</span>
+            </div>
+            <a href="https://github.com/BernardoPatriarca/zela" target="_blank" rel="noopener"
+              class="btn btn-solid magnetic wf-cta" data-cursor="link">Ver código no GitHub
+              <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M5 15L15 5M7 5h8v8" />
+              </svg>
+            </a>
+          </div>
+          <!-- TODO: trocar este placeholder por screenshots reais do ZELA quando houver telas prontas
+               (ex.: assets/img/work/zela-1.png), no mesmo padrão de slides dos outros cards:
+               <div class="wf-thumb slides" data-slides> com <img class="slide on"> + <img class="slide"> -->
+          <div class="wf-thumb work-thumb-ph" aria-hidden="true">
+            <span class="work-thumb-ph-name">ZELA</span>
+            <span class="mono-label">MVP em desenvolvimento</span>
+          </div>
+        </article>
+
         <div class="works" id="works">
           <article class="work reveal">
             <span class="work-num mono-label">01</span>
-            <div class="work-main">
-              <div class="work-meta">
-                <span class="badge badge-fill">Em andamento</span>
-                <span class="mono-label">TCC · UNIMATER · Defesa prevista dez/2026</span>
-              </div>
-              <h3>ZELA</h3>
-              <p>Plataforma web em desenvolvimento para prestação de contas em processos de curatela e tutela.
-                Busca facilitar o registro de receitas e despesas, a conciliação com extratos bancários e a geração
-                do relatório exigido pela Justiça.</p>
-            </div>
-            <span class="work-tags mono-label">Java · Quarkus · Angular · PostgreSQL · PrimeNG · AWS Lambda</span>
-            <div class="work-links">
-              <a href="https://github.com/BernardoPatriarca/zela" target="_blank" rel="noopener"
-                data-cursor="link">Código
-                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
-                  <path d="M5 15L15 5M7 5h8v8" />
-                </svg>
-              </a>
-            </div>
-            <!-- TODO: trocar este placeholder por screenshots reais do ZELA quando houver telas prontas
-                 (ex.: assets/img/work/zela-1.png) usando o mesmo padrão dos outros cards:
-                 <div class="work-thumb slides" data-slides> com <img class="slide on"> + <img class="slide"> -->
-            <div class="work-thumb work-thumb-ph" aria-hidden="true">
-              <span class="work-thumb-ph-name">ZELA</span>
-              <span class="mono-label">MVP em desenvolvimento</span>
-            </div>
-          </article>
-
-          <article class="work reveal">
-            <span class="work-num mono-label">02</span>
             <div class="work-main">
               <h3>Catálogo de Filmes e Séries</h3>
               <p>Catálogo de filmes e séries com cadastro de títulos, gêneros e elenco, avaliações com nota e comentário, dashboard com estatísticas e busca avançada. Projeto de estudo full-stack.</p>
@@ -714,7 +722,7 @@
           </article>
 
           <article class="work reveal">
-            <span class="work-num mono-label">03</span>
+            <span class="work-num mono-label">02</span>
             <div class="work-main">
               <h3>Multi Plataform</h3>
               <p>Sistema fullstack de login e gestão de usuários (web e mobile). Back-end em Java/Spring Boot com PostgreSQL e Flyway, autenticação JWT. Front-end em Angular + Ionic + Capacitor, gerando app web e nativo.</p>
@@ -739,7 +747,7 @@
           </article>
 
           <article class="work reveal">
-            <span class="work-num mono-label">04</span>
+            <span class="work-num mono-label">03</span>
             <div class="work-main">
               <h3>Prime CRM</h3>
               <p>Sistema de gestão de relacionamento com clientes moderno, completo e configurável. Possui autenticação, dashboard, funil de vendas, entre outras funcionalidades.</p>
