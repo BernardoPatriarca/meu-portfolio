@@ -1,7 +1,7 @@
-import { $, $$, fine } from '../core/dom.js';
+import { $, fine } from '../core/dom.js';
 import { onFrame } from '../core/raf.js';
 
-const LABELS = { plus: '+', view: 'Ver' };
+const LABELS = { plus: '+' };
 
 export function initCursor() {
     if (!fine) return;
@@ -10,8 +10,6 @@ export function initCursor() {
     const dot = $('#cursorDot');
     const label = $('#cursorLabel');
     if (!ring) return;
-
-    $$('.work').forEach(w => w.dataset.cursor = 'view');
 
     const pos = { mx: 0, my: 0, cx: 0, cy: 0 };
     let ready = false;
