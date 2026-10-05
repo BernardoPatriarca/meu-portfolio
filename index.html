@@ -249,16 +249,36 @@
     infra: [<span class="c-st">"Docker"</span>, <span class="c-st">"Kubernetes"</span>],
     data:  [<span class="c-st">"PostgreSQL"</span>, <span class="c-st">"MongoDB"</span>],
   },
+  learning: [<span class="c-st">"AWS"</span>, <span class="c-st">"Terraform"</span>, <span class="c-st">"GitHub Actions"</span>],
   <span class="c-fn">available</span>: () => <span class="c-kw">true</span>, <span class="c-cm">// sempre</span>
-};</code></pre>
+};
+
+<span class="c-cm">// o que estou estudando, em forma de pipeline</span>
+<span class="c-kw">async function</span> <span class="c-fn">deploy</span>(app: <span class="c-tp">App</span>) {
+  <span class="c-kw">await</span> <span class="c-fn">test</span>(app);
+  <span class="c-kw">const</span> img = <span class="c-kw">await</span> <span class="c-fn">buildNative</span>(app); <span class="c-cm">// GraalVM</span>
+  <span class="c-kw">await</span> terraform.<span class="c-fn">apply</span>();          <span class="c-cm">// IaC</span>
+  <span class="c-kw">await</span> lambda.<span class="c-fn">publish</span>(img);        <span class="c-cm">// + API Gateway</span>
+  <span class="c-kw">await</span> s3.<span class="c-fn">sync</span>(<span class="c-st">"dist/"</span>);
+  <span class="c-kw">await</span> cloudfront.<span class="c-fn">invalidate</span>(<span class="c-st">"/*"</span>);
+  <span class="c-kw">return</span> <span class="c-fn">monitor</span>(app);              <span class="c-cm">// CloudWatch</span>
+}</code></pre>
           </article>
 
           <article class="cell cell-learn reveal">
             <span class="mono-label">Estudando agora</span>
-            <ul class="learn-list">
-              <li>NestJS</li>
-              <li>Arquiteturas escaláveis</li>
-            </ul>
+            <h3 class="learn-title">Deploy de ponta a ponta na AWS</h3>
+            <p class="learn-sub">Do commit à produção: build, infraestrutura como código, segurança e
+              observabilidade.</p>
+            <ol class="learn-flow">
+              <li><b>Quarkus nativo</b><span>GraalVM · cold start baixo</span></li>
+              <li><b>CI/CD</b><span>GitHub Actions · testes · deploy automático</span></li>
+              <li><b>Terraform</b><span>infraestrutura como código</span></li>
+              <li><b>Lambda + API Gateway</b><span>back-end serverless</span></li>
+              <li><b>S3 + CloudFront</b><span>front-end com CDN e HTTPS</span></li>
+              <li><b>Cognito + MFA</b><span>autenticação com 2º fator · JWT</span></li>
+              <li><b>CloudWatch + X-Ray</b><span>logs, métricas e tracing</span></li>
+            </ol>
           </article>
         </div>
       </div>
