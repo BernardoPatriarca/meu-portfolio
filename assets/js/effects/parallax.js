@@ -32,7 +32,9 @@ export function initParallax() {
         }
 
         if (heroVisible && title) {
-            const p = clamp01(y / (innerHeight * 0.85));
+            // medido a partir do topo do próprio hero: antes dele existe a
+            // tela de abertura, então o scroll absoluto não serve de régua
+            const p = clamp01(-hero.getBoundingClientRect().top / (innerHeight * 0.85));
             title.style.setProperty('--py', `${(p * 90).toFixed(1)}px`);
             title.style.opacity = (1 - p * 0.92).toFixed(3);
             lead.style.setProperty('--py', `${(p * 130).toFixed(1)}px`);

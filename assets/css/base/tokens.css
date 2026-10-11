@@ -1,19 +1,35 @@
 :root {
-    --bg: #08070D;
-    --bg-2: #0D0B14;
-    --surface: #13111C;
-    --surface-2: #1A1726;
-    --text: #EDEAF7;
-    --muted: #8B87A3;
-    --line: rgba(237, 234, 247, .12);
-    --line-2: rgba(237, 234, 247, .25);
-    --accent: #7C5CFF;
+    /* --- base escura: índigo quase preto --- */
+    --bg: #05041a;
+    --bg-2: #0A0826;
+    --surface: #100D2B;
+    --surface-2: #171338;
+
+    --text: #EEEBFF;
+    --muted: #8C88C9;
+
+    --line: rgba(160, 140, 255, .28);
+    --line-2: rgba(170, 152, 255, .5);
+
+    /* --- acentos --- */
+    --accent: #7A4DFF;
+    /* violeta elétrico */
+    --accent-2: #2F7BFF;
+    /* azul cobalto */
     /* fundo de blocos com texto por cima */
-    --accent-surface: #6743E8;
+    --accent-surface: #5B30E6;
     --accent-ink: #FFFFFF;
-    --accent-text: #A392FF;
+    --accent-text: #A68EFF;
     --magenta: #FF4D8D;
 
+    /* --- brilhos dos efeitos WebGL / glow --- */
+    --glow-a: #6B47FF;
+    --glow-b: #0D38BF;
+    /* aberração cromática dos glitches */
+    --glitch-m: #FF2D9B;
+    --glitch-c: #25E8FF;
+
+    --f-hero: 'Unbounded', 'Space Grotesk', 'Arial Black', sans-serif;
     --f-display: 'Space Grotesk', sans-serif;
     --f-body: 'DM Sans', sans-serif;
     --f-serif: 'Instrument Serif', Georgia, serif;
@@ -24,20 +40,32 @@
     --ease: cubic-bezier(.22, 1, .36, 1);
     --ease-io: cubic-bezier(.65, .05, .36, 1);
     --shell: min(1440px, 90vw);
+
+    color-scheme: dark;
 }
 
 [data-theme="light"] {
-    --bg: #F1EDFF;
-    --bg-2: #E2DAFA;
+    --bg: #ECE9FF;
+    --bg-2: #DBD5FA;
     --surface: #FFFFFF;
-    --surface-2: #F4F0FF;
-    --text: #0A0714;
-    --muted: #3E395C;
-    --line: rgba(10, 7, 20, .16);
-    --line-2: rgba(10, 7, 20, .36);
+    --surface-2: #F2EEFF;
+
+    --text: #07051C;
+    --muted: #413C66;
+
+    --line: rgba(70, 48, 170, .22);
+    --line-2: rgba(70, 48, 170, .44);
+
     --accent: #5B2EFF;
+    --accent-2: #1557E0;
     --accent-surface: #4A21E0;
     --accent-text: #4A21E0;
+
+    --glow-a: #7A4DFF;
+    --glow-b: #2F7BFF;
+
     --shadow: 0 24px 50px -28px rgba(74, 33, 224, .5);
     --shadow-soft: 0 10px 30px -18px rgba(74, 33, 224, .45);
+
+    color-scheme: light;
 }

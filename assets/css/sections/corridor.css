@@ -1,0 +1,351 @@
+/* =========================================================
+   CORREDOR 3D DOS PROJETOS
+   A seção é alta e o palco fica preso com sticky: o scroll
+   vira o trilho da câmera. Sem WebGL vira uma faixa de cards.
+   ========================================================= */
+
+.corridor {
+    position: relative;
+    /* estado base = faixa de cards, altura natural. Só vira trilho de
+       câmera quando o 3D realmente vai rodar (.is-3d), para que uma
+       falha no CDN nunca deixe 300vh de rolagem vazia. */
+    margin: clamp(2rem, 5vw, 4rem) 0 clamp(2.5rem, 6vw, 5rem);
+}
+
+.corridor.is-3d {
+    /* 100svh de palco + o curso da câmera */
+    height: 360svh;
+}
+
+.corridor-stick {
+    position: static;
+    isolation: isolate;
+}
+
+.corridor.is-3d .corridor-stick {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+}
+
+.corridor-gl {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 0;
+}
+
+.corridor.is-gl .corridor-gl {
+    display: block;
+}
+
+.corridor.is-over .corridor-gl {
+    cursor: pointer;
+}
+
+/* bordas esmaecidas: o corredor emenda com o fundo da página */
+.corridor.is-gl .corridor-stick::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(to bottom, var(--bg), transparent 14%, transparent 86%, var(--bg)),
+        linear-gradient(to right, var(--bg), transparent 10%, transparent 90%, var(--bg));
+}
+
+/* ---------- HUD sobre o corredor ---------- */
+
+/* degradê de leitura: a legenda fica sobre o painel de destaque, que é
+   claro — sem isto o texto some em cima dele */
+.corridor.is-gl .corridor-hud::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 58%;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(to top,
+            var(--bg) 4%,
+            color-mix(in srgb, var(--bg) 80%, transparent) 34%,
+            transparent 100%);
+}
+
+.corridor-hud {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: clamp(1.2rem, 4vw, 3.2rem);
+}
+
+.corridor-hud {
+    display: none;
+}
+
+.corridor.is-gl .corridor-hud {
+    display: flex;
+}
+
+.cor-caption {
+    max-width: min(30rem, 72%);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .5s var(--ease), transform .6s var(--ease);
+}
+
+.cor-caption.on {
+    opacity: 1;
+    transform: none;
+}
+
+.cor-num {
+    color: var(--accent-text);
+}
+
+.cor-name {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4.2vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    margin: .35rem 0 .55rem;
+    text-shadow: 0 6px 30px color-mix(in srgb, var(--bg) 85%, transparent);
+}
+
+.cor-desc {
+    font-size: clamp(.85rem, 1.1vw, 1rem);
+    line-height: 1.6;
+    color: color-mix(in srgb, var(--text) 80%, transparent);
+    max-width: 34ch;
+}
+
+/* só aparece quando o cursor está sobre um painel */
+.cor-cta {
+    display: block;
+    margin-top: .7rem;
+    color: var(--accent-text);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+.corridor.is-over .cor-cta {
+    opacity: 1;
+    transform: none;
+}
+
+/* em toque não existe cursor sobre painel: a dica não faz sentido */
+@media (hover: none),
+(pointer: coarse) {
+    .cor-cta {
+        display: none;
+    }
+}
+
+.cor-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--muted);
+}
+
+.cor-bar {
+    flex: 1;
+    max-width: 16rem;
+    height: 1px;
+    background: var(--line);
+    overflow: hidden;
+}
+
+.cor-bar i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+/* ---------- versão sem WebGL: faixa de cards ---------- */
+
+.corridor-flat {
+    position: relative;
+    z-index: 1;
+    /* acompanha a margem do resto do conteúdo; só o canvas é full-bleed */
+    width: var(--shell);
+    margin-inline: auto;
+    display: grid;
+    /* adapta sozinho ao número de projetos */
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: clamp(.8rem, 1.8vw, 1.5rem);
+    min-height: clamp(260px, 38vh, 400px);
+    perspective: 1200px;
+}
+
+/* enquanto o 3D carrega os cards seguram o palco; depois saem */
+.corridor.is-3d .corridor-flat {
+    height: 100%;
+    align-content: center;
+}
+
+.corridor.is-gl .corridor-flat {
+    display: none;
+}
+
+.cor-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: .45rem;
+    padding: clamp(1rem, 2vw, 1.6rem);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    overflow: hidden;
+    background:
+        radial-gradient(120% 90% at 20% 110%, color-mix(in srgb, var(--glow-a) 44%, transparent), transparent 70%),
+        linear-gradient(210deg, color-mix(in srgb, var(--accent) 54%, transparent), color-mix(in srgb, var(--accent-2) 46%, transparent) 70%),
+        var(--surface);
+    transform: rotateY(calc((1 - var(--i)) * 13deg));
+    transition: transform .6s var(--ease), border-color .4s var(--ease);
+}
+
+.cor-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .3;
+    background:
+        linear-gradient(90deg, var(--line) 0 1px, transparent 1px),
+        linear-gradient(180deg, var(--line) 0 1px, transparent 1px);
+    background-size: 25% 100%, 100% 25%;
+}
+
+.cor-card:hover {
+    transform: rotateY(0) translateY(-6px);
+    border-color: var(--line-2);
+}
+
+.cor-card-num {
+    position: absolute;
+    top: clamp(1rem, 2vw, 1.6rem);
+    left: clamp(1rem, 2vw, 1.6rem);
+    color: var(--text);
+}
+
+.cor-card-name {
+    position: relative;
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.6vw, 1.4rem);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+}
+
+.cor-card-stack {
+    position: relative;
+    font-size: .6rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--text) 82%, transparent);
+}
+
+/* ---------- responsivo ---------- */
+
+@media (max-width: 900px) {
+    .corridor.is-3d {
+        height: 300svh;
+    }
+
+    .cor-caption {
+        max-width: 86%;
+    }
+}
+
+@media (max-width: 760px) {
+
+    /* no celular nunca roda o 3D: cards empilhados, altura natural */
+    .corridor-flat {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        perspective: none;
+    }
+
+    .cor-card {
+        transform: none;
+        min-height: 124px;
+    }
+
+    .cor-card:hover {
+        transform: none;
+    }
+
+    .cor-card::before {
+        opacity: .18;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cor-card,
+    .cor-card:hover {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .cor-caption {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ---------- projeto em destaque ---------- */
+
+/* o display explícito abaixo venceria o [hidden] do navegador */
+.cor-badge[hidden],
+.cor-card-badge[hidden] {
+    display: none;
+}
+
+.cor-badge,
+.cor-card-badge {
+    display: inline-block;
+    padding: .3em .75em;
+    border-radius: 99px;
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    font-size: .58rem;
+    letter-spacing: .14em;
+}
+
+.cor-badge {
+    margin-left: .6rem;
+    vertical-align: .15em;
+}
+
+.cor-caption.is-feature .cor-name {
+    color: var(--text);
+}
+
+.cor-card.is-feature {
+    border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+        0 26px 60px -40px var(--accent);
+}
+
+.cor-card-badge {
+    position: absolute;
+    top: clamp(1rem, 2vw, 1.6rem);
+    right: clamp(1rem, 2vw, 1.6rem);
+    z-index: 1;
+}

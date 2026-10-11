@@ -1,9 +1,9 @@
 .term {
     /* sempre escuro: não herda o tema claro */
-    --text: #EDEAF7;
-    --muted: #918DB8;
-    --accent-text: #A392FF;
-    background: #0B0A12;
+    --text: #EEEBFF;
+    --muted: #928DD2;
+    --accent-text: #A68EFF;
+    background: #07061E;
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
     overflow: hidden;
@@ -60,7 +60,7 @@
     font-family: var(--f-mono);
     font-size: .78rem;
     line-height: 1.8;
-    color: #C4C0DB;
+    color: #C7C2EA;
     scrollbar-width: thin;
 }
 
@@ -141,11 +141,11 @@
     outline: none;
     font-family: var(--f-mono);
     font-size: .78rem;
-    color: #EDEAF7;
+    color: #EEEBFF;
 }
 
 .term-input::placeholder {
-    color: #56526E;
+    color: #5A5684;
 }
 
 @media (max-width: 620px) {
@@ -177,4 +177,11 @@
     background: var(--surface-2);
     border: 1px solid var(--line);
     color: var(--accent-text);
+}
+
+/* mesmo caso do ⌘K: o campo zera o outline, aqui ele volta no foco de teclado */
+.term-input:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 4px;
 }

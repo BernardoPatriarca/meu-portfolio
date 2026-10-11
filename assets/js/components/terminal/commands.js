@@ -20,6 +20,7 @@ const JOKES = [
 ];
 
 const OPEN_LINKS = {
+    zela: `${SOCIAL.github}/zela`,
     catalogo: `${SOCIAL.github}/catalogo-filmes-series`,
     multi: `${SOCIAL.github}/multi-plataform`,
     crm: `${SOCIAL.github}/prime-crm`,
@@ -72,13 +73,16 @@ export function buildCommands(io) {
         ),
 
         projects: () => print(
-            `1. <b>Catálogo de Filmes e Séries</b> — Java · Quarkus · Angular · PostgreSQL\n` +
+            `1. <b>ZELA</b> — Java · Quarkus · Angular · PostgreSQL · AWS  [em andamento · TCC]\n` +
+            `   prestação de contas para curatela e tutela (MVP em desenvolvimento)\n` +
+            `   <a href="${OPEN_LINKS.zela}" target="_blank" rel="noopener">github.com/${GH_USER}/zela</a>\n` +
+            `2. <b>Catálogo de Filmes e Séries</b> — Java · Quarkus · Angular · PostgreSQL\n` +
             `   <a href="${OPEN_LINKS.catalogo}" target="_blank" rel="noopener">github.com/${GH_USER}/catalogo-filmes-series</a>\n` +
-            `2. <b>Multi Plataform</b> — Java · Spring Boot · Angular · Ionic\n` +
+            `3. <b>Multi Plataform</b> — Java · Spring Boot · Angular · Ionic\n` +
             `   <a href="${OPEN_LINKS.multi}" target="_blank" rel="noopener">github.com/${GH_USER}/multi-plataform</a>\n` +
-            `3. <b>Prime CRM</b> — Java · Spring Boot · Angular · PostgreSQL\n` +
+            `4. <b>Prime CRM</b> — Java · Spring Boot · Angular · PostgreSQL\n` +
             `   <a href="${OPEN_LINKS.crm}" target="_blank" rel="noopener">github.com/${GH_USER}/prime-crm</a>\n\n` +
-            `Use <b>open catalogo</b> (ou multi / crm) para abrir no GitHub.`
+            `Use <b>open zela</b> (ou catalogo / multi / crm) para abrir no GitHub.`
         ),
 
         experience: () => print(

@@ -10,6 +10,7 @@ export const SOCIAL = {
 };
 
 export const PROJECTS = [
+    { key: 'zela', name: 'ZELA', repo: 'zela', stack: 'Java 21 · Quarkus · Angular · PostgreSQL · AWS Lambda · CloudFront', status: 'em andamento (TCC)' },
     { key: 'catalogo', name: 'Catálogo de Filmes e Séries', repo: 'catalogo-filmes-series', stack: 'Java · Quarkus · Angular · PostgreSQL' },
     { key: 'multi', name: 'Multi Plataform', repo: 'multi-plataform', stack: 'Java · Spring Boot · Angular · Ionic' },
     { key: 'crm', name: 'Prime CRM', repo: 'prime-crm', stack: 'Java · Spring Boot · Angular · PostgreSQL' }
@@ -22,4 +23,4 @@ export const SECTIONS = {
     lab: '#playground', contato: '#contact', contact: '#contact', topo: '#top', home: '#top'
 };
 
-export const THEME_COLORS = { dark: '#08070D', light: '#F1EDFF' };
+export const THEME_COLORS = { dark: '#05041a', light: '#ECE9FF' };

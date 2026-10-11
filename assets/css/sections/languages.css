@@ -1,33 +1,65 @@
 .langs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(1.2rem, 3vw, 2.5rem);
+    gap: clamp(1rem, 2.4vw, 1.8rem);
     margin-top: clamp(3rem, 6vw, 5rem);
-    padding-top: clamp(2rem, 4vw, 3rem);
-    border-top: 1px solid var(--line);
+}
+
+.lang {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: clamp(1.3rem, 2.4vw, 2rem);
 }
 
 .lang-top {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
-    margin-bottom: .8rem;
 }
 
 .lang h3 {
     font-family: var(--f-display);
     font-weight: 700;
-    font-size: clamp(1.2rem, 2.4vw, 1.9rem);
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
     letter-spacing: -.03em;
     text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: .35rem;
 }
 
+/* nível CEFR em destaque, no canto do card */
+.lang-level {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    line-height: .9;
+    letter-spacing: -.05em;
+    color: var(--accent-text);
+}
+
+/* barra dividida nos 6 níveis (A1 → C2) */
 .lang-bar {
+    position: relative;
     display: block;
-    height: 4px;
+    height: 10px;
     background: var(--line);
     overflow: hidden;
+}
+
+/* vãos entre os níveis, pintados com a cor do card
+   (mask-image aqui impedia o IntersectionObserver de disparar o preenchimento) */
+.lang-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg,
+            transparent 0 calc((100% - 5 * 4px) / 6),
+            var(--surface) 0 calc((100% - 5 * 4px) / 6 + 4px));
 }
 
 .lang-bar i {
@@ -37,4 +69,15 @@
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 1.3s var(--ease);
+}
+
+.lang-scale {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    margin-top: -.5rem;
+    font-family: var(--f-mono);
+    font-size: .62rem;
+    letter-spacing: .12em;
+    color: var(--muted);
 }

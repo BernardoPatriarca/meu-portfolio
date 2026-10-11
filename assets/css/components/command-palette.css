@@ -186,3 +186,11 @@ kbd {
     align-items: center;
     gap: .35rem;
 }
+
+/* o campo zera o outline acima; devolve um traço visível no foco de teclado,
+   já que ele é o alvo do Tab dentro do diálogo */
+.cmdk-search input:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 4px;
+    border-radius: 4px;
+}

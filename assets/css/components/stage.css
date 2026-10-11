@@ -45,7 +45,7 @@
 }
 
 .orb-2 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 42%, transparent), transparent 66%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--glow-b) 60%, transparent), transparent 66%);
     animation: drift-b 34s ease-in-out infinite alternate;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .orb-3 i {
-    background: radial-gradient(circle, color-mix(in srgb, #4CC9FF 38%, transparent), transparent 64%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 46%, transparent), transparent 64%);
     animation: drift-c 42s ease-in-out infinite alternate;
 }
 
@@ -68,11 +68,11 @@
 }
 
 [data-theme="light"] .orb-2 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--magenta) 46%, transparent), transparent 68%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--glow-b) 50%, transparent), transparent 68%);
 }
 
 [data-theme="light"] .orb-3 i {
-    background: radial-gradient(circle, color-mix(in srgb, #12A9E8 42%, transparent), transparent 66%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 42%, transparent), transparent 66%);
 }
 
 [data-theme="light"] .stage-veil {
@@ -146,4 +146,32 @@ main,
 [data-theme="light"] .cell:hover,
 [data-theme="light"] .gh-stat:hover {
     box-shadow: var(--shadow);
+}
+
+/* ---------- linhas finas de grid, como guias de diagramação ---------- */
+.stage-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 17v14M17 24h14' stroke='%23a08cff' stroke-opacity='.5' stroke-width='1'/%3E%3C/svg%3E"),
+        linear-gradient(90deg, var(--line) 0 1px, transparent 1px);
+    background-size: 12.5% 168px, 12.5% 100%;
+    background-position: center top, left top;
+    opacity: .5;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+}
+
+/* no celular 8 colunas ficariam densas demais */
+@media (max-width: 760px) {
+    .stage-grid {
+        background-size: 33.333% 190px, 33.333% 100%;
+        opacity: .34;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stage-grid {
+        opacity: .3;
+    }
 }

@@ -3,6 +3,27 @@ import { onScroll, watch } from '../core/raf.js';
 
 const desktop = matchMedia('(min-width: 821px)');
 
+/** fração de cada trecho em que o carrossel fica parado no card */
+const HOLD = 0.46;
+
+/**
+ * Mapeia o progresso bruto da rolagem num progresso "com degraus".
+ *
+ * Sem isto o trilho desliza o tempo todo e cada etapa fica centralizada por
+ * um instante só. Aqui cada card segura enquanto a rolagem cobre os
+ * primeiros HOLD do trecho, e só depois desliza para o próximo — é preciso
+ * rolar um pouco mais para sair de "Entrega", por exemplo.
+ */
+function stepped(p, steps) {
+    if (steps < 2) return p;
+    const seg = 1 / (steps - 1);
+    const i = Math.min(steps - 2, Math.floor(p / seg));
+    const u = clamp01((p - i * seg) / seg);
+    if (u <= HOLD) return i * seg;
+    const e = (u - HOLD) / (1 - HOLD);
+    return (i + e * e * (3 - 2 * e)) * seg;   // saída suavizada
+}
+
 export function initProcess() {
     const section = $('#process');
     const track = $('#procTrack');
@@ -23,10 +44,12 @@ export function initProcess() {
 
         const r = section.getBoundingClientRect();
         const travel = r.height - innerHeight;
-        const p = clamp01(travel > 0 ? -r.top / travel : 0);
+        const raw = clamp01(travel > 0 ? -r.top / travel : 0);
+        const p = stepped(raw, cards.length);
 
         track.style.transform = `translate3d(${-(p * distance).toFixed(1)}px, 0, 0)`;
-        bar.style.setProperty('--pp', p.toFixed(3));
+        // a barra segue a rolagem crua: parar junto pareceria travamento
+        bar.style.setProperty('--pp', raw.toFixed(3));
 
         const mid = innerWidth / 2;
         cards.forEach(card => {

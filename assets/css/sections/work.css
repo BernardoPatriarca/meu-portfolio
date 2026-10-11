@@ -144,29 +144,121 @@
     transform: translate3d(-50%, -50%, 0) scale(1) rotate(-2deg);
 }
 
-.work-float .wf-item {
+/* um quadro por projeto; dentro dele as telas se alternam */
+.work-float .wf-frame {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.work-float .wf-frame.shot {
     display: grid;
 }
 
-.work-float img,
-.work-float .wf-item {
+.work-float .wf-frame.on {
+    opacity: 1;
+}
+
+.work-float .wf-frame img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity .3s;
+    transition: opacity .5s var(--ease);
 }
 
-.work-float img.on,
-.work-float .wf-item.on {
+.work-float .wf-frame img.on {
     opacity: 1;
 }
 
 @media (hover: none),
 (pointer: coarse) {
     .work-float {
+        display: none;
+    }
+}
+
+/* selo do projeto em andamento, na linha de destaque */
+.work-badge {
+    display: inline-block;
+    margin-left: .6rem;
+    padding: .34em .8em;
+    border-radius: 99px;
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    font-size: .52rem;
+    letter-spacing: .14em;
+    vertical-align: .32em;
+    white-space: nowrap;
+}
+
+.work-lead .work-num {
+    color: var(--text);
+}
+
+/* um fio violeta marca a linha do projeto atual */
+.work-lead::before {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%);
+    opacity: 1;
+}
+
+@media (max-width: 620px) {
+    .work-badge {
+        display: block;
+        margin: .5rem 0 0;
+        vertical-align: baseline;
+    }
+}
+
+/* nota e tópicos do projeto em destaque (conteúdo vindo da main) */
+.work-meta {
+    display: block;
+    margin-top: .45rem;
+    color: var(--accent-text);
+}
+
+.work-points {
+    margin-top: .8rem;
+    display: grid;
+    gap: .35rem;
+}
+
+.work-points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: .86rem;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.work-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.work:hover .work-points,
+.work:hover .work-meta {
+    transform: translateX(12px);
+    transition: transform .55s .04s var(--ease);
+}
+
+/* as telas reais ficam no DOM mas escondidas na linha: quem as mostra é o
+   preview flutuante e os painéis do corredor */
+.work-thumb.slides {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .work-points {
         display: none;
     }
 }

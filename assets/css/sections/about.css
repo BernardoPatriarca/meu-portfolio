@@ -19,25 +19,6 @@
     transform: translateY(-4px);
 }
 
-.cell::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%),
-            color-mix(in srgb, var(--accent) 16%, transparent), transparent 62%);
-    opacity: 0;
-    transition: opacity .35s var(--ease);
-}
-
-.cell:hover::after {
-    opacity: 1;
-}
-
-.cell-learn::after,
-.cell-code::after {
-    display: none;
-}
 
 .cell>* {
     position: relative;
@@ -133,9 +114,9 @@
 }
 
 [data-theme="light"] .cell-code {
-        --muted: #918DB8;
-    --accent-text: #A392FF;
-    background: #0B0A12;
+        --muted: #A8998A;
+    --accent-text: #FF8A47;
+    background: #15110D;
     border-color: transparent;
 }
 
@@ -177,27 +158,27 @@
     font-family: var(--f-mono);
     font-size: clamp(.68rem, .78vw, .8rem);
     line-height: 1.8;
-    color: #C9C9C2;
+    color: #D9CCB6;
 }
 
 .c-kw {
-    color: #FF4D8D;
+    color: #FF8A47;
 }
 
 .c-tp {
-    color: #8BA6FF;
+    color: #F2B33D;
 }
 
 .c-st {
-    color: #A392FF;
+    color: #C9D67A;
 }
 
 .c-fn {
-    color: #5EE3C0;
+    color: #FFB37A;
 }
 
 .c-cm {
-    color: #7B77A0;
+    color: #8F8070;
     font-style: italic;
 }
 
@@ -215,30 +196,65 @@
     color: color-mix(in srgb, var(--accent-ink) 88%, transparent);
 }
 
-.learn-list {
-    display: flex;
-    flex-direction: column;
-    gap: .3rem;
-    margin-top: auto;
-}
-
-.learn-list li {
+.learn-title {
     font-family: var(--f-display);
     font-weight: 700;
-    font-size: clamp(1.1rem, 2vw, 1.7rem);
-    letter-spacing: -.03em;
+    font-size: clamp(1.35rem, 2.3vw, 2rem);
+    letter-spacing: -.035em;
     text-transform: uppercase;
-    line-height: 1.15;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
+    line-height: 1.02;
 }
 
-.learn-list li::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent-ink);
-    flex-shrink: 0;
+.learn-sub {
+    font-size: .88rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--accent-ink) 92%, transparent);
+    max-width: 40ch;
+}
+
+/* etapas do pipeline, numeradas como num checklist impresso */
+.learn-flow {
+    counter-reset: step;
+    margin-top: auto;
+    padding-top: .4rem;
+    border-top: 2px solid var(--accent-ink);
+}
+
+.learn-flow li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    column-gap: .4rem;
+    align-items: baseline;
+    padding: .5rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent-ink) 25%, transparent);
+}
+
+.learn-flow li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.learn-flow li::before {
+    content: counter(step, decimal-leading-zero);
+    grid-row: span 2;
+    font-family: var(--f-mono);
+    font-size: .7rem;
+    letter-spacing: .08em;
+}
+
+.learn-flow b {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+    line-height: 1.15;
+}
+
+.learn-flow span {
+    font-family: var(--f-mono);
+    font-size: .68rem;
+    letter-spacing: .04em;
+    color: color-mix(in srgb, var(--accent-ink) 92%, transparent);
 }

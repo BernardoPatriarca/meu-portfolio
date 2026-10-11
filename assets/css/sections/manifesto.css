@@ -1,26 +1,132 @@
+/* =========================================================
+   MANIFESTO
+   O fundo é o do tema — a seção não inverte, para não quebrar
+   a continuidade do site. O efeito está na tipografia: as
+   palavras entram vazadas, só com o contorno, e se preenchem
+   uma a uma conforme a página rola. O fecho da frase vai no
+   violeta da marca.
+   ========================================================= */
+
 .manifesto {
-    padding: clamp(4rem, 11vw, 9rem) 0;
+    position: relative;
+    padding: clamp(5rem, 13vw, 11rem) 0;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* brilho suave atrás do texto: dá presença sem trocar o fundo */
+.manifesto::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(62vw 54vh at 26% 50%,
+            color-mix(in srgb, var(--glow-a) 16%, transparent), transparent 72%);
+    opacity: 0;
+    transform: scale(.92);
+    transition: opacity 1.2s var(--ease), transform 1.6s var(--ease);
+}
+
+.manifesto.in-view::before {
+    opacity: 1;
+    transform: none;
+}
+
+/* fio de construção à esquerda, que se desenha de cima para baixo */
+.manifesto .shell {
+    position: relative;
+}
+
+.manifesto .shell::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * clamp(.9rem, 2vw, 1.8rem));
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1.1s var(--ease) .2s;
+}
+
+.manifesto.in-view .shell::before {
+    transform: scaleY(1);
+}
+
+.manifesto .mono-label {
+    color: var(--muted);
 }
 
 .manifesto-text {
     font-family: var(--f-display);
     font-weight: 700;
-    font-size: clamp(1.5rem, 4.4vw, 3.4rem);
-    line-height: 1.22;
+    font-size: clamp(1.7rem, 5.4vw, 5.2rem);
+    line-height: 1.16;
     letter-spacing: -.035em;
-    margin-top: 1.4rem;
-    max-width: 20ch;
+    margin-top: clamp(1.2rem, 2.5vw, 2rem);
+    max-width: 24ch;
 }
 
+/* Cada palavra começa vazada e se preenche na vez dela.
+   O contorno usa a mesma linguagem das letras-fantasma das outras
+   seções, então a identidade continua a mesma. */
 .manifesto-text .w {
-    opacity: .14;
-    transition: opacity .45s var(--ease), color .45s var(--ease);
+    display: inline-block;
+    color: transparent;
+    -webkit-text-stroke: 1.1px color-mix(in srgb, var(--text) 32%, transparent);
+    text-shadow: 0 0 0 transparent;
+    transition:
+        color .55s var(--ease),
+        -webkit-text-stroke-color .55s var(--ease),
+        text-shadow .55s var(--ease);
 }
 
 .manifesto-text .w.on {
-    opacity: 1;
+    color: var(--text);
+    -webkit-text-stroke-color: transparent;
+    text-shadow: 0 0 38px color-mix(in srgb, var(--accent) 42%, transparent);
 }
 
+/* o fecho da frase assume o violeta da marca */
 .manifesto-text .w.hot.on {
     color: var(--accent-text);
+    text-shadow: 0 0 44px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+@media (max-width: 760px) {
+    .manifesto-text {
+        max-width: none;
+    }
+
+    .manifesto-text .w {
+        -webkit-text-stroke-width: .8px;
+    }
+
+    .manifesto .shell::before {
+        left: calc(-1 * clamp(.5rem, 2vw, .9rem));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .manifesto::before {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .manifesto .shell::before {
+        transform: scaleY(1) !important;
+    }
+
+    /* sem animação as palavras já nascem preenchidas */
+    .manifesto-text .w {
+        color: var(--text) !important;
+        -webkit-text-stroke-color: transparent !important;
+    }
+
+    .manifesto-text .w.hot {
+        color: var(--accent-text) !important;
+    }
 }
