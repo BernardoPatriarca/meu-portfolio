@@ -22,3 +22,26 @@
         transform: none !important;
     }
 }
+
+/* etapa 2: as entradas ao rolar já nascem no estado final */
+@media (prefers-reduced-motion: reduce) {
+
+    .sec-head::after {
+        transform: none !important;
+    }
+
+    .works .work::after {
+        transform: scaleX(0) !important;
+    }
+
+    .intro-gl,
+    .intro-hud,
+    .intro-cue {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+
+    .intro-cue {
+        transform: translateX(-50%) !important;
+    }
+}

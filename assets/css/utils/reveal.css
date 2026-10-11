@@ -52,3 +52,58 @@
 .rails .reveal.in {
     transition-delay: calc(var(--i, 0) * .07s);
 }
+
+/* =========================================================
+   ENTRADAS AO ROLAR — etapa 2
+   ========================================================= */
+
+/* régua fina que se desenha sob o cabeçalho de cada seção */
+.sec-head {
+    position: relative;
+}
+
+.sec-head::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: clamp(-2.4rem, -4vw, -1.3rem);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2) 52%, transparent);
+    opacity: .6;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.2s var(--ease) .2s;
+}
+
+.sec-head.in::after {
+    transform: scaleX(1);
+}
+
+/* As linhas de projeto entram com uma varredura da esquerda.
+   A cortina é um ::after e NÃO um clip-path na própria linha: recortar o
+   elemento observado zera a área que o IntersectionObserver mede, ele nunca
+   recebe .in e some da página para sempre. */
+.works .work::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--bg);
+    transform: scaleX(1);
+    transform-origin: right center;
+    transition: transform .9s var(--ease);
+    pointer-events: none;
+}
+
+.works .work.in::after {
+    transform: scaleX(0);
+}
+
+/* emenda suave entre uma seção e a seguinte de fundo alternado */
+.sec-alt {
+    background-image: linear-gradient(to bottom,
+            transparent, color-mix(in srgb, var(--bg-2) 70%, transparent) 6rem,
+            color-mix(in srgb, var(--bg-2) 70%, transparent) calc(100% - 6rem), transparent);
+    background-color: transparent;
+}

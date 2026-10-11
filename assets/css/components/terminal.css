@@ -1,9 +1,9 @@
 .term {
     /* sempre escuro: não herda o tema claro */
-    --text: #F2E8D5;
-    --muted: #A8998A;
-    --accent-text: #FF8A47;
-    background: #15110D;
+    --text: #EEEBFF;
+    --muted: #928DD2;
+    --accent-text: #A68EFF;
+    background: #07061E;
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
     overflow: hidden;
@@ -20,8 +20,8 @@
     justify-content: space-between;
     gap: 1rem;
     padding: .8rem 1.1rem;
-    border-bottom: 1px solid rgba(242, 232, 213, .1);
-    background: rgba(242, 232, 213, .03);
+    border-bottom: 1px solid rgba(237, 234, 247, .1);
+    background: rgba(237, 234, 247, .03);
 }
 
 .term-dots {
@@ -33,7 +33,7 @@
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: rgba(242, 232, 213, .22);
+    background: rgba(237, 234, 247, .22);
 }
 
 .term-dots i:first-child {
@@ -60,7 +60,7 @@
     font-family: var(--f-mono);
     font-size: .78rem;
     line-height: 1.8;
-    color: #D9CCB6;
+    color: #C7C2EA;
     scrollbar-width: thin;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .term-body::-webkit-scrollbar-thumb {
-    background: rgba(242, 232, 213, .16);
+    background: rgba(237, 234, 247, .16);
     border-radius: 3px;
 }
 
@@ -100,11 +100,11 @@
 }
 
 .term-line.err {
-    color: #FF6B5B;
+    color: var(--magenta);
 }
 
 .term-line.ok {
-    color: #C9D67A;
+    color: #5EE3C0;
 }
 
 .term-line b {
@@ -123,7 +123,7 @@
     align-items: center;
     gap: .55rem;
     padding: .85rem 1.2rem;
-    border-top: 1px solid rgba(242, 232, 213, .1);
+    border-top: 1px solid rgba(237, 234, 247, .1);
 }
 
 .term-prompt {
@@ -141,11 +141,11 @@
     outline: none;
     font-family: var(--f-mono);
     font-size: .78rem;
-    color: #F2E8D5;
+    color: #EEEBFF;
 }
 
 .term-input::placeholder {
-    color: #6E6052;
+    color: #5A5684;
 }
 
 @media (max-width: 620px) {
@@ -177,4 +177,11 @@
     background: var(--surface-2);
     border: 1px solid var(--line);
     color: var(--accent-text);
+}
+
+/* mesmo caso do ⌘K: o campo zera o outline, aqui ele volta no foco de teclado */
+.term-input:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 4px;
 }

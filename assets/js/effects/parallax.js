@@ -57,7 +57,9 @@ export function initParallax() {
         }
 
         if (heroVisible && title) {
-            const p = clamp01(y / (innerHeight * 0.85));
+            // Medido a partir do topo do próprio hero: antes dele existe a
+            // tela de abertura, então o scroll absoluto não serve de régua.
+            const p = clamp01(-hero.getBoundingClientRect().top / (innerHeight * 0.85));
             set(title, '--py', `${(p * 90).toFixed(0)}px`);
             // quantizado em passos de 2%: o olho nao ve a diferenca e o titulo
             // com contorno repinta ~50x no scroll inteiro em vez de todo frame

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-theme="light">
+<html lang="pt-br" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,13 +7,13 @@
   <title>Bernardo Patriarca — Full Stack Developer</title>
   <meta name="description"
     content="Bernardo Patriarca — Desenvolvedor Full Stack em Pato Branco, PR. Angular, Java, Quarkus e Spring Boot para construir produtos web robustos e bem projetados." />
-  <meta name="theme-color" content="#F2E8D5" />
+  <meta name="theme-color" content="#05041a" />
   <link rel="icon" href="https://i.imgur.com/JICN3Fa.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Space+Grotesk:wght@500;700&family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -34,6 +34,7 @@
     <span class="orb orb-1"><i></i></span>
     <span class="orb orb-2"><i></i></span>
     <span class="orb orb-3"><i></i></span>
+    <span class="stage-grid"></span>
     <span class="stage-veil"></span>
   </div>
 
@@ -115,18 +116,43 @@
 
   <main id="top">
 
+    <!-- TELA DE ABERTURA — WebGL2 puro -->
+    <section class="intro" id="intro">
+      <canvas class="intro-gl" id="introGl" role="img"
+        aria-label="Marca animada de Bernardo Patriarca: uma onda abre do centro e revela o nome com glitch sobre um grid em perspectiva"></canvas>
+      <div class="intro-static" aria-hidden="true"></div>
+
+      <h1 class="intro-sr"><span>Bernardo</span> <span>Patriarca</span></h1>
+
+      <div class="intro-hud intro-hud-bl">
+        <span class="mono-label">Full Stack Developer</span>
+        <span class="mono-label">WebGL2 · GLSL</span>
+        <span class="mono-label intro-coords" id="introCoords">X 0.500 · Y 0.500</span>
+      </div>
+
+      <div class="intro-hud intro-hud-br">
+        <button class="intro-replay" id="introReplay" type="button" data-cursor="link">Repetir intro</button>
+        <span class="mono-label intro-hint">Mova o cursor</span>
+      </div>
+
+      <a href="#hero" class="intro-cue" data-cursor="link" aria-label="Ir para a apresentação">
+        <span class="mono-label">Role</span>
+        <span class="intro-cue-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="hero" data-in-view>
       <div class="shell">
         <div class="hero-top">
           <p class="mono-label hero-eyebrow"><span class="dot"></span> Disponível para oportunidades</p>
           <p class="mono-label hero-meta">Pato Branco, PR · BR<br /><span id="clockTop">--:--</span> horário local</p>
         </div>
 
-        <h1 class="hero-title">
+        <p class="hero-title" aria-hidden="true">
           <span class="mask"><span class="mask-in" style="--i:0">Bernardo</span></span>
           <span class="mask"><span class="mask-in stroke" style="--i:1">Patriarca</span></span>
-        </h1>
+        </p>
 
         <div class="hero-bottom">
           <div class="hero-lead">
@@ -144,8 +170,7 @@
           </div>
 
           <figure class="portrait reveal">
-            <img src="assets/img/bernardo.jpg" alt="Bernardo Patriarca" width="840" height="1050"
-              fetchpriority="high" decoding="async" />
+            <img src="assets/img/bernardo.jpg" alt="Bernardo Patriarca" width="420" height="520" />
             <figcaption class="mono-label">Full Stack Developer · 21 anos</figcaption>
 
             <div class="seal" id="seal" aria-hidden="true">
@@ -285,7 +310,7 @@
     </section>
 
     <!-- MANIFESTO -->
-    <section class="manifesto" id="manifesto" aria-label="Manifesto">
+    <section class="manifesto" id="manifesto" aria-label="Manifesto" data-in-view>
       <div class="shell">
         <span class="mono-label" data-scramble>Manifesto</span>
         <p class="manifesto-text" data-words>
@@ -357,6 +382,7 @@
     <!-- PROCESS — HORIZONTAL SCROLL -->
     <section class="proc" id="process">
       <div class="proc-sticky">
+        <canvas class="proc-gl" id="procGl" aria-hidden="true"></canvas>
         <div class="shell proc-head">
           <div>
             <span class="mono-label" data-scramble>(03) — Processo</span>
@@ -662,50 +688,67 @@
             <h2 class="sec-title">Trabalhos<br /><em class="serif">recentes</em></h2>
           </div>
           <p class="sec-note">Projetos full-stack que desenvolvi para estudar e resolver problemas reais.
-            Cada card mostra as telas do projeto em sequência — clique para ver o código no GitHub.</p>
+            Passe o mouse para ver as telas — clique para abrir o código no GitHub.</p>
         </header>
 
-        <!-- projeto atual em destaque, fora da lista -->
-        <article class="work-feature reveal">
-          <div class="wf-body">
-            <div class="work-meta">
-              <span class="badge badge-fill">Em andamento</span>
-              <span class="mono-label">Projeto atual · TCC · UNIMATER · Defesa prevista dez/2026</span>
-            </div>
-            <h3 class="wf-title">ZELA</h3>
-            <p class="wf-lead">Plataforma web de gestão financeira e prestação de contas para processos de curatela e
-              tutela. Busca facilitar o trabalho de curadores e tutores, que hoje costumam juntar planilhas, papéis e
-              extratos soltos para prestar contas à Justiça.</p>
-            <ul class="wf-points">
-              <li>Conciliação com extratos bancários OFX/CSV</li>
-              <li>Relatório em PDF determinístico, com hash SHA-256</li>
-              <li>Trilha de auditoria de cada alteração</li>
-              <li>Alertas de prazo legal por e-mail</li>
-            </ul>
-            <div class="wf-tags">
-              <span class="tag">Java 21</span><span class="tag">Quarkus</span><span class="tag">Angular</span>
-              <span class="tag">PrimeNG</span><span class="tag">PostgreSQL</span><span class="tag">AWS Lambda</span>
-              <span class="tag">CloudFront</span>
-            </div>
-            <a href="https://github.com/BernardoPatriarca/zela" target="_blank" rel="noopener"
-              class="btn btn-solid magnetic wf-cta" data-cursor="link">Ver código no GitHub
-              <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M5 15L15 5M7 5h8v8" />
-              </svg>
-            </a>
-          </div>
-          <!-- TODO: trocar este placeholder por screenshots reais do ZELA quando houver telas prontas
-               (ex.: assets/img/work/zela-1.png), no mesmo padrão de slides dos outros cards:
-               <div class="wf-thumb slides" data-slides> com <img class="slide on"> + <img class="slide"> -->
-          <div class="wf-thumb work-thumb-ph" aria-hidden="true">
-            <span class="work-thumb-ph-name">ZELA</span>
-            <span class="mono-label">MVP em desenvolvimento</span>
-          </div>
-        </article>
+      </div>
 
+      <!-- CORREDOR 3D — o scroll conduz a câmera -->
+      <div class="corridor" id="corridor" aria-hidden="true">
+        <div class="corridor-stick">
+          <canvas class="corridor-gl" id="corridorGl"></canvas>
+          <div class="corridor-flat" id="corridorFlat"></div>
+          <div class="corridor-hud">
+            <div class="cor-caption" id="corCaption">
+              <span class="cor-num mono-label"></span>
+              <span class="cor-badge mono-label" hidden></span>
+              <h3 class="cor-name"></h3>
+              <p class="cor-desc"></p>
+              <span class="cor-cta mono-label">Clique para ver o código ↗</span>
+            </div>
+            <div class="cor-meta mono-label">
+              <span id="corIndex">01 / 03</span>
+              <span class="cor-bar"><i id="corBar"></i></span>
+              <span>Role para avançar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shell">
         <div class="works" id="works">
-          <article class="work reveal">
+          <article class="work work-lead reveal" data-img="0" data-feature>
             <span class="work-num mono-label">01</span>
+            <div class="work-main">
+              <h3>Zela <span class="work-badge mono-label">Em andamento</span></h3>
+              <p class="work-meta mono-label">Projeto atual · TCC · UNIMATER · Defesa prevista dez/2026</p>
+              <p>Plataforma web de gestão financeira e prestação de contas para processos de curatela e tutela.
+                Busca facilitar o trabalho de curadores e tutores, que hoje costumam juntar planilhas, papéis e
+                extratos soltos para prestar contas à Justiça.</p>
+              <ul class="work-points">
+                <li>Conciliação com extratos bancários OFX/CSV</li>
+                <li>Relatório em PDF determinístico, com hash SHA-256</li>
+                <li>Trilha de auditoria de cada alteração</li>
+                <li>Alertas de prazo legal por e-mail</li>
+              </ul>
+            </div>
+            <span class="work-tags mono-label">Java 21 · Quarkus · Angular · PrimeNG · PostgreSQL · AWS Lambda · CloudFront</span>
+            <div class="work-links">
+              <a href="https://github.com/BernardoPatriarca/zela" target="_blank" rel="noopener"
+                data-cursor="link">Código
+                <svg class="arr" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M5 15L15 5M7 5h8v8" />
+                </svg>
+              </a>
+            </div>
+            <div class="work-thumb shot" aria-hidden="true">
+              <span class="shot-repo">zela</span>
+              <span class="mono-label">MVP em desenvolvimento</span>
+            </div>
+          </article>
+
+          <article class="work reveal" data-img="1">
+            <span class="work-num mono-label">02</span>
             <div class="work-main">
               <h3>Catálogo de Filmes e Séries</h3>
               <p>Catálogo de filmes e séries com cadastro de títulos, gêneros e elenco, avaliações com nota e comentário, dashboard com estatísticas e busca avançada. Projeto de estudo full-stack.</p>
@@ -720,17 +763,14 @@
               </a>
             </div>
             <div class="work-thumb slides" data-slides aria-hidden="true">
-              <img class="slide on" src="assets/img/work/catalogo-1.jpg" loading="lazy" decoding="async"
-                alt="Dashboard do Catálogo de Filmes e Séries" />
-              <img class="slide" src="assets/img/work/catalogo-2.jpg" loading="lazy" decoding="async"
-                alt="Listagem de filmes e séries" />
-              <img class="slide" src="assets/img/work/catalogo-3.jpg" loading="lazy" decoding="async"
-                alt="Página de detalhe de um título" />
+              <img class="slide on" src="assets/img/work/catalogo-1.jpg" loading="lazy" decoding="async" alt="Tela do projeto catalogo-filmes-series" />
+              <img class="slide" src="assets/img/work/catalogo-2.jpg" loading="lazy" decoding="async" alt="Tela do projeto catalogo-filmes-series" />
+              <img class="slide" src="assets/img/work/catalogo-3.jpg" loading="lazy" decoding="async" alt="Tela do projeto catalogo-filmes-series" />
             </div>
           </article>
 
-          <article class="work reveal">
-            <span class="work-num mono-label">02</span>
+          <article class="work reveal" data-img="2">
+            <span class="work-num mono-label">03</span>
             <div class="work-main">
               <h3>Multi Plataform</h3>
               <p>Sistema fullstack de login e gestão de usuários (web e mobile). Back-end em Java/Spring Boot com PostgreSQL e Flyway, autenticação JWT. Front-end em Angular + Ionic + Capacitor, gerando app web e nativo.</p>
@@ -745,17 +785,14 @@
               </a>
             </div>
             <div class="work-thumb slides" data-slides aria-hidden="true">
-              <img class="slide on" src="assets/img/work/multi-1.png" loading="lazy" decoding="async"
-                alt="Relatórios do Multi Plataform" />
-              <img class="slide" src="assets/img/work/multi-2.png" loading="lazy" decoding="async"
-                alt="Início com os módulos do sistema" />
-              <img class="slide" src="assets/img/work/multi-3.png" loading="lazy" decoding="async"
-                alt="Relatórios no tema escuro" />
+              <img class="slide on" src="assets/img/work/multi-1.png" loading="lazy" decoding="async" alt="Tela do projeto multi-plataform" />
+              <img class="slide" src="assets/img/work/multi-2.png" loading="lazy" decoding="async" alt="Tela do projeto multi-plataform" />
+              <img class="slide" src="assets/img/work/multi-3.png" loading="lazy" decoding="async" alt="Tela do projeto multi-plataform" />
             </div>
           </article>
 
-          <article class="work reveal">
-            <span class="work-num mono-label">03</span>
+          <article class="work reveal" data-img="3">
+            <span class="work-num mono-label">04</span>
             <div class="work-main">
               <h3>Prime CRM</h3>
               <p>Sistema de gestão de relacionamento com clientes moderno, completo e configurável. Possui autenticação, dashboard, funil de vendas, entre outras funcionalidades.</p>
@@ -770,12 +807,9 @@
               </a>
             </div>
             <div class="work-thumb slides" data-slides aria-hidden="true">
-              <img class="slide on" src="assets/img/work/prime-1.png" loading="lazy" decoding="async"
-                alt="Dashboard do Prime CRM" />
-              <img class="slide" src="assets/img/work/prime-2.png" loading="lazy" decoding="async"
-                alt="Kanban de oportunidades no tema escuro" />
-              <img class="slide" src="assets/img/work/prime-3.png" loading="lazy" decoding="async"
-                alt="Listagem de clientes" />
+              <img class="slide on" src="assets/img/work/prime-1.png" loading="lazy" decoding="async" alt="Tela do projeto prime-crm" />
+              <img class="slide" src="assets/img/work/prime-2.png" loading="lazy" decoding="async" alt="Tela do projeto prime-crm" />
+              <img class="slide" src="assets/img/work/prime-3.png" loading="lazy" decoding="async" alt="Tela do projeto prime-crm" />
             </div>
           </article>
         </div>
@@ -788,6 +822,8 @@
         </div>
       </div>
 
+      <div class="work-float" id="workFloat" aria-hidden="true"></div>
+      </div>
     </section>
 
     <!-- GITHUB LIVE -->
@@ -875,7 +911,33 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="sec contact" id="contact">
+    <section class="sec contact" id="contact" data-in-view>
+
+      <!-- PLANTA TÉCNICA — linhas de construção ao fundo -->
+      <div class="blueprint" aria-hidden="true">
+        <svg class="bp-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+          <g class="bp-grid">
+            <path d="M150 0V800M400 0V800M800 0V800M1050 0V800" />
+            <path d="M0 140H1200M0 400H1200M0 660H1200" />
+          </g>
+          <g class="bp-draw">
+            <path d="M150 140L1050 660" />
+            <path d="M1050 140L150 660" />
+            <circle cx="600" cy="400" r="236" />
+            <circle cx="600" cy="400" r="118" />
+          </g>
+          <g class="bp-tick">
+            <path d="M150 140h54M150 140v54M1050 140h-54M1050 140v54" />
+            <path d="M150 660h54M150 660v-54M1050 660h-54M1050 660v-54" />
+            <path d="M594 400h12M600 394v12" />
+          </g>
+        </svg>
+        <span class="bp-note bp-tl mono-label">Fig. 09 — Contato</span>
+        <span class="bp-note bp-tr mono-label">Lat −26.22 · Lon −52.67</span>
+        <span class="bp-note bp-bl mono-label">Escala 1:1 · Esc. BP</span>
+        <span class="bp-note bp-br mono-label">Pato Branco · PR · BR</span>
+      </div>
+
       <div class="shell">
         <span class="mono-label reveal" data-scramble>(09) — Contato</span>
         <h2 class="contact-title">

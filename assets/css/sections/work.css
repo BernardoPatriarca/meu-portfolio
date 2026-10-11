@@ -5,13 +5,9 @@
 .work {
     position: relative;
     display: grid;
-    grid-template-columns: 4.5rem minmax(0, 1fr) clamp(230px, 25vw, 360px) auto;
-    grid-template-areas:
-        "num main thumb links"
-        "num tags thumb links";
+    grid-template-columns: 4.5rem minmax(0, 1.5fr) minmax(0, .8fr) auto;
     align-items: center;
-    column-gap: 1.5rem;
-    row-gap: .9rem;
+    gap: 1.5rem;
     padding: clamp(1.5rem, 3vw, 2.4rem) clamp(.6rem, 1.6vw, 1.6rem);
     border-bottom: 1px solid var(--line);
     isolation: isolate;
@@ -32,16 +28,7 @@
 }
 
 .work-num {
-    grid-area: num;
     color: var(--accent-text);
-}
-
-.work-main {
-    grid-area: main;
-}
-
-.work-tags {
-    grid-area: tags;
 }
 
 .work-main h3 {
@@ -72,7 +59,6 @@
 }
 
 .work-links {
-    grid-area: links;
     display: flex;
     gap: .5rem;
     justify-self: end;
@@ -101,41 +87,34 @@
 }
 
 .work-thumb {
-    grid-area: thumb;
-    align-self: center;
+    display: none;
     width: 100%;
     aspect-ratio: 16/10;
+    object-fit: cover;
     border-radius: var(--r);
     border: 1px solid var(--line);
 }
 
-.slides {
-    position: relative;
-    overflow: hidden;
-    background: var(--surface-2);
+.shot {
+    place-content: center;
+    justify-items: center;
+    gap: .5rem;
+    text-align: center;
+    background:
+        linear-gradient(140deg, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+        repeating-linear-gradient(45deg, var(--line) 0 1px, transparent 1px 11px),
+        var(--surface-2);
 }
 
-.slides .slide {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    opacity: 0;
-    transition: opacity .9s var(--ease);
+.shot-repo {
+    font-family: var(--f-mono);
+    font-size: .8rem;
+    letter-spacing: .04em;
+    color: var(--accent-text);
 }
 
-.slides .slide.on {
-    opacity: 1;
-}
-
-.work-thumb .slide {
-    transition: opacity .9s var(--ease), transform .6s var(--ease);
-}
-
-.work:hover .work-thumb .slide {
-    transform: scale(1.04);
+.shot .mono-label {
+    font-size: .58rem;
 }
 
 .works-more {
@@ -144,146 +123,142 @@
     justify-content: center;
 }
 
-.work-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: .4rem .8rem;
-    margin-bottom: .8rem;
-}
-
-/* placeholder para projeto ainda sem screenshots */
-.work-thumb-ph {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    background:
-        repeating-linear-gradient(-45deg, transparent 0 10px, color-mix(in srgb, var(--text) 7%, transparent) 10px 11px),
-        var(--surface-2);
-    border-style: dashed;
-    border-color: var(--line-2);
-}
-
-.work-thumb-ph-name {
-    font-family: var(--f-display);
-    font-weight: 700;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    letter-spacing: -.035em;
-    color: var(--accent-text);
-}
-
-/* projeto atual: card grande acima da lista */
-.work-feature {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    gap: clamp(1.5rem, 4vw, 3.5rem);
-    align-items: stretch;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    padding: clamp(1.4rem, 3.4vw, 3rem);
-    background: var(--surface);
-    border: 2px solid var(--text);
-    border-radius: var(--r-lg);
-    box-shadow: 8px 8px 0 var(--accent);
-}
-
-[data-theme="dark"] .work-feature {
-    border-color: var(--accent);
-    box-shadow: 8px 8px 0 color-mix(in srgb, var(--accent) 35%, transparent);
-}
-
-.wf-body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.1rem;
-}
-
-.wf-body .work-meta {
-    margin-bottom: 0;
-}
-
-.wf-title {
-    font-family: var(--f-display);
-    font-weight: 700;
-    font-size: clamp(3.2rem, 9vw, 7.5rem);
-    line-height: .85;
-    letter-spacing: -.05em;
-    text-transform: uppercase;
-}
-
-.wf-lead {
-    font-size: clamp(.98rem, 1.2vw, 1.12rem);
-    line-height: 1.6;
-    color: var(--muted);
-    max-width: 52ch;
-}
-
-.wf-points {
-    display: grid;
-    gap: .45rem;
-    width: 100%;
-    padding-top: 1rem;
-    border-top: 1px solid var(--line);
-}
-
-.wf-points li {
-    display: flex;
-    gap: .7rem;
-    align-items: baseline;
-    font-size: .95rem;
-    line-height: 1.45;
-}
-
-.wf-points li::before {
-    content: '→';
-    font-family: var(--f-mono);
-    color: var(--accent-text);
-    flex-shrink: 0;
-}
-
-.wf-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .45rem;
-}
-
-.wf-tags .tag {
-    padding: .4rem .85rem;
-    font-size: .82rem;
-}
-
-.wf-cta {
-    margin-top: .4rem;
-}
-
-.wf-thumb {
-    width: 100%;
-    min-height: 260px;
+.work-float {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: clamp(240px, 22vw, 380px);
+    aspect-ratio: 16/11;
+    z-index: 4000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(.85) rotate(-4deg);
+    transition: opacity .4s var(--ease), transform .5s var(--ease);
     border-radius: var(--r);
-    border: 1px dashed var(--line-2);
+    overflow: hidden;
+    will-change: transform;
 }
 
-@media (max-width: 1080px) {
-    .work-feature {
-        grid-template-columns: 1fr;
-    }
+.work-float.show {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale(1) rotate(-2deg);
+}
 
-    .wf-thumb {
-        order: -1;
-        min-height: 0;
-        aspect-ratio: 16/9;
+/* um quadro por projeto; dentro dele as telas se alternam */
+.work-float .wf-frame {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.work-float .wf-frame.shot {
+    display: grid;
+}
+
+.work-float .wf-frame.on {
+    opacity: 1;
+}
+
+.work-float .wf-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity .5s var(--ease);
+}
+
+.work-float .wf-frame img.on {
+    opacity: 1;
+}
+
+@media (hover: none),
+(pointer: coarse) {
+    .work-float {
+        display: none;
     }
 }
 
-@media (max-width: 520px) {
-    .work-feature {
-        box-shadow: 5px 5px 0 var(--accent);
-    }
+/* selo do projeto em andamento, na linha de destaque */
+.work-badge {
+    display: inline-block;
+    margin-left: .6rem;
+    padding: .34em .8em;
+    border-radius: 99px;
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+    font-size: .52rem;
+    letter-spacing: .14em;
+    vertical-align: .32em;
+    white-space: nowrap;
+}
 
-    .wf-cta {
-        width: 100%;
-        justify-content: center;
+.work-lead .work-num {
+    color: var(--text);
+}
+
+/* um fio violeta marca a linha do projeto atual */
+.work-lead::before {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%);
+    opacity: 1;
+}
+
+@media (max-width: 620px) {
+    .work-badge {
+        display: block;
+        margin: .5rem 0 0;
+        vertical-align: baseline;
+    }
+}
+
+/* nota e tópicos do projeto em destaque (conteúdo vindo da main) */
+.work-meta {
+    display: block;
+    margin-top: .45rem;
+    color: var(--accent-text);
+}
+
+.work-points {
+    margin-top: .8rem;
+    display: grid;
+    gap: .35rem;
+}
+
+.work-points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: .86rem;
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.work-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.work:hover .work-points,
+.work:hover .work-meta {
+    transform: translateX(12px);
+    transition: transform .55s .04s var(--ease);
+}
+
+/* as telas reais ficam no DOM mas escondidas na linha: quem as mostra é o
+   preview flutuante e os painéis do corredor */
+.work-thumb.slides {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .work-points {
+        display: none;
     }
 }

@@ -2,6 +2,7 @@ import { start } from './core/raf.js';
 import { bindAnchors } from './core/smooth-scroll.js';
 
 import { initPreloader } from './components/preloader.js';
+import { initIntroGl } from './components/intro-gl.js';
 import { initTheme } from './components/theme.js';
 import { initNav } from './components/nav.js';
 import { initMenu, closeMenu } from './components/menu.js';
@@ -14,19 +15,24 @@ import { initTerminal } from './components/terminal/index.js';
 import { initCommandPalette } from './components/command-palette.js';
 
 import { initReveal } from './effects/reveal.js';
+import { initGhostType } from './effects/ghost-type.js';
 import { initCounters } from './effects/counters.js';
 import { initLangBars } from './effects/lang-bars.js';
 import { initScramble } from './effects/scramble.js';
 import { initMagnetic } from './effects/magnetic.js';
+import { initSpotlight } from './effects/spotlight.js';
 import { initMarquee } from './effects/marquee.js';
 import { initParallax } from './effects/parallax.js';
 import { initTimeline } from './effects/timeline.js';
 import { initManifesto } from './effects/manifesto.js';
 import { initProcess } from './effects/process.js';
-import { initWorkSlides } from './effects/work-slides.js';
+import { initWorkFloat } from './effects/work-float.js';
+import { initCorridor } from './components/work-corridor.js';
+import { initProcess3D } from './components/process-3d.js';
 
 initTheme();
 initPreloader();
+initIntroGl();
 
 bindAnchors(closeMenu);
 initNav();
@@ -38,18 +44,22 @@ initGitHub();
 initTerminal();
 initCommandPalette();
 
-initCursor();
-initWorkSlides();
+const cursorPos = initCursor();
+initWorkFloat(cursorPos);
+initCorridor();
 
+initGhostType();
 initReveal();
 initCounters();
 initLangBars();
 initScramble();
 initMagnetic();
+initSpotlight();
 initMarquee();
 initParallax();
 initTimeline();
 initManifesto();
 initProcess();
+initProcess3D();
 
 start();

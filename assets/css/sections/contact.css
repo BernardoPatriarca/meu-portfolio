@@ -1,6 +1,9 @@
 .contact {
-    background: var(--accent-surface);
-    color: var(--accent-ink);
+    /* a tela final é a planta técnica: fundo escuro, tinta clara.
+       O violeta da marca não some — virou o destaque de cada linha. */
+    background: var(--bg);
+    color: var(--text);
+    --accent-ink: var(--text);
     padding: clamp(4.5rem, 10vw, 9rem) 0 clamp(3.5rem, 7vw, 6rem);
 }
 
@@ -83,6 +86,26 @@
     transform: scaleX(1);
 }
 
+/* o banho violeta acompanha a linha sob o cursor */
+.contact-row:not(.contact-static)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-surface) 85%, transparent), transparent 85%);
+    opacity: 0;
+    transition: opacity .45s var(--ease);
+}
+
+.contact-row:hover::after,
+.contact-row:focus-visible::after {
+    opacity: 1;
+}
+
+.contact-row {
+    isolation: isolate;
+}
+
 .contact-row:hover .contact-val {
     transform: translateX(10px);
 }
@@ -100,4 +123,143 @@
 .contact-row:hover .arr-c {
     opacity: 1;
     transform: translateY(-50%) translateX(-4px);
+}
+
+/* =========================================================
+   PLANTA TÉCNICA DE FUNDO
+   Linhas de construção, círculos e marcas de canto que se
+   desenham quando a seção entra — a tela final da referência.
+   ========================================================= */
+
+.contact {
+    overflow: clip;
+}
+
+.blueprint {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* halo azul ao centro, como no vídeo */
+    background: radial-gradient(38vw 34vw at 62% 46%, color-mix(in srgb, var(--glow-b) 55%, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity 1s var(--ease);
+}
+
+.contact.in-view .blueprint {
+    opacity: 1;
+}
+
+.bp-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: color-mix(in srgb, var(--text) 42%, transparent);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+.bp-svg path,
+.bp-svg circle {
+    vector-effect: non-scaling-stroke;
+}
+
+.bp-grid {
+    opacity: .5;
+}
+
+/* as diagonais e os círculos se desenham */
+.bp-draw path,
+.bp-draw circle {
+    stroke: color-mix(in srgb, var(--text) 78%, transparent);
+    stroke-dasharray: 1800;
+    stroke-dashoffset: 1800;
+    transition: stroke-dashoffset 1.8s var(--ease) .25s;
+}
+
+.contact.in-view .bp-draw path,
+.contact.in-view .bp-draw circle {
+    stroke-dashoffset: 0;
+}
+
+.bp-tick {
+    stroke: var(--accent-2);
+    stroke-width: 1.5;
+    opacity: 0;
+    transition: opacity .7s var(--ease) 1.1s;
+}
+
+.contact.in-view .bp-tick {
+    opacity: .9;
+}
+
+/* anotações nos cantos */
+.bp-note {
+    position: absolute;
+    color: var(--muted);
+    font-size: .58rem;
+    opacity: 0;
+    transition: opacity .8s var(--ease) 1.3s;
+}
+
+.contact.in-view .bp-note {
+    opacity: 1;
+}
+
+.bp-tl {
+    top: 1.4rem;
+    left: 1.4rem;
+}
+
+.bp-tr {
+    top: 1.4rem;
+    right: 1.4rem;
+}
+
+.bp-bl {
+    bottom: 1.4rem;
+    left: 1.4rem;
+}
+
+.bp-br {
+    bottom: 1.4rem;
+    right: 1.4rem;
+}
+
+@media (max-width: 760px) {
+
+    /* só as duas de baixo cabem sem brigar com o conteúdo */
+    .bp-tl,
+    .bp-tr {
+        display: none;
+    }
+
+    .bp-note {
+        font-size: .54rem;
+    }
+
+    .blueprint {
+        opacity: 0;
+    }
+
+    .contact.in-view .blueprint {
+        opacity: .75;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .blueprint,
+    .bp-tick,
+    .bp-note {
+        opacity: 1 !important;
+    }
+
+    .bp-draw path,
+    .bp-draw circle {
+        stroke-dashoffset: 0 !important;
+        transition: none !important;
+    }
 }

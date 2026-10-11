@@ -75,3 +75,24 @@ button {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent);
 }
+
+/* ---------- foco de teclado ----------
+   Um anel único para quem navega por Tab. :focus-visible não aparece em
+   clique de mouse, então não atrapalha o visual no uso normal. */
+
+:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* campos de texto já têm moldura própria: o anel acompanha a borda */
+input:focus-visible,
+textarea:focus-visible {
+    outline-offset: 1px;
+}
+
+/* o contorno some em fundo claro de alto contraste; aqui ele se mantém */
+[data-theme="light"] :focus-visible {
+    outline-color: var(--accent);
+}

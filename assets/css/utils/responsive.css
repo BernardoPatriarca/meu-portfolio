@@ -118,7 +118,7 @@
 
     .portrait {
         justify-self: center;
-        /* sobra espaço para o círculo laranja que sai 10px para fora */
+        /* sobra espaço para o círculo do acento, que sai 10px para fora */
         width: min(340px, calc(100% - 14px));
     }
 
