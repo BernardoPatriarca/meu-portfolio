@@ -1,5 +1,7 @@
 <div align="center">
 
+<img alt="Bernardo Patriarca — Full Stack Developer" src="assets/img/banner.png">
+
 # Portfólio — Bernardo Patriarca
 
 **Site pessoal de um desenvolvedor full stack.** Sem framework e sem build: HTML, CSS modular e JavaScript em ES Modules, com WebGL puro na abertura.
@@ -47,7 +49,8 @@ Abra <http://localhost:4173>. Não tem `npm install`, não tem passo de build: o
 ```
 index.html                 marcação de todas as seções
 assets/
-├── img/                   foto do hero e telas dos projetos
+├── img/                   foto do hero, telas dos projetos e o banner do README
+├── banner/                fonte do banner (HTML) e o script que o renderiza
 ├── css/
 │   ├── main.css           importa todo o resto, nesta ordem
 │   ├── base/              tokens, reset, tipografia, layout
@@ -103,6 +106,7 @@ O canvas da abertura limita o `devicePixelRatio` (2 no desktop, 1.5 no toque) e 
 - O CSS usa `@import`, que carrega em cascata. Em produção com muita latência, vale concatenar os arquivos em um só.
 - `assets/js/components/terminal/commands.js` concentra os comandos do terminal — basta adicionar uma chave ao objeto para criar um novo.
 - Cuidado com `clip-path` e `mask-image` em elemento observado por `IntersectionObserver`: recortar o elemento zera a área medida, o callback não dispara e o conteúdo some. Nas duas vezes que isso aconteceu aqui — barra de idioma e linha de projeto — a saída foi mover o recorte para um pseudo-elemento.
+- O banner do topo não é uma imagem solta: ele nasce de `assets/banner/banner.html`, que repete os tokens do tema escuro. Mudou a paleta em `base/tokens.css`? Espelhe lá e rode `node assets/banner/render.mjs` (precisa de Playwright com Chromium) para regerar `assets/img/banner.png`.
 - Única dependência externa: Lenis (scroll suave) e Three.js, ambos via CDN com versão fixa. Three.js é baixado sob demanda e só no desktop.
 
 ## Contato

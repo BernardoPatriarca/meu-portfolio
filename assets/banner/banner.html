@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Banner — Bernardo Patriarca</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* Os tokens abaixo são um espelho de assets/css/base/tokens.css (tema escuro).
+       Se a paleta do site mudar, atualize aqui e rode `node assets/banner/render.mjs`. */
+    :root {
+      --bg: #05041a;
+      --bg-2: #0A0826;
+
+      --text: #EEEBFF;
+      --muted: #8C88C9;
+
+      --line: rgba(160, 140, 255, .28);
+      --line-2: rgba(170, 152, 255, .5);
+
+      --accent: #7A4DFF;
+      --accent-2: #2F7BFF;
+      --accent-surface: #5B30E6;
+      --accent-ink: #FFFFFF;
+      --accent-text: #A68EFF;
+
+      --f-display: 'Space Grotesk', sans-serif;
+      --f-body: 'DM Sans', sans-serif;
+      --f-serif: 'Instrument Serif', Georgia, serif;
+      --f-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: var(--f-body);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .banner {
+      position: relative;
+      width: 1600px;
+      height: 400px;
+      overflow: hidden;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      isolation: isolate;
+    }
+
+    /* o mesmo halo do .hero::before, puxado para a direita do título */
+    .glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(760px 420px at 74% 8%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+        radial-gradient(520px 300px at 6% 96%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 72%);
+      pointer-events: none;
+    }
+
+    /* hachura diagonal fininha, herdada da versão impressa */
+    .hairlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(-45deg,
+          transparent 0 11px,
+          color-mix(in srgb, var(--line) 42%, transparent) 11px 12px);
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .top {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 384px 1px minmax(0, 1fr);
+      gap: 0 48px;
+      padding: 46px 64px 0;
+    }
+
+    /* ---------- coluna de identidade ---------- */
+    .ident {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding-top: 6px;
+    }
+
+    .field {
+      border-left: 2px solid var(--accent);
+      padding-left: 18px;
+    }
+
+    .mono-label {
+      display: block;
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .field-val {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: -.02em;
+      margin-top: 7px;
+      color: var(--text);
+    }
+
+    .field-val .accent {
+      color: var(--accent-text);
+    }
+
+    .rule {
+      background: linear-gradient(to bottom, transparent, var(--line-2) 18%, var(--line-2) 82%, transparent);
+    }
+
+    /* ---------- bloco principal ---------- */
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: color-mix(in srgb, var(--text) 78%, transparent);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent);
+      flex: none;
+    }
+
+    .title {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 93px;
+      line-height: .9;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin: 22px 0 26px;
+    }
+
+    .title .stroke {
+      color: transparent;
+      -webkit-text-stroke: 1.6px color-mix(in srgb, var(--text) 72%, transparent);
+    }
+
+    .lead {
+      font-size: 21px;
+      line-height: 1.5;
+      color: color-mix(in srgb, var(--text) 82%, transparent);
+    }
+
+    .hl {
+      background: var(--accent-surface);
+      color: var(--accent-ink);
+      font-weight: 500;
+      padding: 1px .3em 3px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .lead .serif {
+      font-family: var(--f-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.16em;
+      letter-spacing: -.01em;
+      color: var(--accent-text);
+    }
+
+    /* ---------- faixa de tecnologias ---------- */
+    .band {
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      bottom: 30px;
+      z-index: 3;
+      transform: rotate(-2.2deg) scale(1.06);
+      transform-origin: center;
+      user-select: none;
+    }
+
+    .band-row {
+      overflow: hidden;
+      padding: 10px 0;
+      border-block: 1px solid var(--line);
+    }
+
+    .band-solid {
+      background: var(--accent-surface);
+      color: var(--accent-ink);
+      border-color: transparent;
+      box-shadow: 0 -18px 50px -24px color-mix(in srgb, var(--accent) 70%, transparent);
+    }
+
+    .band-ghost {
+      background: transparent;
+      border-top: none;
+      padding-top: 11px;
+    }
+
+    .band-track {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      width: max-content;
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      transform: translateX(-180px);
+    }
+
+    .band-ghost .band-track {
+      color: transparent;
+      -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 38%, transparent);
+      transform: translateX(-420px);
+    }
+
+    .band-track b {
+      color: currentColor;
+      font-size: .55em;
+      opacity: .6;
+    }
+
+    .band-ghost .band-track b {
+      -webkit-text-stroke: 0;
+      color: var(--accent-text);
+      opacity: 1;
+    }
+
+    /* grão, igual ao .grain do site. Fica fora do render: a .05 de opacidade ele
+       some na escala do README e só serve para inflar o PNG em ~2 MB. Para usá-lo,
+       recoloque a <div class="grain"> no corpo. */
+    .grain {
+      position: absolute;
+      inset: 0;
+      z-index: 9;
+      pointer-events: none;
+      opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+
+<body>
+  <div class="banner" id="banner">
+    <div class="glow"></div>
+    <div class="hairlines"></div>
+
+    <div class="top">
+      <aside class="ident">
+        <div class="field">
+          <span class="mono-label">Portfólio</span>
+          <p class="field-val">bernardopatriarca<span class="accent">.netlify.app</span></p>
+        </div>
+        <div class="field">
+          <span class="mono-label">E-mail</span>
+          <p class="field-val">bernardopatriarca2026<span class="accent">@gmail.com</span></p>
+        </div>
+      </aside>
+
+      <div class="rule"></div>
+
+      <main>
+        <p class="mono-label eyebrow">
+          <span class="dot"></span> Full Stack Developer · Disponível para oportunidades · Pato Branco, PR
+        </p>
+
+        <h1 class="title">Bernardo <span class="stroke">Patriarca</span></h1>
+
+        <p class="lead">
+          <span class="hl">Java · Quarkus · Angular</span> no dia a dia, construindo sistemas que
+          <em class="serif">fazem a diferença</em>.
+        </p>
+      </main>
+    </div>
+
+    <div class="band" aria-hidden="true">
+      <div class="band-row band-solid">
+        <div class="band-track">
+          <span>Java</span><b>✳</b><span>Quarkus</span><b>✳</b><span>Angular</span><b>✳</b><span>AWS</span><b>✳</b>
+          <span>PostgreSQL</span><b>✳</b><span>Spring Boot</span><b>✳</b><span>Terraform</span><b>✳</b>
+          <span>TypeScript</span><b>✳</b><span>Docker</span><b>✳</b><span>Java</span><b>✳</b><span>Quarkus</span><b>✳</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
