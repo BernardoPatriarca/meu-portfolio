@@ -1,5 +1,5 @@
 export const EMAIL = 'bernardopatriarca2026@gmail.com';
-export const WHATSAPP = 'https://wa.me/5546988120972';
+export const WHATSAPP = 'https://wa.me/5546999716231';
 export const GH_USER = 'BernardoPatriarca';
 
 export const SOCIAL = {

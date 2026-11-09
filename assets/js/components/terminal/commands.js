@@ -8,7 +8,7 @@ import { ghData, loadGitHub } from '../github.js';
 export const FILES = {
     'about.txt': 'Bernardo Patriarca, 21 anos, Pato Branco/PR.\nFull Stack Developer na IDS Software e Assessoria desde maio de 2026.\nAtuo no módulo de Saúde de soluções de Gestão Pública Municipal.\nCursando Sistemas de Informação na UNIMATER.',
     'skills.json': '{\n  "front": ["Angular", "React", "TypeScript"],\n  "back": ["Java", "Quarkus", "Spring Boot", "Node.js"],\n  "data": ["PostgreSQL", "MongoDB", "Supabase"],\n  "devops": ["Docker", "Kubernetes", "Jenkins", "Redis"],\n  "mobile": ["Flutter", "React Native", "Dart"]\n}',
-    'contact.md': `# Contato\n- email: ${EMAIL}\n- whatsapp: +55 (46) 9 8812-0972\n- local: Pato Branco, PR`
+    'contact.md': `# Contato\n- email: ${EMAIL}\n- whatsapp: +55 (46) 9 9971-6231\n- local: Pato Branco, PR`
 };
 
 const JOKES = [
@@ -95,7 +95,7 @@ export function buildCommands(io) {
 
         contact: () => print(
             `e-mail    <a href="mailto:${EMAIL}">${EMAIL}</a>\n` +
-            `whatsapp  <a href="${WHATSAPP}" target="_blank" rel="noopener">+55 (46) 9 8812-0972</a>\n` +
+            `whatsapp  <a href="${WHATSAPP}" target="_blank" rel="noopener">+55 (46) 9 9971-6231</a>\n` +
             `local     Pato Branco, PR — Brasil`
         ),
 
