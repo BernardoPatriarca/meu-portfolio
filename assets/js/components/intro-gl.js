@@ -29,6 +29,8 @@ uniform vec2  uMouse;
 uniform float uCalm;    // 1 quando prefers-reduced-motion
 uniform float uLight;   // 1 no tema claro
 uniform float uExit;    // 0 → 1 enquanto a seção sai por rolagem
+uniform float uSpot;    // 0 → 1 depois que o ponteiro se mexe
+uniform vec3  uPulse;   // xy = origem do clique · z = idade em s (< 0: inativa)
 uniform sampler2D uTex; // R = letras · G = marca vazada
 
 uniform vec3 uBg;
@@ -75,11 +77,20 @@ void main(){
   float settle = smoothstep(.22, 1., intro);
   float enter  = 1. - settle;                       // 1 no começo, 0 no fim
   float burst  = step(.972, hash(vec2(tt, 3.1))) * calm;
-  float amt    = (uExit * .35 + burst * .30 + uVel * .18) * (1. - uCalm * .6);
+
+  // onda de choque do clique: um anel que se abre a partir do ponteiro,
+  // empurra a sala e a marca e rasga o glitch só por onde passa
+  vec2  pd   = (uv - uPulse.xy) * vec2(asp, 1.);
+  float pAge = max(uPulse.z, 0.);
+  float ring = exp(-pow((length(pd) - pAge * 1.25) * 8., 2.))
+             * exp(-pAge * 2.2) * step(0., uPulse.z);
+  vec2  push = normalize(pd + 1e-5) * ring;
+
+  float amt    = (uExit * .35 + burst * .30 + uVel * .18 + ring * .40) * (1. - uCalm * .6);
 
   // a sala também avança quando a seção sai: tudo passa pelo observador
   float roomZoom = 1. - uExit * .35 * calm;
-  vec2  q   = ((uv - .5) * roomZoom) * vec2(asp, 1.) - m * vec2(.09, .06);
+  vec2  q   = ((uv - .5) * roomZoom) * vec2(asp, 1.) - m * vec2(.09, .06) - push * .03;
   float ext = .5 * length(vec2(asp, 1.));
   float rn  = length(q) / ext;
 
@@ -113,10 +124,18 @@ void main(){
   // halo no fundo da sala
   col = lay(col, uGlowA, smoothstep(.95, 0., rn) * .30);
 
+  // o ponteiro é uma lanterna: acende os ladrilhos e as juntas por perto
+  vec2  dm   = (uv - uMouse) * vec2(asp, 1.);
+  float spot = exp(-dot(dm, dm) * 4.5) * uSpot;
+  col = lay(col, uAccent2, (face * .30 + grout * .45) * depth * spot);
+
+  // a crista da onda de choque
+  col = lay(col, mix(uAccent2, uGlitchC, .35), ring * .20);
+
   // =====================================================================
   // MARCA — letras (canal R) e triângulo vazado (canal G)
   // =====================================================================
-  vec2 tuv = uv;
+  vec2 tuv = uv - push * .022 / vec2(asp, 1.);
 
   // fatias horizontais e blocos deslocados
   float bands = mix(14., 70., hash(vec2(tt, 7.)));
@@ -126,7 +145,6 @@ void main(){
   tuv += (blk - .5) * step(.9, blk) * amt * .04;
 
   // lente discreta sob o cursor
-  vec2 dm = (uv - uMouse) * vec2(asp, 1.);
   float lens = exp(-dot(dm, dm) * 16.);
   tuv += normalize(dm + 1e-5) * lens * (-.012) * (.6 + uVel * 1.6) / vec2(asp, 1.);
   tuv += m * vec2(.010, .007);
@@ -220,11 +238,15 @@ void main(){
     glow += texture(uTex, tz + vec2(cos(a), sin(a)) * .013).r;
   }
   glow = glow / 6. * smoothstep(4.2, 1.15, zTxt);
-  col = lay(col, uGlowA, glow * .55);
+
+  // com a marca em repouso, um feixe atravessa o neon de tempos em tempos
+  float sweep = exp(-pow((uv.x + uv.y * .3 - (fract(uTime * .13) * 3.2 - 1.)) * 6., 2.))
+              * settle * calm;
+  col = lay(col, uGlowA, glow * (.55 + sweep * .7));
 
   // o triângulo vazado atravessa as letras, como a marca da referência
   float markGlow = smoothstep(.15, .9, settle);
-  col = lay(col, mix(uAccent2, uAccent, .45), markW * markGlow * 1.6);
+  col = lay(col, mix(uAccent2, uAccent, .45), markW * markGlow * (1.6 + sweep * 1.8));
 
   // letras por cima de tudo
   col = mix(col, txCol, cover * smoothstep(0., .12, intro));
@@ -321,7 +343,7 @@ export function initIntroGl() {
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
     const U = {};
-    for (const n of ['uRes', 'uTime', 'uIntro', 'uVel', 'uMouse', 'uCalm', 'uLight', 'uExit', 'uTex',
+    for (const n of ['uRes', 'uTime', 'uIntro', 'uVel', 'uMouse', 'uCalm', 'uLight', 'uExit', 'uSpot', 'uPulse', 'uTex',
         'uBg', 'uInk', 'uAccent', 'uAccent2', 'uGlowA', 'uGlowB', 'uGlitchM', 'uGlitchC']) {
         U[n] = gl.getUniformLocation(prog, n);
     }
@@ -470,15 +492,32 @@ export function initIntroGl() {
     const cur = { x: .5, y: .5 };
     const last = { x: .5, y: .5 };
     let vel = 0;
+    let moved = false;             // a lanterna só acende depois do 1º movimento
+    let spot = 0;
 
     function onMove(e) {
         const r = canvas.getBoundingClientRect();
         if (r.bottom < 0 || r.top > innerHeight) return;
         target.x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
         target.y = Math.min(1, Math.max(0, 1 - (e.clientY - r.top) / r.height));
+        moved = true;
     }
     addEventListener('pointermove', onMove, { passive: true });
     addEventListener('pointerdown', onMove, { passive: true });
+
+    // ---------- onda de choque no clique / toque ----------
+    const PULSE_LIFE = 2.6;        // s até a onda sumir
+    const pulse = { x: .5, y: .5, at: -1 };
+
+    if (!reduced) {
+        section.addEventListener('pointerdown', e => {
+            if (e.target.closest('a, button')) return;
+            const r = canvas.getBoundingClientRect();
+            pulse.x = clamp01((e.clientX - r.left) / r.width);
+            pulse.y = clamp01(1 - (e.clientY - r.top) / r.height);
+            pulse.at = now;
+        }, { passive: true });
+    }
 
     // ---------- linha do tempo ----------
     let exitP = 0;                 // 0 → 1 enquanto a seção sai por rolagem
@@ -488,7 +527,19 @@ export function initIntroGl() {
     const DUR = 3000;
     const easeOut = x => 1 - Math.pow(1 - x, 2.2);
 
-    const restart = () => { introStart = null; started = true; dirty = true; };
+    // o HUD entra em cascata junto com a marca; sem movimento ele já nasce
+    // visível, e sem WebGL esta linha nem chega a rodar
+    if (!reduced) section.classList.add('is-armed');
+
+    const restart = () => {
+        introStart = null;
+        started = true;
+        dirty = true;
+        if (reduced) return;
+        section.classList.remove('is-live');
+        void section.offsetWidth;  // reinicia a animação do HUD
+        section.classList.add('is-live');
+    };
     replayBtn?.addEventListener('click', restart);
 
     // só desenha enquanto a abertura está em tela
@@ -509,6 +560,9 @@ export function initIntroGl() {
         gl.uniform2f(U.uMouse, cur.x, cur.y);
         gl.uniform1f(U.uCalm, reduced ? 1 : 0);
         gl.uniform1f(U.uExit, reduced ? 0 : exitP);
+        gl.uniform1f(U.uSpot, reduced ? 0 : spot);
+        const age = pulse.at < 0 ? -1 : (now - pulse.at) / 1000;
+        gl.uniform3f(U.uPulse, pulse.x, pulse.y, age > PULSE_LIFE ? -1 : age);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, tex);
         gl.uniform1i(U.uTex, 0);
@@ -535,6 +589,7 @@ export function initIntroGl() {
         vel += (Math.min(1, Math.hypot(dx, dy) * 40) - vel) * .12;
         last.x = cur.x;
         last.y = cur.y;
+        spot += ((moved ? 1 : 0) - spot) * .05;
 
         draw();
 

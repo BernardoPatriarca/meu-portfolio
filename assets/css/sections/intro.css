@@ -148,6 +148,45 @@
     animation: cue 2.2s var(--ease-io) infinite;
 }
 
+/* ---------- entrada do HUD: em cascata, quando a marca assenta ---------- */
+/* .is-armed / .is-live vêm do intro-gl.js; sem eles o HUD já nasce visível */
+
+@media (prefers-reduced-motion: no-preference) {
+
+    .intro.is-armed .intro-hud>*,
+    .intro.is-armed .intro-cue>* {
+        opacity: 0;
+    }
+
+    /* 'backwards' e não 'both': terminada a entrada, o hover do botão
+       volta a mandar no transform */
+    .intro.is-live .intro-hud>*,
+    .intro.is-live .intro-cue>* {
+        opacity: 1;
+        animation: introHud .8s var(--ease) backwards;
+        animation-delay: calc(1.45s + var(--n, 0) * 90ms);
+    }
+
+    .intro-hud>*:nth-child(2) {
+        --n: 1;
+    }
+
+    .intro-hud>*:nth-child(3) {
+        --n: 2;
+    }
+
+    .intro-cue>* {
+        --n: 4;
+    }
+}
+
+@keyframes introHud {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}
+
 /* ---------- fallback: sem WebGL2 ou com movimento reduzido ---------- */
 
 .intro-static {
