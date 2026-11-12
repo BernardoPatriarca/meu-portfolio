@@ -1,0 +1,1 @@
+Arquivo das cinco direções exploradas antes da escolha do logo. A 01 (Ladrilho) foi a escolhida; as outras não devem ser usadas. Os arquivos `-escuro` e `-claro` trazem o fundo embutido; `-mono` usa `currentColor`.

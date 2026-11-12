@@ -30,7 +30,9 @@ body {
     overflow-x: hidden;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
-    transition: background .5s var(--ease), color .5s var(--ease);
+    /* a cena WebGL troca de tema na hora; o texto não pode ficar meio segundo
+       na cor antiga por cima dela */
+    transition: background .5s var(--ease), color .15s;
 }
 
 a {

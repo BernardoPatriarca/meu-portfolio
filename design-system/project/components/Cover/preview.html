@@ -1,0 +1,38 @@
+<!-- @dsCard height=288 -->
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Space+Grotesk:wght@500;700&family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);width:960px;height:288px;position:relative;overflow:hidden}
+svg{position:absolute;inset:0}
+.as{fill:var(--accent-surface)}.a2{fill:var(--accent-2)}.s2{fill:var(--surface-2)}.mg{fill:var(--magenta)}.tx{fill:var(--text)}.gd{fill:var(--bg)}
+.t{position:absolute;left:40px;bottom:36px;max-width:440px}
+h1{font-family:var(--font-display);font-weight:700;font-size:72px;line-height:.92;letter-spacing:-.04em;text-transform:uppercase;color:var(--text)}
+p{margin-top:16px;font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--muted)}
+</style></head><body>
+<!--
+blocos: accent-surface 192×192 + 96×96, accent-2 192×96, surface-2 96×192, magenta 48×48
+arranjo: grade modular rente, de x=528 até sangrar na borda direita e no topo — os ladrilhos do corredor
+padrão: miras em cruz nos cruzamentos da grade (passo 96px), porque o site marca cada cruzamento do piso com uma mira de diagramação
+escalas: módulo 96px (e meio módulo 48px), cantos retos, mira de 16px com traço de 2px
+-->
+<svg viewBox="0 0 960 288" width="960" height="288" aria-hidden="true">
+<rect class="as" x="528" y="0" width="192" height="192"/>
+<rect class="a2" x="720" y="0" width="192" height="96"/>
+<rect class="s2" x="912" y="0" width="48" height="192"/>
+<rect class="s2" x="720" y="96" width="96" height="192"/>
+<rect class="as" x="816" y="96" width="96" height="96"/>
+<rect class="mg" x="816" y="192" width="48" height="48"/>
+<rect class="a2" x="624" y="192" width="96" height="96"/>
+<g class="tx">
+<path d="M623 88h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M719 88h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M815 88h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M623 184h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M719 184h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M815 184h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M911 184h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M527 184h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+<path d="M911 88h2v7h7v2h-7v7h-2v-7h-7v-2h7z"/>
+</g>
+</svg>
+<div class="t"><h1>Bernardo<br>Patriarca</h1><p>Full Stack — Java, Quarkus, Spring Boot, Angular</p></div>
+</body></html>

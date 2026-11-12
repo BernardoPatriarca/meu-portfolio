@@ -98,7 +98,10 @@ function tileTexture(seed) {
     c.width = c.height = W;
     const x = c.getContext('2d');
 
-    const bg = css('--bg') || '#05041a';
+    const isLight = root.getAttribute('data-theme') === 'light';
+    // no claro a parede usa o tom de baixo (--bg-2): com --bg puro a
+    // sala inteira estourava para o branco
+    const bg = css(isLight ? '--bg-2' : '--bg') || '#05041a';
     const line = css('--accent') || '#7a4dff';
 
     x.fillStyle = bg;
@@ -112,8 +115,10 @@ function tileTexture(seed) {
             const v = rnd();
             if (v > 0.78) continue;                       // ladrilho apagado
             const g = x.createLinearGradient(i * S, j * S, (i + 1) * S, (j + 1) * S);
-            g.addColorStop(0, `rgba(122,77,255,${0.10 + v * 0.14})`);
-            g.addColorStop(1, `rgba(47,123,255,${0.04 + v * 0.10})`);
+            // no claro o banho precisa de mais tinta para o ladrilho ter corpo
+            const k = isLight ? 2.1 : 1;
+            g.addColorStop(0, `rgba(122,77,255,${(0.10 + v * 0.14) * k})`);
+            g.addColorStop(1, `rgba(47,123,255,${(0.04 + v * 0.10) * k})`);
             x.fillStyle = g;
             x.fillRect(i * S + 2, j * S + 2, S - 4, S - 4);
         }
@@ -330,9 +335,18 @@ function build(THREE, { host, flat, canvas, items }) {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 90);
 
-    let bgHex = hex(css('--bg'));
+    const light = () => root.getAttribute('data-theme') === 'light';
+    // a névoa é o "borrão" do fundo: começa mais longe e, no claro, usa o
+    // tom da parede e quase não fecha — senão vira uma parede branca
+    const fogOf = () => hex(css(light() ? '--bg-2' : '--bg'));
+    const syncFog = () => {
+        scene.fog.near = light() ? 22 : 16;
+        scene.fog.far = light() ? 64 : 44;
+    };
+    let bgHex = fogOf();
     scene.background = new THREE.Color(bgHex);
-    scene.fog = new THREE.Fog(bgHex, 12, 36);
+    scene.fog = new THREE.Fog(bgHex, 16, 44);
+    syncFog();
 
     /* ---------- paredes ---------- */
     const LEN = Z_NEAR - Z_FAR;
@@ -398,7 +412,6 @@ function build(THREE, { host, flat, canvas, items }) {
     // No tema claro a soma aditiva estoura e o plano vira um retângulo
     // branco no fundo do corredor; aí ele entra em mistura normal e mais
     // apagado, só como halo atrás do painel de destaque.
-    const light = () => root.getAttribute('data-theme') === 'light';
     const glowMat = new THREE.MeshBasicMaterial({
         map: glowTex, transparent: true, opacity: .9,
         blending: THREE.AdditiveBlending, depthWrite: false, fog: false
@@ -468,9 +481,10 @@ function build(THREE, { host, flat, canvas, items }) {
 
     /* ---------- repinta tudo quando o tema muda ---------- */
     new MutationObserver(() => {
-        bgHex = hex(css('--bg'));
+        bgHex = fogOf();
         scene.background.setHex(bgHex);
         scene.fog.color.setHex(bgHex);
+        syncFog();
         walls.forEach((m, i) => {
             m.userData.tex.dispose();
             const t = new THREE.CanvasTexture(tileTexture(i + 1));
@@ -600,7 +614,7 @@ function build(THREE, { host, flat, canvas, items }) {
         // as juntas deslizam de leve: dá sensação de movimento mesmo parado
         for (const m of walls) m.userData.tex.offset.y = clock.t * 0.012;
 
-        glow.material.opacity = 0.55 + Math.sin(clock.t * 1.1) * 0.12;
+        glow.material.opacity = (light() ? 0.22 : 0.55) + Math.sin(clock.t * 1.1) * 0.12;
         ghosts.forEach((g, i) => { g.material.opacity = 0.12 + Math.sin(clock.t * 0.5 + i) * 0.04; });
 
         ray.setFromCamera(ptr, camera);

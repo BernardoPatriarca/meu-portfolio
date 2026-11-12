@@ -73,8 +73,9 @@ void main(){
   float intro = uIntro;
   float calm  = 1. - uCalm;
 
-  // a marca assenta na segunda metade da abertura
-  float settle = smoothstep(.22, 1., intro);
+  // a marca avança desde o primeiro quadro: sem faixa morta no começo,
+  // o zoom nasce junto com a cena e só desacelera ao chegar
+  float settle = intro;
   float enter  = 1. - settle;                       // 1 no começo, 0 no fim
   float burst  = step(.972, hash(vec2(tt, 3.1))) * calm;
 
@@ -118,11 +119,13 @@ void main(){
   float depth = smoothstep(.05, .40, t) * smoothstep(1.55, .42, t);
 
   vec3 col = mix(uBg * .62, uBg, uLight);
-  col = lay(col, mix(uGlowB, uGlowA, id), face * depth * .58);
-  col = lay(col, mix(uAccent, uAccent2, uv.x), grout * depth * mix(.30, .40, uLight));
+  // no claro a tinta dos ladrilhos é bem mais rala: a sala fica no mesmo
+  // tom de papel do resto da página, em vez de um lilás chapado
+  col = lay(col, mix(uGlowB, uGlowA, id), face * depth * mix(.58, .24, uLight));
+  col = lay(col, mix(uAccent, uAccent2, uv.x), grout * depth * mix(.30, .34, uLight));
 
   // halo no fundo da sala
-  col = lay(col, uGlowA, smoothstep(.95, 0., rn) * .30);
+  col = lay(col, uGlowA, smoothstep(.95, 0., rn) * mix(.30, .12, uLight));
 
   // o ponteiro é uma lanterna: acende os ladrilhos e as juntas por perto
   vec2  dm   = (uv - uMouse) * vec2(asp, 1.);
@@ -166,8 +169,10 @@ void main(){
   float eX = pow(uExit, 1.3) * calm;              // saída por rolagem
   float land = sin(settle * 3.14159) * .035 * (1. - settle) * calm;
 
-  float zTxt = mix(7.0, 1.0, eZ) - land;          // plano das letras
-  float zMrk = mix(3.2, 1.0, eZ) + land * .6;     // plano do triângulo
+  // interpola o TAMANHO aparente (1/z), não o z: com z linear a marca
+  // passava quase um segundo minúscula e só crescia no fim
+  float zTxt = 1. / mix(1. / 7.0, 1., eZ) - land;      // plano das letras
+  float zMrk = 1. / mix(1. / 3.2, 1., eZ) + land * .6; // plano do triângulo
   zTxt *= mix(1., .26, eX);                       // na saída, passa por nós
   zMrk *= mix(1., .40, eX);
 
@@ -524,8 +529,10 @@ export function initIntroGl() {
     let introStart = null;
     let started = false;
     let now = 0;
-    const DUR = 3000;
-    const easeOut = x => 1 - Math.pow(1 - x, 2.2);
+    const DUR = 2200;
+    // suave de propósito: o shader ainda aplica a própria desaceleração (eZ),
+    // e as duas somadas faziam o zoom disparar e depois se arrastar
+    const easeOut = x => 1 - Math.pow(1 - x, 1.15);
 
     // o HUD entra em cascata junto com a marca; sem movimento ele já nasce
     // visível, e sem WebGL esta linha nem chega a rodar

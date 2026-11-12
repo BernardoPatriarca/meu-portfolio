@@ -54,8 +54,9 @@
     z-index: 1;
     pointer-events: none;
     background:
-        linear-gradient(to bottom, var(--bg), transparent 14%, transparent 86%, var(--bg)),
-        linear-gradient(to right, var(--bg), transparent 10%, transparent 90%, var(--bg));
+        linear-gradient(to bottom, var(--veil), transparent 9%, transparent 91%, var(--veil)),
+        linear-gradient(to right, var(--veil), transparent 6%, transparent 94%, var(--veil));
+    --veil: color-mix(in srgb, var(--bg) var(--veil-edge), transparent);
 }
 
 /* ---------- HUD sobre o corredor ---------- */
@@ -66,13 +67,15 @@
     content: '';
     position: absolute;
     inset: auto 0 0;
-    height: 58%;
+    height: 62%;
     z-index: -1;
     pointer-events: none;
-    background: linear-gradient(to top,
-            var(--bg) 4%,
-            color-mix(in srgb, var(--bg) 80%, transparent) 34%,
-            transparent 100%);
+    /* só atrás da legenda, no canto: uma faixa de lado a lado escurecia
+       (ou esbranquiçava) metade da cena */
+    background: radial-gradient(ellipse 58% 100% at 0% 100%,
+            color-mix(in srgb, var(--bg) var(--veil-hud), transparent),
+            color-mix(in srgb, var(--bg) calc(var(--veil-hud) * .6), transparent) 45%,
+            transparent 78%);
 }
 
 .corridor-hud {
@@ -119,13 +122,21 @@
     letter-spacing: -.035em;
     text-transform: uppercase;
     margin: .35rem 0 .55rem;
-    text-shadow: 0 6px 30px color-mix(in srgb, var(--bg) 85%, transparent);
+    text-shadow: 0 2px 18px color-mix(in srgb, var(--bg) 90%, transparent);
+}
+
+/* com o véu mais leve, um halo curto no próprio texto segura a leitura */
+.cor-desc,
+.cor-num,
+.cor-cta,
+.cor-meta {
+    text-shadow: 0 0 12px var(--bg), 0 0 3px var(--bg);
 }
 
 .cor-desc {
     font-size: clamp(.85rem, 1.1vw, 1rem);
     line-height: 1.6;
-    color: color-mix(in srgb, var(--text) 80%, transparent);
+    color: color-mix(in srgb, var(--text) 90%, transparent);
     max-width: 34ch;
 }
 

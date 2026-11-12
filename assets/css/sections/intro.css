@@ -71,7 +71,26 @@
 }
 
 .intro-hint {
-    color: var(--muted);
+    color: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+/* sobre a cena o cinza de --muted some: os rótulos do HUD usam o texto cheio */
+.intro-hud .mono-label:not(.intro-coords):not(.intro-hint) {
+    color: var(--text);
+}
+
+/* véus no topo e na base: dão chão para a barra e para o HUD sem
+   esconder a cena */
+.intro::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(to bottom, color-mix(in srgb, var(--bg) 62%, transparent), transparent 9.5rem),
+        linear-gradient(to top, color-mix(in srgb, var(--bg) 66%, transparent), transparent 10rem);
+    opacity: calc(1 - var(--exit, 0));
 }
 
 .intro-replay {
@@ -80,8 +99,8 @@
     letter-spacing: .16em;
     text-transform: uppercase;
     color: var(--text);
-    background: color-mix(in srgb, var(--bg) 55%, transparent);
-    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    border: 1px solid var(--line-2);
     border-radius: 99px;
     padding: .5rem .95rem;
     cursor: pointer;
@@ -116,7 +135,7 @@
 }
 
 .intro-cue .mono-label {
-    color: var(--muted);
+    color: color-mix(in srgb, var(--text) 80%, transparent);
     transition: color .3s var(--ease);
 }
 
@@ -164,7 +183,7 @@
     .intro.is-live .intro-cue>* {
         opacity: 1;
         animation: introHud .8s var(--ease) backwards;
-        animation-delay: calc(1.45s + var(--n, 0) * 90ms);
+        animation-delay: calc(.35s + var(--n, 0) * 70ms);
     }
 
     .intro-hud>*:nth-child(2) {

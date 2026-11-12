@@ -64,19 +64,19 @@
 }
 
 [data-theme="light"] .orb-1 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 46%, transparent), transparent 70%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%);
 }
 
 [data-theme="light"] .orb-2 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--glow-b) 50%, transparent), transparent 68%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--glow-b) 36%, transparent), transparent 68%);
 }
 
 [data-theme="light"] .orb-3 i {
-    background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 42%, transparent), transparent 66%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent-2) 30%, transparent), transparent 66%);
 }
 
 [data-theme="light"] .stage-veil {
-    background: color-mix(in srgb, var(--bg) 22%, transparent);
+    background: color-mix(in srgb, var(--bg) 32%, transparent);
 }
 
 .stage-veil {

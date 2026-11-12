@@ -12,17 +12,18 @@ export function initPreloader() {
         document.body.classList.remove('loading');
         document.body.classList.add('ready');
         loader.classList.add('done');
-        setTimeout(() => loader.remove(), 1200);
+        setTimeout(() => loader.remove(), 800);
     };
 
     if (reduced) return finish();
 
     let pct = 0;
     (function step() {
-        pct = Math.min(100, pct + Math.random() * 16 + 7);
+        pct = Math.min(100, pct + Math.random() * 18 + 14);
         count.textContent = Math.round(pct);
         fill.style.width = pct + '%';
-        if (pct < 100) setTimeout(step, 80 + Math.random() * 70);
-        else setTimeout(finish, 320);
+        // contagem curta: a abertura não deve esperar um carregamento de mentira
+        if (pct < 100) setTimeout(step, 24 + Math.random() * 16);
+        else finish();
     })();
 }

@@ -5,7 +5,7 @@
     padding: .45rem .7rem .45rem .8rem;
     border: 1px solid var(--line);
     border-radius: 99px;
-    color: var(--muted);
+    color: color-mix(in srgb, var(--text) 82%, transparent);
     transition: border-color .25s, color .25s, background .25s;
 }
 

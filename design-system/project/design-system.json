@@ -1,0 +1,254 @@
+{
+ "v": 3,
+ "assetGroups": {
+  "Logos": {
+   "name": "Logos",
+   "tile": "l",
+   "order": [
+    "simbolo-escuro.svg",
+    "simbolo-claro.svg",
+    "simbolo-mono.svg",
+    "assinatura-escuro.svg",
+    "assinatura-claro.svg",
+    "assinatura-mono.svg",
+    "assinatura-compacta-escuro.svg",
+    "assinatura-compacta-claro.svg",
+    "assinatura-compacta-mono.svg",
+    "favicon.svg"
+   ],
+   "files": {
+    "simbolo-escuro.svg": {
+     "name": "simbolo-escuro.svg",
+     "blob": "c47361aa14bcef4a2b5e3d5270d2772a",
+     "size": 311,
+     "type": "image/svg+xml"
+    },
+    "simbolo-claro.svg": {
+     "name": "simbolo-claro.svg",
+     "blob": "06b4ac87951d2ccb9e7f1a143bf2354e",
+     "size": 311,
+     "type": "image/svg+xml"
+    },
+    "simbolo-mono.svg": {
+     "name": "simbolo-mono.svg",
+     "blob": "62a44fda2adb4d65f09d7bb6de8c2c68",
+     "size": 283,
+     "type": "image/svg+xml"
+    },
+    "assinatura-escuro.svg": {
+     "name": "assinatura-escuro.svg",
+     "blob": "099df4b0d05a837ea835cbeb78021d74",
+     "size": 6724,
+     "type": "image/svg+xml"
+    },
+    "assinatura-claro.svg": {
+     "name": "assinatura-claro.svg",
+     "blob": "e4e48479c4ec1a74e71da95d36b5dae3",
+     "size": 6724,
+     "type": "image/svg+xml"
+    },
+    "assinatura-mono.svg": {
+     "name": "assinatura-mono.svg",
+     "blob": "3c3c50e4ba609b3753d940ed7d23d741",
+     "size": 6701,
+     "type": "image/svg+xml"
+    },
+    "assinatura-compacta-escuro.svg": {
+     "name": "assinatura-compacta-escuro.svg",
+     "blob": "54712a05602e57cfc01c95b30580fe80",
+     "size": 6618,
+     "type": "image/svg+xml"
+    },
+    "assinatura-compacta-claro.svg": {
+     "name": "assinatura-compacta-claro.svg",
+     "blob": "f5ab0c65b04117bdf11f49a8267e6f5f",
+     "size": 6618,
+     "type": "image/svg+xml"
+    },
+    "assinatura-compacta-mono.svg": {
+     "name": "assinatura-compacta-mono.svg",
+     "blob": "be86fd5c4729263b19371cf054b7c0d9",
+     "size": 6595,
+     "type": "image/svg+xml"
+    },
+    "favicon.svg": {
+     "name": "favicon.svg",
+     "blob": "7618d308d4f28ab3b54e8edcc833930b",
+     "size": 285,
+     "type": "image/svg+xml"
+    }
+   }
+  },
+  "Logo-direcoes": {
+   "files": {
+    "01-ladrilho-claro.svg": {
+     "blob": "076500e8a92e13ec072f02a2c407ef60",
+     "name": "01-ladrilho-claro.svg",
+     "size": 388,
+     "type": "image/svg+xml"
+    },
+    "01-ladrilho-escuro.svg": {
+     "blob": "525ff1f7de5b83925e50d9eb3f4fe8f9",
+     "name": "01-ladrilho-escuro.svg",
+     "size": 388,
+     "type": "image/svg+xml"
+    },
+    "01-ladrilho-favicon.svg": {
+     "blob": "59c5ccd4d0d0c59766ad49181bcc54c4",
+     "name": "01-ladrilho-favicon.svg",
+     "size": 408,
+     "type": "image/svg+xml"
+    },
+    "01-ladrilho-mono.svg": {
+     "blob": "7c674f447a04e4eb8630ba001b8eae4d",
+     "name": "01-ladrilho-mono.svg",
+     "size": 321,
+     "type": "image/svg+xml"
+    },
+    "02-prisma-claro.svg": {
+     "blob": "374fbb4fc9f6937f85b3a9c37449a133",
+     "name": "02-prisma-claro.svg",
+     "size": 387,
+     "type": "image/svg+xml"
+    },
+    "02-prisma-escuro.svg": {
+     "blob": "ec3cf9b8128c377d2c96a9caa9d0fe25",
+     "name": "02-prisma-escuro.svg",
+     "size": 387,
+     "type": "image/svg+xml"
+    },
+    "02-prisma-favicon.svg": {
+     "blob": "7d5635077c159dbaa9986c0e978b481c",
+     "name": "02-prisma-favicon.svg",
+     "size": 407,
+     "type": "image/svg+xml"
+    },
+    "02-prisma-mono.svg": {
+     "blob": "e923b416fa4b27805e467056558634da",
+     "name": "02-prisma-mono.svg",
+     "size": 315,
+     "type": "image/svg+xml"
+    },
+    "03-corredor-claro.svg": {
+     "blob": "686218850338a440e352e35aebbd1fc5",
+     "name": "03-corredor-claro.svg",
+     "size": 348,
+     "type": "image/svg+xml"
+    },
+    "03-corredor-escuro.svg": {
+     "blob": "c6d981d2071871e6a5a6a012d213d0fd",
+     "name": "03-corredor-escuro.svg",
+     "size": 348,
+     "type": "image/svg+xml"
+    },
+    "03-corredor-favicon.svg": {
+     "blob": "b2aa0bc380346f3602f9b87e650ba198",
+     "name": "03-corredor-favicon.svg",
+     "size": 308,
+     "type": "image/svg+xml"
+    },
+    "03-corredor-mono.svg": {
+     "blob": "2e3e4cb28d3e934c61e79ec7a66ddb01",
+     "name": "03-corredor-mono.svg",
+     "size": 206,
+     "type": "image/svg+xml"
+    },
+    "04-mira-claro.svg": {
+     "blob": "326b4d849fd61a609b801e233c526d4a",
+     "name": "04-mira-claro.svg",
+     "size": 539,
+     "type": "image/svg+xml"
+    },
+    "04-mira-escuro.svg": {
+     "blob": "53642c89a583861fdc8ea14a9f9e1b96",
+     "name": "04-mira-escuro.svg",
+     "size": 539,
+     "type": "image/svg+xml"
+    },
+    "04-mira-favicon.svg": {
+     "blob": "bcfe2f02e32ddbf5e9a597979e126090",
+     "name": "04-mira-favicon.svg",
+     "size": 323,
+     "type": "image/svg+xml"
+    },
+    "04-mira-mono.svg": {
+     "blob": "601e3a2429ec1f5a5319d85f9192fb1f",
+     "name": "04-mira-mono.svg",
+     "size": 467,
+     "type": "image/svg+xml"
+    },
+    "05-vazado-claro.svg": {
+     "blob": "b1d0f7e9b77ba8b320c00cb788756fb2",
+     "name": "05-vazado-claro.svg",
+     "size": 565,
+     "type": "image/svg+xml"
+    },
+    "05-vazado-escuro.svg": {
+     "blob": "4bac40df0b72991571fe2188a785e6d0",
+     "name": "05-vazado-escuro.svg",
+     "size": 565,
+     "type": "image/svg+xml"
+    },
+    "05-vazado-favicon.svg": {
+     "blob": "9f2afa86b23d587f33ed9514422c18d1",
+     "name": "05-vazado-favicon.svg",
+     "size": 323,
+     "type": "image/svg+xml"
+    },
+    "05-vazado-mono.svg": {
+     "blob": "bfc82503b7c6e1398d526efcd0104fd0",
+     "name": "05-vazado-mono.svg",
+     "size": 488,
+     "type": "image/svg+xml"
+    }
+   },
+   "name": "Logo-direcoes",
+   "order": [
+    "01-ladrilho-escuro.svg",
+    "01-ladrilho-claro.svg",
+    "01-ladrilho-mono.svg",
+    "01-ladrilho-favicon.svg",
+    "02-prisma-escuro.svg",
+    "02-prisma-claro.svg",
+    "02-prisma-mono.svg",
+    "02-prisma-favicon.svg",
+    "03-corredor-escuro.svg",
+    "03-corredor-claro.svg",
+    "03-corredor-mono.svg",
+    "03-corredor-favicon.svg",
+    "04-mira-escuro.svg",
+    "04-mira-claro.svg",
+    "04-mira-mono.svg",
+    "04-mira-favicon.svg",
+    "05-vazado-escuro.svg",
+    "05-vazado-claro.svg",
+    "05-vazado-mono.svg",
+    "05-vazado-favicon.svg"
+   ],
+   "tile": "s"
+  }
+ },
+ "blobs": {},
+ "createdOnFiles": {
+  "at": "2026-11-12T02:00:51Z",
+  "v": 1
+ },
+ "docs": {
+  "sections": []
+ },
+ "groups": [
+  "Logos",
+  "Logo-direcoes"
+ ],
+ "lastChange": {
+  "by": "BernardoPatriarca",
+  "at": "2026-11-12T02:05:10Z",
+  "via": "Claude Code",
+  "note": "Logo escolhido: 01 Ladrilho. SVGs finais em paths; direções arquivadas em Logo-direcoes."
+ },
+ "layout": "files",
+ "libraries": [],
+ "namespace": "BP",
+ "sections": {},
+ "title": "Bernardo Patriarca — Design System"
+}

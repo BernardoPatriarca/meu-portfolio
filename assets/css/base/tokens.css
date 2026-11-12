@@ -35,6 +35,11 @@
     --f-serif: 'Instrument Serif', Georgia, serif;
     --f-mono: 'JetBrains Mono', monospace;
 
+    /* --- véus do corredor 3D: quanto do fundo cobre as bordas e a
+       base da legenda. Baixo = cena mais limpa. --- */
+    --veil-edge: 62%;
+    --veil-hud: 78%;
+
     --r: 18px;
     --r-lg: 28px;
     --ease: cubic-bezier(.22, 1, .36, 1);
@@ -51,7 +56,7 @@
     --surface-2: #F2EEFF;
 
     --text: #07051C;
-    --muted: #413C66;
+    --muted: #37325C;
 
     --line: rgba(70, 48, 170, .22);
     --line-2: rgba(70, 48, 170, .44);
@@ -64,8 +69,16 @@
     --glow-a: #7A4DFF;
     --glow-b: #2F7BFF;
 
+    /* no claro os véus quase somem: fundo claro por cima da cena
+       vira névoa branca */
+    --veil-edge: 26%;
+    --veil-hud: 66%;
+
     --shadow: 0 24px 50px -28px rgba(74, 33, 224, .5);
     --shadow-soft: 0 10px 30px -18px rgba(74, 33, 224, .45);
 
-    color-scheme: light;
+    /* 'only': impede o "forçar tema escuro" do navegador (Opera, Chrome)
+       de inverter o tema claro — sem isso o fundo vira cinza e o texto
+       branco, por cima de uma cena WebGL que continua clara */
+    color-scheme: only light;
 }
